@@ -9,7 +9,7 @@ clear;clc;
 % ----------------------------- System Parameters -------------------------
 for Num_users=5:5:20 % Number of users
 
-for TX_ant=64 %Number of UPA TX antennas
+for TX_ant=128 %Number of UPA TX antennas
 TX_ant_w=TX_ant; % width
 TX_ant_h=1; % hieght 
 ind_TX_w=reshape(repmat([0:1:TX_ant_w-1],TX_ant_h,1),1,TX_ant_w*TX_ant_h);
@@ -25,7 +25,7 @@ k_cluster = 5;
 for Num_paths=4 %Number of channel paths
 
 % ----------------------------- Simulation Parameters ---------------------
-SNR_dB_range=[40 100 200 300];  % SNR in dB
+SNR_dB_range=[40 100 200];  % SNR in dB
 Rate_SU=zeros(1,length(SNR_dB_range)); % Will carry the single-user MIMO rate (without interference)
 Rate_LB=zeros(1,length(SNR_dB_range));% Will carry the lower bound values
 Rate_BS=zeros(1,length(SNR_dB_range));% Will carry the rate with analog-only beamsteering
@@ -92,13 +92,13 @@ for iter=1:1:ITER
         Fbb_cl(:,u)=Fbb_cl(:,u)/sqrt((Frf_cl*Fbb_cl(:,u))'*(Frf_cl*Fbb_cl(:,u)));
     end
     
-%     for col = 1:Num_users
-%         for row = 1:Num_users
-%             if abs(row-col)>=Num_users/k_cluster
-%                 Fbb_cl(col,row) = 0;
-%             end
-%         end
-%     end
+    for col = 1:Num_users
+        for row = 1:Num_users
+            if abs(row-col)>=Num_users/k_cluster
+                Fbb_cl(col,row) = 0;
+            end
+        end
+    end
    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -124,13 +124,13 @@ for iter=1:1:ITER
         Fbb_BDMA(:,u)=Fbb_BDMA(:,u)/sqrt((Frf_BDMA*Fbb_BDMA(:,u))'*(Frf_BDMA*Fbb_BDMA(:,u)));
     end
     
-%     for col = 1:Num_users
-%         for row = 1:Num_users
-%             if abs(row-col)>=(Num_users/k_cluster)
-%             Fbb_BDMA(col,row) = 0;
-%             end
-%         end
-%     end
+    for col = 1:Num_users
+        for row = 1:Num_users
+            if abs(row-col)>=(Num_users/k_cluster)
+            Fbb_BDMA(col,row) = 0;
+            end
+        end
+    end
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
      % For the lower bound 
         [Us Ss Vs]=svd(Frf);
@@ -181,8 +181,7 @@ for iter=1:1:ITER
             
             %Hybrid Precoding with fully zero-forcing
             intf(:,:)=a_TX_select_inf(:,u,:);
-            intf_all = sum(abs(Wrf_fzf(:,u)'*Channel*intf).^2);
-            SINR_BS_fzf=(SNR*(abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,u)).^2))/(SNR*sum((abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,Int_set)).^2))+1+intf_all);
+            SINR_BS_fzf=(SNR*(abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,u)).^2))/(SNR*sum((abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,Int_set)).^2))+1);
             Rate_HP_fzf(count)=Rate_HP_fzf(count)+log2(1+SINR_BS_fzf)/(Num_users*ITER);
         end
     
@@ -208,10 +207,9 @@ end % End of ITER loop
 % end
 end
 end
+hold on;  plot(SNR_dB_range,Rate_HP_fzf,'-o','LineWidth',1.5);
 hold on; plot(SNR_dB_range,Rate_HP_cl,'-','LineWidth',1.5);
-hold on;  plot(SNR_dB_range,Rate_HP_fzf,'--o','LineWidth',1.5);
-
-% hold on;  plot(SNR_dB_range,Rate_HP,'--','LineWidth',1.5);
+hold on;  plot(SNR_dB_range,Rate_HP,'--','LineWidth',1.5);
 end
 % hold on;  plot(SNR_dB_range,Rate_BS_BDMA,'LineWidth',1.5);
 % plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
@@ -220,8 +218,7 @@ end
 %hold on; plot(SNR_dB_range,Rate_HP_cl,'--b','LineWidth',1.5);
 %legend('2','4','6','8','Single-user','Analog','Hybrid')
 % legend('128BDMA','Single-user','Analog Only','Hybrid','Hybrid cluster')
-% legend('5zf','5group','5','10zf','10group','10','15zf','15group','15','20zf','20group','20')
-legend('full ZF 5 users','Delay profile 5 users', 'full ZF 10 users','Delay profile 10 users', 'full ZF 15 users','Delay profile 15 users', 'full ZF 20 users','Delay profile 20 users')
+legend('5zf','5group','5','10zf','10group','10','15zf','15group','15','20zf','20group','20')
 % legend('5','5B','10','10B','15','15B','20','20B')
 xlabel('SNR (dB)','FontSize',12);
 ylabel('Spectral Efficiency (bps/ Hz)','FontSize',12);
