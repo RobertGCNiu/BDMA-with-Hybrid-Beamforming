@@ -36,7 +36,6 @@ for user = 1:Num_users
 end
 %%
 [~, max_path] = max(SINR,[],2);
-
 for user = 1:Num_users
         a_TX_select(:,user) = a_TX(:,user,max_path(user));
         a_RX_select(:,user) = a_RX(:,user,max_path(user));

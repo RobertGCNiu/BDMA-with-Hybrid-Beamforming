@@ -9,7 +9,7 @@ clear;clc;
 % ----------------------------- System Parameters -------------------------
 for Num_users=5:5:20 % Number of users
 
-for TX_ant=64 %Number of UPA TX antennas
+for TX_ant=128 %Number of UPA TX antennas
 TX_ant_w=TX_ant; % width
 TX_ant_h=1; % hieght 
 ind_TX_w=reshape(repmat([0:1:TX_ant_w-1],TX_ant_h,1),1,TX_ant_w*TX_ant_h);
@@ -25,7 +25,7 @@ k_cluster = 5;
 for Num_paths=4 %Number of channel paths
 
 % ----------------------------- Simulation Parameters ---------------------
-SNR_dB_range=[40 100 200 300];  % SNR in dB
+SNR_dB_range=[-10:4:30];  % SNR in dB
 Rate_SU=zeros(1,length(SNR_dB_range)); % Will carry the single-user MIMO rate (without interference)
 Rate_LB=zeros(1,length(SNR_dB_range));% Will carry the lower bound values
 Rate_BS=zeros(1,length(SNR_dB_range));% Will carry the rate with analog-only beamsteering
@@ -182,7 +182,7 @@ for iter=1:1:ITER
             %Hybrid Precoding with fully zero-forcing
             intf(:,:)=a_TX_select_inf(:,u,:);
             intf_all = sum(abs(Wrf_fzf(:,u)'*Channel*intf).^2);
-            SINR_BS_fzf=(SNR*(abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,u)).^2))/(SNR*sum((abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,Int_set)).^2))+1+intf_all);
+            SINR_BS_fzf=(SNR*(abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,u)).^2))/(SNR*sum((abs(Wrf_fzf(:,u)'*Channel*Frf_fzf*Fbb_fzf(:,Int_set)).^2)+intf_all)+1);
             Rate_HP_fzf(count)=Rate_HP_fzf(count)+log2(1+SINR_BS_fzf)/(Num_users*ITER);
         end
     
