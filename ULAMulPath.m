@@ -23,7 +23,8 @@ for u=1:1:Num_users
     AoA_az(u,:)=2*pi*rand(1,Num_paths);
     %alpha_init=  sqrt(1/Num_paths)*sqrt(1/2)*(randn(1,Num_paths)+1j*randn(1,Num_paths));
     
-    alpha(u,:)= Lam*exp(-Lam*(0:2:(Num_paths-1)*2)); % ideal exponential pdf
+    alpha(u,:)= Lam*exp(-Lam*(0:20:(Num_paths-1)*20)); % ideal exponential pdf
+    alpha(u,:) = alpha(u,:) ./sum(alpha);
     
     Temp_Channel=zeros(RX_ant_w*RX_ant_h,TX_ant_w*TX_ant_h);
     for l=1:1:Num_paths
