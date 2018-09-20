@@ -1,0 +1,9 @@
+fbb = [1,2,5,3;2,3,4,3]';
+y = [1,2,3,4]
+cvx_begin
+        variable x(4,2)
+        minimize(norm(x-fbb,'fro'))
+        subject to 
+                x(3)==0
+                x(4)==0
+cvx_end

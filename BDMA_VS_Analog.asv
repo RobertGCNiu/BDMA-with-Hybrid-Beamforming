@@ -89,21 +89,24 @@ for iter=1:1:ITER
     % Baseband zero-forcing precoding
 %   Fbb_cl = eye(Num_users);
     Fbb_cl=He_cl'*(He_cl*He_cl')^(-1);
-    
-   for k = 0:k_cluster-1
-        for col = (1+Num_group*(k+1)) : Num_users
+    Fbb_cl_new = zeros(Num_users,Num_users);
+    for k = 0:k_cluster-1
+        for col = (1+Num_group*k) : (Num_group+Num_group*k)
             for row =  (1+Num_group*k) : (Num_group+Num_group*k)
-                    Fbb_cl(col,row) = 0;
+                    Fbb_cl_new(col,row) = Fbb_cl(col,row);
             end
         end
-        for row = (1+Num_group*(k+1)) : Num_users
-            for col =  (1+Num_group*k) : (Num_group+Num_group*k)
-                    Fbb_cl(col,row) = 0;
+    end
+    
+   for k = 0:k_cluster-1
+        for col = (1+Num_group*k) : Num_users
+            for row =  
+                    Fbb_cl_new(col,row) = Fbb_cl(col,row);
             end
         end
     end
 
-
+ Fbb_cl = Fbb_cl_new;
     
     
     for u=1:1:Num_users % Normalization of the hybrid precoders
@@ -129,7 +132,7 @@ for iter=1:1:ITER
  
     % Baseband zero-forcing precoding
     Fbb_BDMA=He_BDMA'*(He_BDMA*He_BDMA')^(-1);   
-    Fbb_BDMA = cvxToBlockOpt(He_BDMA, Fbb_BDMA, k_cluster);
+    %Fbb_BDMA = cvxToBlockOpt(He_BDMA, Fbb_BDMA, k_cluster);
     
    for u=1:1:Num_users % Normalization of the hybrid precoders
         Fbb_BDMA(:,u)=Fbb_BDMA(:,u)/sqrt((Frf_BDMA*Fbb_BDMA(:,u))'*(Frf_BDMA*Fbb_BDMA(:,u)));
