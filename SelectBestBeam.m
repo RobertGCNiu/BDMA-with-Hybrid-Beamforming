@@ -22,7 +22,8 @@ for user = 1:Num_users
    %Calculate all the interference path to select the best beam
         for user_inf = 1:Num_users
             for path_inf = 1:Num_paths
-                if user_inf~=user || path_inf~=path
+%                 if user_inf~=user || path_inf~=path
+                if user_inf~=user
                     a_TBInter(:, k_inf) = a_TX(:,user_inf,path_inf);
                     k_inf = k_inf+1;
                 end
