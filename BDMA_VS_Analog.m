@@ -9,15 +9,15 @@ clear;clc;
 % ----------------------------- System Parameters -------------------------
 for Num_users=8 % Number of users
 
-for TX_ant=128 %Number of UPA TX antennas
-TX_ant_w=TX_ant; % width
-TX_ant_h=1; % hieght 
+for TX_ant=144 %Number of UPA TX antennas
+TX_ant_w=sqrt(TX_ant); % width
+TX_ant_h=sqrt(TX_ant); % hieght 
 ind_TX_w=reshape(repmat([0:1:TX_ant_w-1],TX_ant_h,1),1,TX_ant_w*TX_ant_h);
 ind_TX_h=repmat([0:1:TX_ant_h-1],1,TX_ant_w);
 
-RX_ant=16; %Number of UPA RX antennas
-RX_ant_w=16; % width 
-RX_ant_h=1; % hieght
+RX_ant=64; %Number of UPA RX antennas
+RX_ant_w=sqrt(RX_ant); % width 
+RX_ant_h=sqrt(RX_ant); % hieght
 ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
 ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
 k_cluster = 2;
@@ -134,17 +134,17 @@ for iter=1:1:ITER
       He_cl_cvx = zeros(Num_users,Num_users);
     for u=1:1:Num_users
         Channel_cl_cvx=zeros(RX_ant,TX_ant);
-        Channel_cl_cvx(:,:)= H(u,:,:);
-        He_cl_cvx(u,:)=Wrf(:,u)'*Channel_cl_cvx*Frf ;    % Effective channels
+        Channel_cl_cvx(:,:)= H_cl(u,:,:);
+        He_cl_cvx(u,:)=Wrf_cl(:,u)'*Channel_cl_cvx*Frf_cl ;    % Effective channels
     end
     
     % Baseband zero-forcing precoding
 %   Fbb_cl = eye(Num_users);
- Fbb_cl_cvx=He_cl_cvx'*(He_cl_cvx*He_cl_cvx')^(-1);
- %Fbb_cl_cvx = cvxToBlockOpt(He_cl_cvx, Fbb_fzf_group, k_cluster);
+ %Fbb_cl_cvx=He_cl_cvx'*(He_cl_cvx*He_cl_cvx')^(-1);
+ Fbb_cl_cvx = cvxToBlockOpt(He_cl_cvx, Fbb_fzf_group, k_cluster);
 
    for u=1:1:Num_users % Normalization of the hybrid precoders
-        Fbb_cl_cvx(:,u)=Fbb_cl_cvx(:,u)/sqrt((Frf*Fbb_cl_cvx(:,u))'*(Frf*Fbb_cl_cvx(:,u)));
+        Fbb_cl_cvx(:,u)=Fbb_cl_cvx(:,u)/sqrt((Frf_cl*Fbb_cl_cvx(:,u))'*(Frf_cl*Fbb_cl_cvx(:,u)));
    end
 
    

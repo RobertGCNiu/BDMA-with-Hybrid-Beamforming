@@ -1,11 +1,11 @@
 
 function [H,a_TX,a_RX]=ULAMulPath(Num_users,TX_ant_w,RX_ant_w,Num_paths)
    
-Lam=0.0233; 
+%Lam=0.0233; 
 
 
-TX_ant_h = 1;
-RX_ant_h = 1;
+TX_ant_h = TX_ant_w;
+RX_ant_h = RX_ant_w;
 H=zeros(Num_users,RX_ant_w*RX_ant_h,TX_ant_w*TX_ant_h);  % One user channel
 a_TX=zeros(TX_ant_w*TX_ant_h,Num_users,Num_paths); % TX steering vector
 a_TX_left = zeros(TX_ant_w*TX_ant_h,Num_users,Num_paths);
@@ -17,9 +17,13 @@ ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
 ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
 % Constructing the channels
 for u=1:1:Num_users
-    AoD_el(u,:)=pi/2 * ones(1,Num_paths);
+%     AoD_el(u,:)=pi/2 * ones(1,Num_paths);
+%     AoD_az(u,:)=2*pi*rand(1,Num_paths);
+%     AoA_el(u,:)=pi/2 * ones(1,Num_paths);
+%     AoA_az(u,:)=2*pi*rand(1,Num_paths);
+    AoD_el(u,:)=pi*rand(1,Num_paths)-pi/2;
     AoD_az(u,:)=2*pi*rand(1,Num_paths);
-    AoA_el(u,:)=pi/2 * ones(1,Num_paths);
+    AoA_el(u,:)=pi*rand(1,Num_paths)-pi/2;
     AoA_az(u,:)=2*pi*rand(1,Num_paths);
     alpha(u,:)=  sqrt(1/Num_paths)*sqrt(1/2)*(randn(1,Num_paths)+1j*randn(1,Num_paths));
     
