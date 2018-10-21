@@ -9,13 +9,6 @@ end
 eigvalue = diag(lamda);
 sir = 1./(eigvalue-1);
 sir(imag(sir)~=0) = -10000;
-%  for u = 1:N_users
     [maxsir,maxindex] = max(real(sir));
     p = power(:,maxindex);
-%     if sum(p>=0)==N_users || sum(p<=0)==N_users
-%         break
-%     else
-%         sir(maxindex) =-100000;
-%     end
-% end
 end

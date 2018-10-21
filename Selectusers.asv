@@ -12,7 +12,7 @@ alpha_u = zeros(Num_users_all,Num_paths);
 for u = 1:Num_users_all
     H_u(:,:) = H(u,:,:);
     for p = 1:Num_paths
-        alpha_u(u,p) = a_RX(:,u,l)'*H_u*a_TX(:,u,p);
+        alpha_u(u,p) = a_RX(:,u,p)'*H_u*a_TX(:,u,p);
     end
 end
 [max_u_all, max_u] = max(alpha_u,[],1);
@@ -21,10 +21,11 @@ max_user = max_u(max_p);
 %%
 a_TX_select(:,1) = a_TX(:,max_user,max_p);
 a_RX_select(:,1) = a_RX(:,max_user,max_p);
-H_selected(1,:,:) = H(max_user);
+H_selected(1,:,:) = H(max_user,:,:);
 new_add = 1;
-while size(users,1)<Num_users
+while new_add<Num_users
 new_add= new_add+1;
+a_TX(:,max_user,:) = 0;
 sinr = zeros(Num_users_all,Num_paths);
  for u_try= 1:Num_users_all
      for path = 1:Num_paths
@@ -49,7 +50,7 @@ sinr = zeros(Num_users_all,Num_paths);
  a_TX_select(:,new_add) = a_TX(:,max_user,max_p);
 a_RX_select(:,new_add) = a_RX(:,max_user,max_p);
 H_selected(new_add,:,:) = H(max_user);
-a_TX(:,max_user,:) = 0;
+
 end
 
 

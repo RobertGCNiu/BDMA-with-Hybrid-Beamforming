@@ -15,7 +15,7 @@ Num_users_all = 50;
      Rate_Path = zeros(length(paths),1);
 for Num_users_index=1:length(Num_user_cluster) % Number of users
     Num_users = Num_user_cluster(Num_users_index);
-for TX_ant=256 %Number of UPA TX antennas
+for TX_ant=144 %Number of UPA TX antennas
 TX_ant_w=sqrt(TX_ant); % width
 TX_ant_h=sqrt(TX_ant); % hieght 
 ind_TX_w=reshape(repmat([0:1:TX_ant_w-1],TX_ant_h,1),1,TX_ant_w*TX_ant_h);
@@ -26,7 +26,7 @@ RX_ant_w=sqrt(RX_ant); % width
 RX_ant_h=sqrt(RX_ant); % hieght
 ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
 ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
-for k_cluster = [1,2,4,8,16]
+for k_cluster = [4]
 Num_group = Num_users/k_cluster;
 % ----------------------------- Channel Parameters ------------------------
 for Num_paths_index=1:length(paths) %Number of channel paths
@@ -42,6 +42,7 @@ Rate_BS_BDMA = zeros(1,length(SNR_dB_range));
 Rate_HP_cl = zeros(1,length(SNR_dB_range));
 Rate_HP_fzf = zeros(1,length(SNR_dB_range));
 Rate_HP_schedule = zeros(1,length(SNR_dB_range));
+
 ITER=500; % Number of iterations
 
 % --------------- Simulation starts ---------------------------------------
@@ -52,12 +53,12 @@ for iter=1:1:ITER
     [H_all,a_TX_all,a_RX_all]=ULAMulPath(Num_users_all,TX_ant_w,RX_ant_w,Num_paths); 
     % H is a 3-dimensional matrix, with Num_users,RX_ant,TX_ant dimensions
     
-   [a_TX_schedule,a_RX_schedule, H_schedule] = Selectusers(Num_users_all, Num_users,a_TX,a_RX,Num_paths,H);%select Num_users from Num_users_all
+   [a_TX_schedule,a_RX_schedule, H_schedule] = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
     
    
    H = H_all(1:Num_users,:,:);
-   a_TX = a_TX_all(:,1:Num_users);
-   a_RX = a_RX_all(:,1:Num_users);
+   a_TX = a_TX_all(:,1:Num_users,:);
+   a_RX = a_RX_all(:,1:Num_users,:);
    
     [a_TX_select, a_RX_select, a_TX_select_inf, a_RX_select_inf] = SelectBestBeam(Num_users,a_TX,a_RX,Num_paths,H);
    
@@ -92,18 +93,7 @@ for iter=1:1:ITER
  
     % Baseband zero-forcing precoding
     Fbb_fzf=He_fzf'*(He_fzf*He_fzf')^(-1);   
-%    for k = 0:k_cluster-1
-%         for col = (1+Num_group*(k+1)) : Num_users
-%             for row =  (1+Num_group*k) : (Num_group+Num_group*k)
-%                     Fbb_fzf(col,row) = 0;
-%             end
-%         end
-%         for row = (1+Num_group*(k+1)) : Num_users
-%             for col =  (1+Num_group*k) : (Num_group+Num_group*k)
-%                     Fbb_fzf(col,row) = 0;
-%             end
-%         end
-%    end
+
     for u=1:1:Num_users % Normalization of the hybrid precoders
         Fbb_fzf(:,u)=Fbb_fzf(:,u)/sqrt((Frf_fzf*Fbb_fzf(:,u))'*(Frf_fzf*Fbb_fzf(:,u)));
     end
@@ -277,8 +267,8 @@ for iter=1:1:ITER
             
             %%%%%%%%%%%%%
             %Scheduling is considered.
-            SINR_BS_cl=(SNR*(abs(He_cl(u,:)*Fbb_cl(:,u)).^2))/(SNR*sum((abs(He_cl(u,:)*Fbb_cl(:,Int_set)).^2))+1);
-            Rate_HP_cl(count)=Rate_HP_cl(count)+log2(1+SINR_BS_cl)/(Num_users*ITER);
+            SINR_schedule=(SNR*(abs(He_schedule(u,:)*Fbb_schedule(:,u)).^2))/(SNR*sum((abs(He_schedule(u,:)*Fbb_schedule(:,Int_set)).^2))+1);
+            Rate_HP_schedule(count)=Rate_HP_schedule(count)+log2(1+SINR_schedule)/(Num_users*ITER);
         end
     
 
@@ -322,12 +312,12 @@ end
 % plot(Num_user_cluster,Rate_SIR,'-s','LineWidth',1.5);
 % legend('Uniform Power', 'Balanced Power')
 %plot(paths, Rate_Path,'-*','LineWidth',1.5);
-% plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
-% hold on; plot(SNR_dB_range,Rate_BS_BDMA,'LineWidth',1.5);
-% hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
-%  hold on; plot(SNR_dB_range,Rate_HP,'LineWidth',1.5);
-% hold on;  plot(SNR_dB_range,Rate_HP_fzf,'--o','LineWidth',1.5);
-% hold on; plot(SNR_dB_range,Rate_HP_cl,'--b','LineWidth',1.5);
+plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
+hold on; plot(SNR_dB_range,Rate_BS_BDMA,'LineWidth',1.5);
+hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
+ hold on; plot(SNR_dB_range,Rate_HP,'LineWidth',1.5);
+hold on;  plot(SNR_dB_range,Rate_HP_fzf,'--o','LineWidth',1.5);
+hold on; plot(SNR_dB_range,Rate_HP_cl,'--b','LineWidth',1.5);
 
 % %legend('2','4','6','8','Single-user','Analog','Hybrid')
 % % legend('128BDMA','Single-user','Analog Only','Hybrid','Hybrid cluster')

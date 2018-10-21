@@ -15,7 +15,7 @@ Num_users_all = 50;
      Rate_Path = zeros(length(paths),1);
 for Num_users_index=1:length(Num_user_cluster) % Number of users
     Num_users = Num_user_cluster(Num_users_index);
-for TX_ant=256 %Number of UPA TX antennas
+for TX_ant=144 %Number of UPA TX antennas
 TX_ant_w=sqrt(TX_ant); % width
 TX_ant_h=sqrt(TX_ant); % hieght 
 ind_TX_w=reshape(repmat([0:1:TX_ant_w-1],TX_ant_h,1),1,TX_ant_w*TX_ant_h);
@@ -26,7 +26,7 @@ RX_ant_w=sqrt(RX_ant); % width
 RX_ant_h=sqrt(RX_ant); % hieght
 ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
 ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
-for k_cluster = [1,2,4,8,16]
+for k_cluster = [4]
 Num_group = Num_users/k_cluster;
 % ----------------------------- Channel Parameters ------------------------
 for Num_paths_index=1:length(paths) %Number of channel paths
@@ -42,7 +42,8 @@ Rate_BS_BDMA = zeros(1,length(SNR_dB_range));
 Rate_HP_cl = zeros(1,length(SNR_dB_range));
 Rate_HP_fzf = zeros(1,length(SNR_dB_range));
 Rate_HP_schedule = zeros(1,length(SNR_dB_range));
-ITER=500; % Number of iterations
+
+ITER=50; % Number of iterations
 
 % --------------- Simulation starts ---------------------------------------
 for iter=1:1:ITER
@@ -56,8 +57,8 @@ for iter=1:1:ITER
     
    
    H = H_all(1:Num_users,:,:);
-   a_TX = a_TX_all(:,1:Num_users);
-   a_RX = a_RX_all(:,1:Num_users);
+   a_TX = a_TX_all(:,1:Num_users,:);
+   a_RX = a_RX_all(:,1:Num_users,:);
    
     [a_TX_select, a_RX_select, a_TX_select_inf, a_RX_select_inf] = SelectBestBeam(Num_users,a_TX,a_RX,Num_paths,H);
    
@@ -92,18 +93,7 @@ for iter=1:1:ITER
  
     % Baseband zero-forcing precoding
     Fbb_fzf=He_fzf'*(He_fzf*He_fzf')^(-1);   
-%    for k = 0:k_cluster-1
-%         for col = (1+Num_group*(k+1)) : Num_users
-%             for row =  (1+Num_group*k) : (Num_group+Num_group*k)
-%                     Fbb_fzf(col,row) = 0;
-%             end
-%         end
-%         for row = (1+Num_group*(k+1)) : Num_users
-%             for col =  (1+Num_group*k) : (Num_group+Num_group*k)
-%                     Fbb_fzf(col,row) = 0;
-%             end
-%         end
-%    end
+
     for u=1:1:Num_users % Normalization of the hybrid precoders
         Fbb_fzf(:,u)=Fbb_fzf(:,u)/sqrt((Frf_fzf*Fbb_fzf(:,u))'*(Frf_fzf*Fbb_fzf(:,u)));
     end
@@ -119,22 +109,19 @@ for iter=1:1:ITER
     % Baseband zero-forcing precoding
 %   Fbb_cl = eye(Num_users);
     Fbb_schedule=He_schedule'*(He_schedule*He_schedule')^(-1);
-   for u=1:1:Num_users % Normalization of the hybrid precoders
-        Fbb_schedule(:,u)=Fbb_schedule(:,u)/sqrt((a_TX_schedule*Fbb_schedule(:,u))'*(a_TX_schedule*Fbb_schedule(:,u)));
-   end
     
-   for k = 0:k_cluster-1
-        for col = (1+Num_group*(k+1)) : Num_users
-            for row =  (1+Num_group*k) : (Num_group+Num_group*k)
-                    Fbb_schedule(col,row) = 0;
-            end
-        end
-        for row = (1+Num_group*(k+1)) : Num_users
-            for col =  (1+Num_group*k) : (Num_group+Num_group*k)
-                    Fbb_schedule(col,row) = 0;
-            end
-        end
-   end
+%    for k = 0:k_cluster-1
+%         for col = (1+Num_group*(k+1)) : Num_users
+%             for row =  (1+Num_group*k) : (Num_group+Num_group*k)
+%                     Fbb_schedule(col,row) = 0;
+%             end
+%         end
+%         for row = (1+Num_group*(k+1)) : Num_users
+%             for col =  (1+Num_group*k) : (Num_group+Num_group*k)
+%                     Fbb_schedule(col,row) = 0;
+%             end
+%         end
+%    end
     
     for u=1:1:Num_users % Normalization of the hybrid precoders
         Fbb_schedule(:,u)=Fbb_schedule(:,u)/sqrt((a_TX_schedule*Fbb_schedule(:,u))'*(a_TX_schedule*Fbb_schedule(:,u)));
@@ -281,7 +268,6 @@ for iter=1:1:ITER
             Rate_HP_schedule(count)=Rate_HP_schedule(count)+log2(1+SINR_schedule)/(Num_users*ITER);
         end
     
-
         % Hybrid Precoding
         % Rate_HP(count)=Rate_HP(count)+log2(det(eye(Num_users)+SNR*(He_BDMA*(Fbb_BDMA*Fbb_BDMA')*He_BDMA')))/(Num_users*ITER);
        
@@ -309,7 +295,7 @@ end % End of ITER loop
 
 %Rate_Path(Num_paths_index) = Rate_HP_cl;
 end
-hold on; plot(SNR_dB_range,Rate_HP_cl,'--','LineWidth',1.5);
+%hold on; plot(SNR_dB_range,Rate_HP_cl,'--','LineWidth',1.5);
 end
 end
 % hold on; plot(SNR_dB_range,Rate_HP_cl,'-','LineWidth',1.5);
@@ -322,17 +308,18 @@ end
 % plot(Num_user_cluster,Rate_SIR,'-s','LineWidth',1.5);
 % legend('Uniform Power', 'Balanced Power')
 %plot(paths, Rate_Path,'-*','LineWidth',1.5);
-% plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
-% hold on; plot(SNR_dB_range,Rate_BS_BDMA,'LineWidth',1.5);
-% hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
-%  hold on; plot(SNR_dB_range,Rate_HP,'LineWidth',1.5);
-% hold on;  plot(SNR_dB_range,Rate_HP_fzf,'--o','LineWidth',1.5);
-% hold on; plot(SNR_dB_range,Rate_HP_cl,'--b','LineWidth',1.5);
-
+plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
+hold on; plot(SNR_dB_range,Rate_BS_BDMA,'LineWidth',1.5);
+hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
+ hold on; plot(SNR_dB_range,Rate_HP,'LineWidth',1.5);
+hold on;  plot(SNR_dB_range,Rate_HP_fzf,'--o','LineWidth',1.5);
+hold on; plot(SNR_dB_range,Rate_HP_cl,'--b','LineWidth',1.5);
+hold on; plot(SNR_dB_range,Rate_HP_schedule,'-s','LineWidth',1.5);
+ legend('signal user','BDMA','analog only', 'block-cvx-ZF','full-zf','group','schedule')
 % %legend('2','4','6','8','Single-user','Analog','Hybrid')
 % % legend('128BDMA','Single-user','Analog Only','Hybrid','Hybrid cluster')
 % % legend('5zf','5group','5','10zf','10group','10','15zf','15group','15','20zf','20group','20')
-%  legend('signal user','BDMA','analog only', 'block-cvx-ZF','full-zf','group')
+
 % %legend('block-cvx-ZF1','group1','block-cvx-ZF2','group2','block-cvx-ZF4','group4')
 % % legend('full ZF 5 users','Delay profile 5 users', 'full ZF 10 users','Delay profile 10 users', 'full ZF 15 users','Delay profile 15 users', 'full ZF 20 users','Delay profile 20 users')
 % % legend('5','5B','10','10B','15','15B','20','20B')
