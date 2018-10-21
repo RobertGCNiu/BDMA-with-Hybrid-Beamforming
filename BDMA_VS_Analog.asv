@@ -52,7 +52,7 @@ for iter=1:1:ITER
     [H_all,a_TX_all,a_RX_all]=ULAMulPath(Num_users_all,TX_ant_w,RX_ant_w,Num_paths); 
     % H is a 3-dimensional matrix, with Num_users,RX_ant,TX_ant dimensions
     
-   [a_TX_schedule,a_RX_schedule, H_schedule] = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
+   [a_TX_schedule,a_RX_schedule, H_schedule] = Selectusers(Num_users_all, Num_users,a_TX,a_RX,Num_paths,H);%select Num_users from Num_users_all
     
    
    H = H_all(1:Num_users,:,:);
@@ -277,8 +277,8 @@ for iter=1:1:ITER
             
             %%%%%%%%%%%%%
             %Scheduling is considered.
-            SINR_schedule=(SNR*(abs(He_schedule(u,:)*Fbb_schedule(:,u)).^2))/(SNR*sum((abs(He_schedule(u,:)*Fbb_schedule(:,Int_set)).^2))+1);
-            Rate_HP_schedule(count)=Rate_HP_schedule(count)+log2(1+SINR_schedule)/(Num_users*ITER);
+            SINR_BS_cl=(SNR*(abs(He_cl(u,:)*Fbb_cl(:,u)).^2))/(SNR*sum((abs(He_cl(u,:)*Fbb_cl(:,Int_set)).^2))+1);
+            Rate_HP_cl(count)=Rate_HP_cl(count)+log2(1+SINR_BS_cl)/(Num_users*ITER);
         end
     
 
