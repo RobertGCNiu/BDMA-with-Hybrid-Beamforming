@@ -8,7 +8,7 @@
 clear;clc;
 % ----------------------------- System Parameters% -------------------------
 Num_user_cluster = [16];
-Num_users_all = 50;
+Num_users_all = 40;
      Rate_SIR=zeros(1,length(Num_user_cluster));
      Rate_hb = zeros(1,length(Num_user_cluster));
      paths = [4];
@@ -42,6 +42,7 @@ Rate_BS_BDMA = zeros(1,length(SNR_dB_range));
 Rate_HP_cl = zeros(1,length(SNR_dB_range));
 Rate_HP_fzf = zeros(1,length(SNR_dB_range));
 Rate_HP_schedule = zeros(1,length(SNR_dB_range));
+Rate_HP_SLNR = zeros(1,length(SNR_dB_range));
 
 ITER=50; % Number of iterations
 
@@ -53,7 +54,7 @@ for iter=1:1:ITER
     [H_all,a_TX_all,a_RX_all]=ULAMulPath(Num_users_all,TX_ant_w,RX_ant_w,Num_paths); 
     % H is a 3-dimensional matrix, with Num_users,RX_ant,TX_ant dimensions
     
-   [a_TX_schedule,a_RX_schedule, H_schedule] = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
+   [a_TX_schedule,a_RX_schedule, ~,~,H_schedule] = Selectusers(Num_users,Num_users_all,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
     
    
    H = H_all(1:Num_users,:,:);
@@ -97,6 +98,7 @@ for iter=1:1:ITER
     for u=1:1:Num_users % Normalization of the hybrid precoders
         Fbb_fzf(:,u)=Fbb_fzf(:,u)/sqrt((Frf_fzf*Fbb_fzf(:,u))'*(Frf_fzf*Fbb_fzf(:,u)));
     end
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %Schedule Selection
       He_schedule = zeros(Num_users,Num_users);
@@ -208,10 +210,41 @@ for iter=1:1:ITER
             end
             [sir, power] = GMtraixGeneration(T); %The power is orthonomal vector.
             Rate_SIR(Num_users_index) = Rate_SIR(Num_users_index)+ log2(1+ sir)/(ITER);
-        
+   
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Leakage-Based Hybrid Beamforming Design for Downlink Multiuser mmWave MIMO Systems
+% for SNR_dB=SNR_dB_range
+%         SNR=10^(.1*SNR_dB)/Num_users; % SNR value         
+%         for u=1:1:Num_users
+%             Int_set=[]; % interference index
+%             for i=1:1:Num_users
+%                 if(i~=u)
+%                     Int_set=[Int_set i]; 
+%                 end
+%             end
+%     C = SNR*He_fzf(u,:)'*He_fzf(u,:);
+%     D = eye(Num_users)+SNR*(He_fzf(Int_set,:)'*He_fzf(Int_set,:));
+%     [Vector_C, lamda_C]= eigs((C*D^(-1)));
+%     F_slnr(:,u) = Vector_C(:,1);
+%         end
+% end
+
     % Spectral efficiency calculations
     count=0;
     for SNR_dB=SNR_dB_range
+           for u=1:1:Num_users
+            Int_set=[]; % interference index
+                for i=1:1:Num_users
+                    if(i~=u)
+                        Int_set=[Int_set i]; 
+                    end
+                end
+        C = SNR_dB*He_fzf(u,:)'*He_fzf(u,:);
+        D = eye(Num_users)+SNR_dB*(He_fzf(Int_set,:)'*He_fzf(Int_set,:));
+        [Vector_C, lamda_C]= eigs((C*D^(-1)));
+        F_slnr(:,u) = Vector_C(:,1);
+           end
+        
         count=count+1;
         SNR=10^(.1*SNR_dB)/Num_users; % SNR value
               
@@ -266,7 +299,28 @@ for iter=1:1:ITER
             %Scheduling is considered.
             SINR_schedule=(SNR*(abs(He_schedule(u,:)*Fbb_schedule(:,u)).^2))/(SNR*sum((abs(He_schedule(u,:)*Fbb_schedule(:,Int_set)).^2))+1);
             Rate_HP_schedule(count)=Rate_HP_schedule(count)+log2(1+SINR_schedule)/(Num_users*ITER);
+            
+            %%%%%%%%%%%%%%%%%%%%%%%%%
+            %Leakage SINR
+            SINR_SLNR=(SNR*(abs(He_fzf(u,:)*F_slnr(:,u)).^2))/(SNR*sum((abs(He_fzf(u,:)*F_slnr(:,Int_set)).^2))+1);
+            Rate_HP_SLNR(count)=Rate_HP_SLNR(count)+log2(1+SINR_SLNR)/(Num_users*ITER);
+            
         end
+        
+
+        
+%    for k = 0:k_cluster-1
+%         for col = (1+Num_group*(k+1)) : Num_users
+%             for row =  (1+Num_group*k) : (Num_group+Num_group*k)
+%                     Fbb_cl(col,row) = 0;
+%             end
+%         end
+%         for row = (1+Num_group*(k+1)) : Num_users
+%             for col =  (1+Num_group*k) : (Num_group+Num_group*k)
+%                     Fbb_cl(col,row) = 0;
+%             end
+%         end
+%    end
     
         % Hybrid Precoding
         % Rate_HP(count)=Rate_HP(count)+log2(det(eye(Num_users)+SNR*(He_BDMA*(Fbb_BDMA*Fbb_BDMA')*He_BDMA')))/(Num_users*ITER);
@@ -310,12 +364,14 @@ end
 %plot(paths, Rate_Path,'-*','LineWidth',1.5);
 plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
 hold on; plot(SNR_dB_range,Rate_BS_BDMA,'LineWidth',1.5);
-hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
- hold on; plot(SNR_dB_range,Rate_HP,'LineWidth',1.5);
-hold on;  plot(SNR_dB_range,Rate_HP_fzf,'--o','LineWidth',1.5);
-hold on; plot(SNR_dB_range,Rate_HP_cl,'--b','LineWidth',1.5);
-hold on; plot(SNR_dB_range,Rate_HP_schedule,'-s','LineWidth',1.5);
- legend('signal user','BDMA','analog only', 'block-cvx-ZF','full-zf','group','schedule')
+plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
+plot(SNR_dB_range,Rate_HP,'LineWidth',1.5);
+plot(SNR_dB_range,Rate_HP_fzf,'--o','LineWidth',1.5);
+plot(SNR_dB_range,Rate_HP_cl,'--b','LineWidth',1.5);
+plot(SNR_dB_range,Rate_HP_schedule,'-s','LineWidth',1.5);
+plot(SNR_dB_range,Rate_HP_SLNR,'-k','LineWidth',1.5);
+
+ legend('signal user','BDMA','analog only', 'block-cvx-ZF','full-zf','group','schedule','SLNR')
 % %legend('2','4','6','8','Single-user','Analog','Hybrid')
 % % legend('128BDMA','Single-user','Analog Only','Hybrid','Hybrid cluster')
 % % legend('5zf','5group','5','10zf','10group','10','15zf','15group','15','20zf','20group','20')
