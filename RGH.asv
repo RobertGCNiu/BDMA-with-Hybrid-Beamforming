@@ -1,0 +1,10 @@
+function [R] = RGH(G,F,rho)
+%RGH 此处显示有关此函数的摘要
+%   此处显示详细说明
+s=size(F,2);
+T=G*F+eye(s)/rho;
+T(logical(eye()))
+R=diag(T)./
+
+end
+
