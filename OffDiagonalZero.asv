@@ -1,0 +1,7 @@
+function F_odz = OffDiagonalZero(N_RF, N_users,F_full);
+
+
+Fbb_cl=Fbb_cl.*kron(eye(K),ones(m_k));
+
+end
+
