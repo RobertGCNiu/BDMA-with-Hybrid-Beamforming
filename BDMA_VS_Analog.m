@@ -26,8 +26,8 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
         RX_ant_h=sqrt(RX_ant); % hieght
         ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
         ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
-        for k_cluster = [8]
-            Num_group = Num_users/k_cluster;
+        for K = [2]
+            m_k = Num_users/K;
             % ----------------------------- Channel Parameters ------------------------
             for Num_paths_index=1:length(paths) %Number of channel paths
                 Num_paths = paths(Num_paths_index);
@@ -41,10 +41,10 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                 Rate_HP_schedule = zeros(1,length(SNR_dB_range));
                 Rate_HP_SLNR = zeros(1,length(SNR_dB_range));
                 
-                ITER=10; % Number of iterations
+                ITER=50; % Number of iterations
                 
                 % --------------- Simulation starts ---------------------------------------
-                for iter=1:ITER
+                for iter=1:1:ITER
                     T = zeros(Num_users, Num_users);
                     
                     % Generate user channels
@@ -64,7 +64,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                     Frf_BDMA = a_TX_select;
                     Wrf_BDMA = a_RX_select;
                     
-                   G_bdma=effective_H(H,Wrf_BDMA,Frf_BDMA);
+                    G_bdma=effective_H(H,Wrf_BDMA,Frf_BDMA);
                     
                     Frf_fzf=a_TX_select;
                     Wrf_fzf=a_RX_select;
@@ -87,17 +87,17 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                     Fbb_schedule=pinv(G_schedule);
                     Fbb_schedule = normalize_f(Fbb_schedule,a_TX_schedule);
                     
-                    [Wrf_cl, Frf_cl, H_cl]= greedySelection(a_TX_select, a_RX_select,k_cluster,H);
+                    [Wrf_cl, Frf_cl, H_cl]= greedySelection(a_TX_select, a_RX_select,K,H);
                     % Constructin the effective channels
                     G_cl = effective_H(H_cl,Wrf_cl,Frf_cl);
                     
                     % Baseband zero-forcing precoding
                     %   Fbb_cl = eye(Num_users);
                     Fbb_cl=pinv(G_cl);
-                    Fbb_cl=Fbb_cl.*kron(eye(Num_group),ones(k_cluster));
+                    Fbb_cl=Fbb_cl.*kron(eye(K),ones(m_k));
                     Fbb_cl = normalize_f(Fbb_cl,Frf_cl);
                     
- 
+                    
                     
                     
                     %% Power Allocation
@@ -117,7 +117,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                     SNR_index=0;
                     for SNR_dB=SNR_dB_range
                         SNR_index=SNR_index+1;
-                        rho=10^(.1*SNR_dB)/Num_users; % SNR value
+                        rho=db2pow(SNR_dB)/Num_users; % SNR value
                         for u=1:Num_users
                             Int_set=1:Num_users; % interference index
                             Int_set(u)=[];
@@ -129,14 +129,14 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         F_slnr=normalize_f(F_slnr,Frf_fzf);
                         
                         
-                        interval=1:k_cluster:Num_users+1;
+                        interval=1:m_k:Num_users+1;
                         for u=1:Num_users
                             Int_set=1:Num_users; % interference index
                             Int_set(u)=[];
                             G_index=sum(u>=interval);
                             G_replace=G_cl(:,interval(G_index):interval(G_index+1)-1);
                             C = rho*G_replace(u,:)'*G_replace(u,:);
-                            D = eye(k_cluster)+rho*(G_replace(Int_set,:)'*G_replace(Int_set,:));
+                            D = eye(m_k)+rho*(G_replace(Int_set,:)'*G_replace(Int_set,:));
                             [Vector_C, lamda_C]= eigs((D^(-1)*C));
                             f_temp=zeros(Num_users,1);
                             f_temp(interval(G_index):interval(G_index+1)-1)=Vector_C(:,1);
@@ -147,34 +147,30 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         
                         
                         
-                        for u=1:Num_users
+                        for u=1:1:Num_users
                             Int_set=1:Num_users; % interference index
                             Int_set(u)=[];
                             Channel=zeros(RX_ant,TX_ant);
                             Channel(:,:)= H(u,:,:);
                             [U_channel S_channel V_channel]=svd(Channel);
                             Channel_cl(:,:) =H_cl(u,:,:);
-                            Rate_SU(SNR_index)=Rate_SU(SNR_index)+log2(1+rho*S_channel(1,1)^2)/(Num_users*ITER);
+                            
+                            % Single-user rate
+                            Rate_SU(SNR_index)=Rate_SU(SNR_index)+log2(1+rho*S_channel(1,1)^2)/(ITER);
+                            
                         end
                         
-                        
                         G_BDMA=effective_H(H,Wrf_BDMA,Frf_BDMA);
-                        Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index)+RGH(G_BDMA,eye(size(G_BDMA)),rho)/(Num_users*ITER);
-                        Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index)+RGH(G_cl,Fbb_cl,rho)/(Num_users*ITER);
-                        Rate_HP_fzf(SNR_index) = Rate_HP_fzf(SNR_index)+RGH(G_fzf,Fbb_fzf,rho)/(Num_users*ITER);
-                        Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_schedule,Fbb_schedule,rho)/(Num_users*ITER);
-                        Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(Num_users*ITER);
-                        
-                        
+                        Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
+                        Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
+                        Rate_HP_fzf(SNR_index) = Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
+                        Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_schedule,Fbb_schedule,rho)/(ITER);
+                        Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
                     end % End of SNR loop
-                    
                 end % End of ITER loop
-                
             end
-            
         end
     end
-    
 end
 
 
@@ -185,4 +181,4 @@ plot(SNR_dB_range,Rate_HP_cl,'--');
 plot(SNR_dB_range,Rate_HP_schedule,'-s');
 plot(SNR_dB_range,Rate_HP_SLNR,'-');
 
-legend('signal user','BDMA','full-zf','group','schedule','SLNR')
+legend('signal user','BDMA','full-zf','group','selection','SLNR')
