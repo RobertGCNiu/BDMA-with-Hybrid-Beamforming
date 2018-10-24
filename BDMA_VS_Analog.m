@@ -13,7 +13,7 @@ Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
 paths = [4];
 Rate_Path = zeros(length(paths),1);
-TX_sets = (8:12).^2;
+TX_sets = (8:16).^2;
 Rate_HP_ant = zeros(1,length(TX_sets));
 
 
@@ -24,7 +24,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
     for Num_RF_index = 1:length(RF_sets)
         Num_RF = RF_sets(Num_RF_index);
         TX_index = 0;
-        for TX_ant=169%Number of UPA TX antennas
+        for TX_ant=TX_sets  %Number of UPA TX antennas
             TX_index = TX_index+1;
             TX_ant_w=sqrt(TX_ant); % width
             TX_ant_h=sqrt(TX_ant); % hieght
@@ -42,11 +42,11 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                 for Num_paths_index=1:length(paths) %Number of channel paths
                     Num_paths = paths(Num_paths_index);
                     % ----------------------------- Simulation Parameters ---------------------
-                    SNR_dB_range=-15:3:20;  % SNR in dB
+                    SNR_dB_range=15;  % SNR in dB
                     Rate_SU=zeros(1,length(SNR_dB_range)); % Will carry the single-user MIMO rate (without interference)
                     Rate_BS=zeros(1,length(SNR_dB_range));% Will carry the rate with analog-only beamsteering
                     Rate_BS_BDMA = zeros(1,length(SNR_dB_range));
-                    Rate_HP_cl = zeros(1,length(SNR_dB_range));
+                     Rate_HP_cl = zeros(1,length(SNR_dB_range));
                     %Rate_HP_fzf = zeros(1,length(SNR_dB_range));
                     Rate_HP_schedule = zeros(1,length(SNR_dB_range));
                     Rate_HP_SLNR = zeros(1,length(SNR_dB_range));
@@ -163,18 +163,18 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                             Fbb_slnr=normalize_f(Fbb_slnr,Frf_cl);
                                                
                             
-                            for u=1:1:Num_users
-                                Int_set=1:Num_users; % interference index
-                                Int_set(u)=[];
-                                Channel=zeros(RX_ant,TX_ant);
-                                Channel(:,:)= H(u,:,:);
-                                [U_channel S_channel V_channel]=svd(Channel);
-                                Channel_cl(:,:) =H_cl(u,:,:);
-                                
-                                % Single-user rate
-                                Rate_SU(SNR_index)=Rate_SU(SNR_index)+log2(1+rho*S_channel(1,1)^2)/(ITER);
-                                
-                            end
+%                             for u=1:1:Num_users
+%                                 Int_set=1:Num_users; % interference index
+%                                 Int_set(u)=[];
+%                                 Channel=zeros(RX_ant,TX_ant);
+%                                 Channel(:,:)= H(u,:,:);
+%                                 [U_channel S_channel V_channel]=svd(Channel);
+%                                 Channel_cl(:,:) =H_cl(u,:,:);
+%                                 
+%                                 % Single-user rate
+%                                 Rate_SU(SNR_index)=Rate_SU(SNR_index)+log2(1+rho*S_channel(1,1)^2)/(ITER);
+%                                 
+%                             end
                             
                             G_BDMA=effective_H(H,Wrf_BDMA,Frf_BDMA);
                             Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
@@ -185,7 +185,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                             Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
                         end % End of SNR loop
                         Rate_HP_fzf(Num_RF_index)=Rate_HP_fzf(Num_RF_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
-                        %Rate_HP_ant(TX_index) = Rate_HP_ant(TX_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
+                        Rate_HP_ant(TX_index) = Rate_HP_ant(TX_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
                     end % End of ITER loop
                 end
             end
@@ -193,9 +193,9 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
         
     end
 end
- plot(RF_sets,Rate_HP_fzf,'-v');
+ %plot(RF_sets,Rate_HP_fzf,'-v');
 % figure
-% plot(TX_sets,Rate_HP_ant,'-v');
+ plot(TX_sets,Rate_HP_ant,'-v');
 % 
 % plot(SNR_dB_range,Rate_SU,'-v');
 % hold on; plot(SNR_dB_range,Rate_BS_BDMA);
@@ -205,3 +205,5 @@ end
 % plot(SNR_dB_range,Rate_HP_SLNR,'-');
 % 
 % legend('signal user','BDMA','full-zf','group','selection','SLNR')
+xlabel('The number of antennas')
+ylabel('Sum-rate Spectral Efficiency(bps/Hz)')
