@@ -136,15 +136,15 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         for SNR_dB=SNR_dB_range
                             SNR_index=SNR_index+1;
                             rho=db2pow(SNR_dB)/Num_users*2; % SNR value
-                            for u=1:Num_users
-                                Int_set=1:Num_users; % interference index
-                                Int_set(u)=[];
-                                C = rho*G_fzf(u,:)'*G_fzf(u,:);
-                                D = eye(Num_users)+rho*(G_fzf(Int_set,:)'*G_fzf(Int_set,:));
-                                [Vector_C, lamda_C]= eigs((D^(-1)*C));
-                                F_slnr(:,u) =Vector_C(:,1);
-                            end
-                            F_slnr=normalize_f(F_slnr,Frf_fzf);
+%                             for u=1:Num_users
+%                                 Int_set=1:Num_users; % interference index
+%                                 Int_set(u)=[];
+%                                 C = rho*G_fzf(u,:)'*G_fzf(u,:);
+%                                 D = eye(Num_users)+rho*(G_fzf(Int_set,:)'*G_fzf(Int_set,:));
+%                                 [Vector_C, lamda_C]= eigs((D^(-1)*C));
+%                                 F_slnr(:,u) =Vector_C(:,1);
+%                             end
+%                             F_slnr=normalize_f(F_slnr,Frf_fzf);
                             
                             
                             interval=1:m_k:Num_users+1;
@@ -152,7 +152,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                                 Int_set=1:Num_users; % interference index
                                 Int_set(u)=[];
                                 G_index=sum(u>=interval);
-                                G_replace=G_cl(:,interval(G_index):interval(G_index+1)-1);
+                                G_replace=G_fzf(:,interval(G_index):interval(G_index+1)-1);
                                 C = rho*G_replace(u,:)'*G_replace(u,:);
                                 D = eye(m_k)+rho*(G_replace(Int_set,:)'*G_replace(Int_set,:));
                                 [Vector_C, lamda_C]= eigs((D^(-1)*C));
@@ -160,7 +160,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                                 f_temp(interval(G_index):interval(G_index+1)-1)=Vector_C(:,1);
                                 Fbb_slnr(:,u) =f_temp;
                             end
-                            Fbb_slnr=normalize_f(Fbb_slnr,Frf_cl);
+                            Fbb_slnr=normalize_f(Fbb_slnr,Fbb_fzf);
                                                
                             
                             for u=1:1:Num_users
@@ -182,7 +182,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                             Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
                             Rate_HP_fzf(SNR_index) = Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                             Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_schedule,Fbb_schedule,rho)/(ITER);
-                            Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
+                            Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_fzf,Fbb_slnr,rho)/(ITER);
                         end % End of SNR loop
                         %Rate_HP_fzf(Num_RF_index)=Rate_HP_fzf(Num_RF_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                         %Rate_HP_ant(TX_index) = Rate_HP_ant(TX_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);

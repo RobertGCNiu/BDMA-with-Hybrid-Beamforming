@@ -1,65 +1,22 @@
-This is BibTeX, Version 0.99d (TeX Live 2017/W32TeX)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: ICC2018_V4.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: ICC2018_V4.aux
 The style file: IEEEtran.bst
-Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: BDMAref.bib
-Repeated entry---line 857 of file BDMAref.bib
+Repeated entry---line 429 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 967 of file BDMAref.bib
+Repeated entry---line 484 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "spencer2004zero"
+Warning--I didn't find a database entry for "ni2016hybrid"
+Warning--I didn't find a database entry for "bogale2014beamforming"
+Warning--I didn't find a database entry for "liu2014phase"
+Warning--I didn't find a database entry for "garcia2017mimo"
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 8 entries,
-            4087 wiz_defined-function locations,
-            871 strings with 8846 characters,
-and the built_in function-call counts, 7662 in all, are:
-= -- 623
-> -- 208
-< -- 81
-+ -- 118
-- -- 35
-* -- 396
-:= -- 1105
-add.period$ -- 16
-call.type$ -- 8
-change.case$ -- 7
-chr.to.int$ -- 180
-cite$ -- 8
-duplicate$ -- 514
-empty$ -- 536
-format.name$ -- 43
-if$ -- 1778
-int.to.chr$ -- 0
-int.to.str$ -- 8
-missing$ -- 88
-newline$ -- 47
-num.names$ -- 8
-pop$ -- 180
-preamble$ -- 1
-purify$ -- 0
-quote$ -- 2
-skip$ -- 582
-stack$ -- 0
-substring$ -- 427
-swap$ -- 480
-text.length$ -- 21
-text.prefix$ -- 0
-top$ -- 5
-type$ -- 8
-warning$ -- 0
-while$ -- 34
-width$ -- 9
-write$ -- 106
 (There were 2 error messages)
