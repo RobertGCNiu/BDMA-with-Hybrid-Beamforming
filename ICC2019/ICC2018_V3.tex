@@ -34,40 +34,44 @@ Shenzhen, Guangdong, China, 518172
 
 \maketitle \thispagestyle{plain}
 \pagenumbering{gobble}
-
 \begin{abstract}
 Beam division multiple access (BDMA) has recently been proposed for massive multiple-input multiple-output (MIMO) systems by simultaneously transmitting multiple users' data streams via different beams. In our previous work, single-path propagation channel model has been investigated by opportunistically selecting users to suppress the multiuser interference. Similarly, for multipath channel model, the different paths of each user can be chosen opportunistically. Furthermore, the block diagonal precoding is proposed and the number of RF chains can be significantly reduced by applying the Time Division Duplex(TDD) or switches. Simulation results confirm the effectiveness of proposed block diagonal precoding algorithm.
 \end{abstract}
 
 \section{introduction}
-To meet the ever-increasing demand of higher user data rates, it is envisioned that the next-generation cellular systems will be equipped with massive antenna arrays \cite{boccardi2014five}. Capitalizing on the large number of antennas at the base-station (BS), beam division multiple access (BDMA) has recently been proposed to transmit multiple users' data streams via different beams \cite{sun2015beam, Jiang2018}. In contrast to the more conventional multiple access schemes such as Code Division Multiple Access (CDMA) or Orthogonal Frequency Multiple Division Access (OFDMA) that multiplex users in code, time and frequency domains, BDMA separates users in the beam space by transmitting data to different users in orthogonal beam directions. In \cite{sun2015beam}, BDMA was first proposed to decompose the multiuser multiple-input multiple-output (MU-MIMO) system into multiple single-user MIMO channels by multiplexing multiple users' data onto non-overlapping beams. More recently, joint user scheduling and beam selection for BDMA was formulated under the Lyapunov-drift optimization framework before the optimal user-beam scheduling policy was derived in a closed form \cite{Jiang2018}.
+To meet the ever-increasing demand of higher user data rates, it is envisioned that the next-generation cellular systems will be equipped with massive antenna arrays \cite{boccardi2014five}. Capitalizing on the large number of antennas at the base-station (BS), beam division multiple access (BDMA) has recently been proposed to transmit multiple users' data-streams via different beams \cite{sun2015beam, Jiang2018}. In contrast to the more conventional multiple access schemes such as Code Division Multiple Access (CDMA) or Orthogonal Frequency Multiple Division Access (OFDMA) that multiplex users in code, time and frequency domains, BDMA separates users in the beam space by transmitting data to different users in orthogonal beam directions. In \cite{sun2015beam}, BDMA was first proposed to decompose the multiuser multiple-input multiple-output (MU-MIMO) system into multiple single-user MIMO channels by multiplexing multiple users' data onto non-overlapping beams. More recently, joint user scheduling and beam selection for BDMA was formulated under the Lyapunov-drift optimization framework before the optimal user-beam scheduling policy was derived in a closed form \cite{Jiang2018}.
 
-In the meantime, hyrbid digital and analog beamforming has also been developed for millimeter wave (mmWave) massive MIMO transmissions by dividing the procoding process into two steps, namely analog and digital precoding \cite{han2015large, el2014spatially}. More specifically, the transmitted signals are first precoded digitally using a smaller number of radio frequency (RF) chains followed by the analog precoding implemented with a much larger number of low-cost phase shifters. As a result, the hybrid analog-digital precoding architecture requires significantly less RF chains as compared to the fully digital precoding in which every available antenna element is supported by one RF chain. 
+However, the expensive and power-hungry components (e.g. ADC/DAC, filters, mixers and amplifiers) in RF chain constitute an impediment of broad implementation of massive MIMO systems.  Thus, hybrid digital and analog beamforming has been developed for massive MIMO transmissions by dividing the procoding process into two steps, namely analog and digital precoding \cite{han2015large, el2014spatially}. More specifically, the transmitted signals are first precoded digitally using a smaller number of radio frequency (RF) chains followed by the analog precoding implemented with a much larger number of low-cost phase shifters. As a result, the hybrid analog-digital precoding architecture requires significantly less RF chains as compared to the fully digital precoding in which every available antenna element is supported by one RF chain. 
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.55]{PPTFigure/groupcluster.eps}
-		\caption{Group scheduling to reduce the number of RF chains and eliminate the intra-cluster interference}\label{fig:BDMA}
-	\end{center}
-\end{figure}
+On the other hand, aimed at lowering the computational complexity and obtaining closed-form solutions in downlink space-division multiple access (SDMA), the notion of \textit{block diagonalization} (BD) was introduced in \cite{spencer2004zero}, which is found out helpful in massive MIMO transmissions especially for digital precoder design of hybrid beamforming system. This is because computation and implementation of full zero-forcing precoding matrix in an instant is of great challenge, while separating digital precoders into blocks efficiently mitigates the hard work. With the number of transmit RF chains larger than the total number of receive RF chains (considering multiuser scenario), it can be achieved that, for each block, base station projects all inter-block interference onto the its null spaces \cite{ni2016hybrid}. By setting up an optimization problem minimizing the means square error (MSE) between the received signals resulted from full ZF prcoding system and BD precoding system, \cite{bogale2014beamforming} indicates that utilizing BD precoders can realize an asymptotic performance to full ZF precoding transmissions. Actually, the composition of a block is flexible, i.e., it can be a downlink user with multiple antennas or multiple single-antenna users. For instance, in \cite{liu2014phase}, the structure of hybrid BD precoding is also investigated but with each block being a group of single-antenna users. In such a system, the size of each block can even be a optimization variable. Nevertheless, the above hybrid BD massive MIMO systems are all under a crucial condition, that is, the number of RF chains must be no less than the number of supported data-streams.
 
-{\color{red}However, the number of RF chains is lower bounded by the transmitted the number of data streams. In our proposed system, the users are grouped to several clusters. We assume the symbol duration is much larger than time delay thus the received symbols of different users are same and the channel gain is constant. Compared to serve each cluster separately, the interference will increase since each user has to decode received signal from other clusters. Leveraging the scheduling of users, we can firstly use analog precoding to eliminate the inter-cluster interference between cluster and then implement digital precoding to suppress the intra-cluster interference. The simulation results show that our proposed algorithm can efficiently reduce the number of RF chains without introducing large intra-cluster interference.} 
+To circumvent the restriction, \cite{garcia2017mimo} uses $L$ RF chains to approximate $K\geq L$ transmitted symbols, in this way, the data-stream to RF chain ratio can be above 1. The success of this scheme relies on that the state-of-art phase shifters and switches can change their state in hundreds of pico seconds, since the approximation needs to be done in each symbol period. However, due to that digital/analog precoder is symbol-dependent, and users have to recover symbols via compressive sensing tools, the overall scheme is of high complexity. In this paper, we also consider the hybrid BD multiuser massive MIMO system with number of data-streams larger than number of RF chains, and against the current literature, our contributions are threefold:
 
-\underline{Notation}: Vectors and matrices are denoted by boldface letters. ${\bm A}^T$ and ${\bm A}^H$ denote transpose and conjugate transpose of ${\bm A}$, respectively. $\bm{A}^\dagger$ being the pseudo inverse of $\bm{A}$ while $||\bm{A}|| $ and $|\bm{A}|$ stand for the Frobenius norm and determinant of ${\bm A}$, respectively. $\bm{A}(i,j)$ denotes the $i$ row, $j$ column element of ${\bm A}$; $|\mathcal{I}|$ is the cardinality of the enclosed set ${\cal I}$; Finally, $\mathbb{E}[\cdot] $ and $\Re\{\cdot\}$ denote the expectation and real part of a random variable.
-
-\begin{figure*}[htpb]
-	\centering
-	\begin{minipage}[t]{0.7\linewidth}
-		\includegraphics[width=5.6in,height=3in]{PPTFigure/BlockDiagonal.eps}
-		\caption{Block diagram of the hybrid precoding system under consideration}\label{fig:BlockDiagram}
-		\parbox{6.5cm}{\small \hspace{1.5cm} }
-	\end{minipage}
+\begin{figure*}[t]
+\centering
+\begin{minipage}[t]{0.7\linewidth}
+	\includegraphics[width=5.6in,height=3in]{PPTFigure/BlockDiagonal.eps}
+	\caption{Block diagram of the hybrid precoding system under consideration}\label{fig:BlockDiagram}
+	\parbox{6.5cm}{\small \hspace{1.5cm} }
+\end{minipage}
 \end{figure*}
+
+\begin{itemize}
+\item It is widely accepted in massive MIMO studies that the number of data-streams is restricted to the number of RF chains. To break the rule, we propose an asynchronous hybrid precoding process that involves both digital and analog precoders. In our proposed scheme, users are divided into $K$ clusters, their signals are multiplied by corresponding digital precoders block by block, and added up together at the analog precoding stage before simultaneous transmission. Thus, the data-stream per physical RF chain is far above 1 while the data-stream per RF chain usage is still equal to 1.
+\item We design a whole set of transmission scheme from transmit digital/analog precoding matrix to the receive analog beamforming vectors. With finite number of transmit antennas, the inter-cluster interference inherently exists in our system model, hence we investigate two distinguishing digital precoders respectively coming from equivalent channel inversion and signal-to-leakage-and-noise (SLNR), which show equivalent performance in simulation results.
+\item Clustering different users together results in different systematic performance. This phenomenon is also known as peer effect. For particular digital and analog precoding strategy, we formulate the user clustering problem as an integer programming problem, which is of NP-hardness. To tackle the problem, we propose a K-means based heuristic user clustering algorithm that could effectively improve system sume-rate.
+\end{itemize}
+
+
+
+The structure of this paper is arranged as follows: the massive MIMO system with asynchronous hybrid BD precoding is introduced in Section II; the design of transmit digital/analog precoding matrix and receive analog beamforming vectors are elaborated in Section III; The user clustering algorithm is detailed in Section IV whereas the simulation results are shown in Section V; and finally we conclude the paper in Section VI
+
+\underline{Notation}: Vectors and matrices are denoted by boldface letters. $\bm{I}_N$ denotes the identity matrix with size $N\times N$. ${\bm A}^T$ and ${\bm A}^H$ denote transpose and conjugate transpose of ${\bm A}$, respectively. $\bm{A}^\dagger$ being the pseudo inverse of $\bm{A}$ while $||\bm{A}||_0$, $||\bm{A}|| $ and $|\bm{A}|$ stand for $0$ norm, the Frobenius norm and determinant of ${\bm A}$, respectively. $\bm{A}(i,j)$ denotes the $i$ row, $j$ column element of ${\bm A}$; $|\mathcal{I}|$ is the cardinality of the enclosed set ${\cal I}$; Finally, $\mathbb{E}[\cdot] $ and $\Re\{\cdot\}$ denote the expectation and real part of a random variable.
 
 \section{system model}
 There are $N_{tot}$ users under considered base station, and $N_U$ of them will be selected to serve. We consider a multi-user mmWave MIMO system shown in \figurename{ \ref{fig:BlockDiagram}}, in which a transmitter equipped with $N_{RF}$ RF chains and $N_T$ antennas transmits $N_U$ data streams to $N_U$ receivers with $N_R$ receive antennas. Following the same assumption commonly employed in the literature \cite{alkhateeb2015limited}, we assume only one data stream is designated to each scheduled receiver. We use ${\bm s}(n)$ to denote the $n$-th block of $N_U$ data to be transmitted with $\mathbb{E}\left[\bm{ss}^H\right]=\frac{1}{N_U}\bm{I}_{N_U}$. In the sequel, we concentrate on a single block and omit the temporal index $n$ for notational simplicity.
 
-Our basic idea is to group the users into several clusters and then the inter-cluster interference can be minimized by analog precoding with group-scheduling and the intra-cluster interference can be eliminated by digital precoding.
+Many papers have proposed block algorithm to reduce the computational complexity. Our basic idea is to group the users into several clusters and then the inter-cluster interference can be minimized by analog precoding with group-scheduling and the intra-cluster interference can be eliminated by digital precoding.
 
 The $N_U$ users are divided into $K$ clusters and each cluster has $M_k$ users. Obviously, we have
 \begin{equation}
@@ -113,7 +117,7 @@ Assuming the receivers are all low-cost terminals that perform analog beamformin
 \begin{equation}{\label{eq:hats}}
 \hat{s}_{ku} = \bm{w}_{ku}^H \bm{H}_{ku} \bm{\mathcal{V}}_k \bm{f}_{ku} s_{ku} + \bm{w}_{ku}^H \bm{\tilde{n}}_{ku},
 \end{equation}
-where ${\bm w}_u$ of dimension $N_R\times 1$ is the analog beamforming vector employed by the $u$-th receiver with the power constraint of $|\bm{w}_u|^2=1$ and
+where ${\bm w}_{ku}$ of dimension $N_R\times 1$ is the analog beamforming vector employed by the $u$-th receiver with the power constraint of $|\bm{w}_u|^2=1$ and
 \begin{equation}\label{Eq:ntilde}
 \bm{\tilde{n}}_u=\bm{H}_{ku} \bm{\mathcal{V}}_k\sum_{\substack{i=1 \\ i\neq u}}^{M_K}\bm{f}_{ki}s_{ki} + \bm{H}_{ku}\sum_{\substack{j=1\\j\neq k}}^{K}\bm{\mathcal{V}}_j\bm{\mathcal{F}}_j\bm{s}_j+  \underbrace{\bm{w}_{ku}^H \bm{n}_{ku}}_\text{Noise}
 \end{equation}
@@ -146,130 +150,169 @@ Then, the channel capacity of the $u$-th user is given by
 \begin{equation}\label{eq:convenR}
 R_{ku} = \log\left(1+\frac{\frac{P}{N_U}|{\bm{g}}_{ku}^H \bm{f}_{ku}|^2}{\frac{P}{N_U}\displaystyle\sum_{\substack{i=1 \\ i\neq u}}^{M_k}(|{\bm{g}}_{ku}^H\bm{f}_{ki}|^2+\sum_{\substack{j=1\\j\neq k}}^{K}||\bm{g}_{ju}\bm{F}_j||^2)+\sigma^2}\right).
 \end{equation}
+where we assume the power of each user is uniformly allocated.
+
 Subsequently, the system average capacity that is a function of ${\bm V}$ and ${\bm F}$ can be computed as
 \begin{equation}
 R_{avg}=\frac{1}{KN_U}\sum_{k=1}^{K}\sum_{u=1}^{N_U}R_{ku}.
 \end{equation}
-Then the number of required RF chains can be reduced to $N_{RF} = \max \{M_k\}_{k=1}^K $
 
-Finally, for the given $K$, the optimal design of the digital and analog precoding matrices can be formulated as
+\subsection{Cluster-by-Cluster(CbC) hybrid precoding}
+Obviously, the capacity of BD precoding is upper bounded by conventional hybrid precoding although the computational complexity is reduced. In this paper, we proposed a clustering algorithm to reduce the gap between conventional and block hybrid precoding. By introducing an switch matrix $\bm{T}\in \{0,1\}^{N_U\times N_U}$, the data streams are clustered by distinct beams.
+
+As shown in Eq. \eqref{eq:hats}, the proposed algorithm is also aiming to break the ceiling on the number of steams $N_{RF}\leq N_U$, where we assume the analog and digital precoder can be instantaneously calculated such that the transmitted signal can be processed cluster-by-cluster.
+
+Finally, for the given $K$ clusters, the optimal design of the digital and analog precoding matrices can be formulated as
 \begin{align}\label{eq:maxsumrate}
-P_1: \quad&\max_{\bm W, \bm V,\bm F, \bm{p}}\quad R_{avg}\\ \nonumber
+P_1: \quad&\max_{\bm W, \bm T, \bm{V},\bm F}\quad R_{avg}(\bm{W},\bm{VT},\bm{F})\\ \nonumber
 s.t. \quad&C_1: \text{diag}(\bm{v}_{ku}\bm{v}_{ku}^H)=\frac{\bm{I}_{N_T}}{\sqrt{N_T}};\\
 &C_2: \text{diag}(\bm{w}_{ku}\bm{w}_{ku}^H)=\frac{\bm{I}_{N_{R}}}{\sqrt{N_R}};\nonumber\\
-&C_3: \text{tr}(\bm{FF}^H) \leq N_U;\nonumber\\
-& C_4: \sum_{u=1}^{N_U} p_u = P_{tot};\nonumber\\
-&C_5: \bm{F} = \text{diag}(\bm{\mathcal{F}}_1, \bm{\mathcal{F}}_2, \cdots, \bm{\mathcal{F}}_{K});\nonumber\\
-&C_6: \bm{V} = [\bm{\mathcal{V}}_1, \bm{\mathcal{V}}_2, \cdots, \bm{\mathcal{V}}_K];\nonumber\\
-&C_7: \max \{M_k\}_{k=1}^K \leq N_{RF}\nonumber
+&C_3: ||\bm{Vf}_u||^2=1;\nonumber\\
+&C_4: \bm{F} = \text{diag}(\bm{\mathcal{F}}_1, \bm{\mathcal{F}}_2, \cdots, \bm{\mathcal{F}}_{K});\nonumber\\
+&C_5: \bm{V} = [\bm{\mathcal{V}}_1, \bm{\mathcal{V}}_2, \cdots, \bm{\mathcal{V}}_K];\nonumber\\
+&C_6: \max \{M_k\}_{k=1}^K \leq N_{RF};\nonumber\\
+&C_7: ||\bm{t}_{i}||_0=||\bm{t}_{j}||_0=1, \quad [\bm{T}]_{ij}\in\{0,1\};\nonumber
 \end{align}
-
+where $\bm{t}_{i}$ and $\bm{t}_{j}$ are the row and column vector of $\bm{T}$ respectively. In the following parts, we will solve this problem by two-stage algorithm. The first stage is to solve the analog precoding by implementing clustering method, and the second stage is to design the digital precoder cluster-by-cluster.
 
 
 
 \section{proposed block hybrid beamforming for RF chains reduction}
-In this section, the power of users will be uniformly allocated
-\begin{equation}
-p_u = \frac{P_{tot}}{N_U}, \quad u = 1,2,\cdots, N_U
-\end{equation}
+To solve the Problem $P_1$, We will firstly ignore the constraints on digital precoder and solve the analog precoder. Then two approaches for digital precoding are proposed in this section, namely block clustering(BC) and signal-to-leakage-and-noise ratio(SLNR) maximization. For BC, the users are clustered like K-means and then the inter-cluster interference can be minimized by analog precoding and the intra-cluster interference can be eliminated by conventional zero-forcing. As to SLNR maximization, the analog precoder is calculated same with BC but the digital precoder will be designed by maximizing the SLNR.
 
-Thus, the constraint $C_3$ in Eq. \eqref{eq:maxsumrate} will be temporarily removed. We will firstly consider a conventional case that $N_{RF} \geq N_U$. Then the new block hybrid precoding structure will be proposed for $N_{RF}<N_U$.
+\subsection{Analog Precoding Design}
 
-\subsection{Conventional hybrid beamforming by zero-forcing}
-Considering a case of $K=1$ ($N_U<N_{RF}$), the problem will be simplified to conventional hybrid beamforming precoding problem, \textit{i.e.} $\bm{V} = \bm{\mathcal{V}}_1$, $\bm{F} = \bm{\mathcal{F}}_1$. For notational simplicity, we will ignore the subscript $k$.
+For multi-path channel model as shown in Eq. \eqref{eq:Hu}, We need to select the beams with least interference. Then the Problem P1 can be simplified as 
+\begin{align}\label{eq:analog}
+P_2: \quad&\max_{\bm W, \bm T, \bm{V}}\quad R_{avg}(\bm{W},\bm{VT})\\ \nonumber
+s.t. \quad&C_1: \text{diag}(\bm{v}_{ku}\bm{v}_{ku}^H)=\frac{\bm{I}_{N_T}}{\sqrt{N_T}};\\
+&C_2: \text{diag}(\bm{w}_{ku}\bm{w}_{ku}^H)=\frac{\bm{I}_{N_{R}}}{\sqrt{N_R}};\nonumber\\
+&C_3: \bm{V} = [\bm{\mathcal{V}}_1, \bm{\mathcal{V}}_2, \cdots, \bm{\mathcal{V}}_K];\nonumber\\
+&C_4: \max \{M_k\}_{k=1}^K \leq N_{RF};\nonumber\\
+&C_5: ||\bm{t}_{i}||_0=||\bm{t}_{j}||_0=1, \quad [\bm{T}]_{ij}\in\{0,1\}.\nonumber
+\end{align}
 
 With the assumption that array response vectors corresponding to distinct beams are asymptotically orthogonal with infinite number of antennas at transmitter
 \begin{equation}\label{Eq:assumption}
 \lim_{N\rightarrow +\infty} \bm{a}^H_{T}(\phi^t_{i,l},\theta^t_{i,l}) \cdot\bm{a}_{T}(\phi^t_{j,p},\theta^t_{j,p})=\delta(i-j)\delta(l-p),
 \end{equation}
 
-For multi-path channel model as shown in Eq. \eqref{eq:Hu}, We need to select the beams with least interference. Based on the idea of BDMA, the analog precoder is solved by
+Based on the idea of BDMA, the analog precoder is solved by clustering the transmitted signal
 
-\begin{align}\label{eq:analogprecoder}
-\{\bm{w}^*_u,\bm{v}^*_u\}_{u=1}^{N_U} &= \argmax \frac{||\bm{w}^H_u \bm{H}_u \bm{v}_u||_F^2}{\sum_{i=1,i\neq u}^{N_U}||\bm{w}^H_u \bm{H}_u \bm{v}_i||_F^2}  \\ \nonumber
-s.t. &\quad \bm{v}_u \in \{ \bm{a}_{T}(\phi^t_{u,l},\theta^t_{u,l})\}_{l=1}^{L_u}\\
-&\quad \bm{w}_u \in \{ \bm{a}_{R}(\phi^r_{u,l},\theta^r_{u,l})\}_{l=1}^{L_u}
-\end{align}
-
-Assuming that the transmitter has perfect channel state information (CSI), then all AoA and AoD information, {\em i.e.} $\left\{\phi^t_u,\theta^t_u,\phi^r_u,\theta^r_u\right\}$, is perfectly known to the transmitter. As a result, the optimization problem in Eq.~(\ref{eq:maxsumrate}) can be simplified as
-\begin{align}\label{eq:P2}
-P_2: \quad&\max_{\bm F}\quad R_{avg}\\ \nonumber
-s.t.\quad &\text{tr}(\bm{FF}^H) \leq N_U;\nonumber
-\end{align}
-
-We denote by $\hat{\bm s}=\left[\hat{s}_1,\hat{s}_2,\cdots,\hat{s}_{N_U}\right]^T$ the estimated signal vector. Recalling Eq.~(\ref{eq:hats}), $\hat{\bm s}$ can be expressed as \cite{alkhateeb2014channel}
-\begin{equation}\label{eq:hatsAllUsers}
-\hat{\bm s} = {\bm G}\cdot \bm{F} \cdot\bm{s} + \bm{\xi},
-\end{equation}
-where ${\bm G}=\left[{\bm g}_1,{\bm g}_2,\cdots,{\bm g}_{N_U}\right]^H$ is of dimension $N_U\times N_{RF}$ and ${\bm \xi}=\left[{\bm w}_1^H\tilde{\bm n}_1,{\bm w}_2^H\tilde{\bm n}_2,\cdots,{\bm w}_{N_U}^H\tilde{\bm n}_{N_U}\right]^T$. \cite{alkhateeb2014channel} proposed a zero-forcing approach to solve Eq.~(\ref{eq:P2}) by setting
-\begin{equation}\label{eq:ZFU-HBF}
-\bm{F}_{ZF}={\bm G}^\dagger = \bm{G}^H(\bm{G}\bm{G}^H)^{-1},
-\end{equation}
-with $N_{RF}\geq N_U$.
-
-To satisfy the power constraint, power normalization is performed on each ${\bm f}_u$ derived from $\bm{F}_{ZF}=\left[\bm{f}_{ZF,1},\bm{f}_{ZF,2},\cdots,\bm{f}_{ZF,N_U}\right]$ as
-\begin{equation}\label{eq:ZFU-HBF2}
-\bm{f}^*_{ZF,u} = {\frac{\bm{f}_{ZF,u}}{||\bm{V}\cdot\bm{f}_{ZF,u}||}}.
-\end{equation}
-
-\subsection{Block Diagonal Digital Precoder}
-In general, the number of RF chains is constant but not the number of users. In this section, we will use less RF chains to serve users more than $N_{RF}$ by taking the advantage of user scheduling. For the assumption of Eq. \eqref{Eq:assumption},  although the infinite antennas can't be practical, the residual interference of difference users can be minimized by
 \begin{align}\label{eq:group-scheduling}
-\{\bm{\mathcal{W}}^*_k, \bm{\mathcal{V}}^*_k\}_{k=1}^{K} &= \argmax \frac{||\bm{w}^H_{ku} \bm{H}_{ku} \bm{\mathcal{V}}_k||_F^2}{\sum_{j=1,j\neq k}^{N_U}||\bm{w}^H_{ku} \bm{H}_{ku} \bm{\mathcal{V}}_j||_F^2}  \\ \nonumber
-s.t. &\quad \bm{\mathcal{V}}_{k} \in  \{\bm{v}_u^*\}_{u=1}^{N_U}, \\
-&\quad \bm{\mathcal{W}}^*_k \in \{\bm{w}^*_u\}_{u=1}^{N_U},\quad k = 1,2,\cdots,K
+\{\bm{\mathcal{W}}^*_k, \bm{\mathcal{V}}^*_k\}_{k=1}^{K} &= \argmax \sum_{k=1}^{K}\frac{||\bm{w}^H_{ku} \bm{H}_{ku} \bm{\mathcal{V}}_k||_F^2}{\sum_{j=1,j\neq k}^{N_U}||\bm{w}^H_{ku} \bm{H}_{ku} \bm{\mathcal{V}}_j||_F^2}  \\ \nonumber
+s.t. &\quad \bm{\mathcal{V}}^*_{k} \in  \{\bm{a}^H_{T}(\phi^t_{u,l},\theta^t_{u,l})\}_{u\in [1,N_U], l\in [1,L_u]}; \\
+&\quad \bm{\mathcal{W}}^*_k \in \{\bm{a}^H_{R}(\phi^t_{u,l},\theta^t_{u,l})\}_{u\in [1,N_U], l\in [1,L_u]};\nonumber\\
+&\quad \max\{M_k\}_{k=1}^K<N_{RF}
 \end{align}
-and the following deduction can be given
+Assuming that the transmitter has perfect channel state information (CSI), then all AoA and AoD information, {\em i.e.} $\left\{\phi^t_u,\theta^t_u,\phi^r_u,\theta^r_u\right\}$, is perfectly known to the transmitter. And we denote the $\{\bm{a}^H_{T}(\phi^t_{u,l},\theta^t_{u,l})\}_{u\in [1,N_U], l\in [1,L_u]}$ as $\bm{a}_{\mathcal{X},\mathcal{L}}$
+
+To solve $\bm{T}$. although the optimal solution can be solved by exhaustive searching, the computational complexity will be large. We propose a beam-cluster algorithm to cluster users.
+\begin{algorithm}[h] 		
+	\caption{Greedy clustering algorithm for block hybrid beamforming system}
+	\label{beam_cluster}
+	\begin{algorithmic}
+		\REQUIRE  \quad
+		\STATE	All user index set and path set: $\mathcal{X}$, $\mathcal{L}$\\
+		\STATE  Clustered user and path index set : $\mathcal{I}_k=\emptyset$, $k=1,2,\cdots, K$\\
+		\STATE  Number of clusters: $\mathcal{K}$\\
+		\ENSURE   	
+		\STATE Initialization: Assign a user index with largest channel gain $x_{k,l}$ corresponding to ${\mathcal I}_1$, {\em i.e.} $\mathcal{I}_1 \leftarrow  x^*_{k,l}$,  $\bm{\mathcal{I}} \leftarrow \mathcal{I}_1$ and ${\mathcal X}\setminus x_{k,l}^*$, 
+		\WHILE{$2\leq k \leq K$}
+		\FOR{$x_{k,l}$ in $({\mathcal{X},\mathcal{L}})$}
+		\STATE $p(x_{k,l}) = ||\bm{v}_{klx}^H \bm{a}_{\bm{\mathcal{I}}}||^2$
+		\ENDFOR
+		\STATE Find the user index $x_k^*$ with minimum $p(x_k)$ in $k$ cluster
+		\STATE Update $\mathcal{I}_{k,l}\leftarrow x_{k,l}^*$, $\bm{\mathcal{I}}\leftarrow \mathcal{I}_k$ and  ${\cal X}\setminus x_{k,\mathcal{L}}^*$
+		\ENDWHILE
+		\FOR{$x_{k,l}$ in $({\mathcal{X}}, {\mathcal{L}})$}
+		\FOR{$k$ in $\mathcal{K}$}
+		\STATE  Calculate the sum-rate SIR $p(x_{k,l})$ for the users in $\bm{\mathcal{I}}$
+		\ENDFOR
+		\STATE Find the user index $x_k^*$ with max $p(x_k)$								
+		\STATE	Update ${\cal I}_k \leftarrow  x_k^*$, $\bm{\mathcal{I}}\leftarrow \mathcal{I}_k$ and ${\cal X}\setminus x_k^*$	
+		\IF{length($\mathcal{I}_k$)$>$ $N_{RF}$}
+		\STATE $k \setminus {\mathcal{K}}$
+		\ENDIF
+		\ENDFOR	
+	\end{algorithmic}
+\end{algorithm}
+
+The clustered data streams can be given by $\bm{\mathcal{V}}^*_k = \bm{\bm{a}}_{\mathcal{I}_k}$.
+
+
+\subsection{Digital Precoder}
+By analog beamforming procedure, the following deduction can be given
 \begin{equation}\label{approx}
 \bm{\mathcal{W}}^*_{k}\bm{H}_{ku}\bm{\mathcal{V}}^*_{j} \approx \bm{0} \quad \text{for} \quad k \neq j
 \end{equation}
+
 Then the Eq. \eqref{Eq:ntilde} can be simplified as 
 \begin{equation}
 \tilde{\bm{n}}_{ku} \approx	\bm{g}_{uk}\sum_{\substack{i=1\\i\neq u}}^{M_k}\bm{f}_{ik}s_{ik}+\bm{w}_{uk}\bm{n}_{uk}
 \end{equation}
-Where the inter-cluster interference term is eliminated by Eq. \eqref{approx}. 
+Where the inter-cluster interference term is eliminated by Eq. \eqref{approx}.
 
-Compared to Eq. \eqref{eq:hatsAllUsers}, the only difference is that the number of considered users is reduced from $N_U$ to $M_k$ with $K$ clusters. The number of required RF chains is then reduce to $N_{RF} = \max \{M_k\}_{k=1}^K$. Then the digital precoder can be solved by
+In general, the number of RF chains is constant but not the number of users. In this section, we will use less RF chains to serve users more than $N_{RF}$ by taking the advantage of user scheduling. For the assumption of Eq. \eqref{Eq:assumption},  although the infinite antennas can't be practical, the residual interference of difference users can be minimized by Eq. \eqref{eq:analog}. To break the limitation on the minimal required number of RF chains, the above equations show that the data streams can be processed by digital precoder cluster-by-cluster and then the precoded data streams will be transmitted after combining, where the number of required RF chains is reduced to $M_k$ for each cluster.  
+
+The digital precoder can be solved by the following optimization problem
+\begin{align}\label{eq:digital}
+P_3: \quad&\max_{\bm F}\quad \sum_{k=1}^{K} R_{avg}(\bm{\mathcal{F}}_k)\\ \nonumber
+s.t. \quad &C_1: ||\bm{Vf}_u||^2=1;\nonumber\\
+&C_2: \bm{F} = \text{diag}(\bm{\mathcal{F}}_1, \bm{\mathcal{F}}_2, \cdots, \bm{\mathcal{F}}_{K});\nonumber\\
+&C_3: \max \{M_k\}_{k=1}^K \leq N_{RF};\nonumber
+\end{align}
+Then two approaches will be introduce to solve the $P_3$.
+
+\subsubsection{Blcok Zero Forcing (BZF)}
+For the given $K$, the digital precoder is assumed to be designed as a block diagonal matrix. Then the block digital precoder can be separately calculated. \cite{alkhateeb2014channel} proposed a zero-forcing approach to solve $\bm{F}$ by setting
 \begin{equation}
-\bm{\mathcal{F}}_k = \bm{\mathcal{G}}_k^\dagger = \bm{\mathcal{G}}_k^H(\bm{\mathcal{G}}_k \bm{\mathcal{G}}_k^H)^{-1}.
+\bm{\mathcal{F}}_{BZF,k} = \bm{\mathcal{G}}_k^\dagger = \bm{\mathcal{G}}_k^H (\bm{\mathcal{G}}_k \bm{\mathcal{G}}_k^H)^{-1}.
 \end{equation}
-Where $\bm{\mathcal{G}}_k = [\bm{g}_{k1}, \bm{g}_{k2},\cdots,\bm{g}_{kM_k}]$.
+with $N_{RF}\geq M_k$, where $\bm{\mathcal{G}}_k = [\bm{g}_{k1}, \bm{g}_{k2},\cdots,\bm{g}_{kM_k}]$.
+
+To satisfy the power constraint $C_3$ in $P_1$, power normalization is performed on each ${\bm f}_{ku}$ derived from $\bm{\mathcal{F}}_{BZF,k}=\left[\bm{f}_{BZF,k1},\bm{f}_{BZF,k2},\cdots,\bm{f}_{BZF,kM_k}\right]$ as
+\begin{equation}\label{eq:ZFU-HBF2}
+\bm{f}^*_{BZF,ku} = {\frac{\bm{f}_{BZF,ku}}{||\bm{V}\cdot\bm{f}_{BZF,ku}||}}.
+\end{equation}
+
+For a special case $K=1$, this problem can be simply solved by conventional zero-forcing. 
+
+Compared to conventional digital precoding, the only difference is that the data streams are processed cluster-by-cluster such that the number of considered users is reduced from $N_U$ to $M_k$ for $k$-th cluster. Thus, the minimal number of required RF chains is then reduce to $N_{RF} = \max \{M_k\}_{k=1}^K$. 
+
+
+\subsection{Block SLNR Maximization(BSM)}
+The conventional SLNR maximization(SM) is considered as a criterion to reduce co-channel interference(CCI) and noise. For the $u$-th user, the desired signals power can be expressed as 
+\begin{equation}
+	S_{ku} = \frac{P}{N_U}|\bm{w}_{ku} \bm{H}_{ku} \bm{V} \bm{f}_{SM,ku}|^2
+\end{equation}
+
+and the power leaked from $u$-th user to all other users is 
+\begin{align}
+L_{ku} &\approx \frac{P}{N_U}(\sum_{j=1,j\neq k}^{K}\sum_{i=1}^{M_j}|\bm{w}_{ji} \bm{H}_{ji} \bm{V} \bm{f}_{SM,ku}|^2\nonumber\\ 
+&+ \sum_{t=1}^{M_k}|\bm{w}_{kt} \bm{H}_{kt} \bm{V}\bm{f}_{SM,ku}|^2)
+\end{align}
+By recalling the Eq. \eqref{approx}, the SLNR for $u$-th user in $k$-th cluster can be expressed as
+\begin{equation}
+	\text{SLNR}_{BSM, ku} \approx \frac{\gamma|\bm{w}_{ku} \bm{H}_{ku} \bm{\mathcal{V}}_k \bm{f}_{BSM,ku}|^2}{\gamma \sum_{j=1,j\neq k}^{K}\sum_{i=1}^{M_j}|\bm{w}_{ji} \bm{H}_{ji} \bm{\mathcal{V}}_j \bm{f}_{BSM,ku}|^2+1}
+\end{equation}
+where the size of $\bm{f}_{BSM,ku} $ is $M_k\times 1$ while the the size of $\bm{f}_{SM,ku}$ is $N_U \times 1$. The $\gamma$ is the Signal-to-noise ratio (SNR).
+
+Define $\tilde{\bm{g}}_{ku}$ is the collection of all effective array gain matrix that excludes $\bm{w}_{ku} \bm{H}_{ku} \bm{\mathcal{V}}_k$. Thus the SLNR of each user can be represented as
+
+\begin{equation}
+\text{SLNR}_{ku} \approx \frac{\bm{f}_{BSM, ku}^H{\bm{g}}_{ku}^H{\bm{g}}_{ku} \bm{f}_{BSM, ku}}{\bm{f}_{BSM, ku}^H(\frac{1}{\gamma}\bm{I}+\bar{\bm{g}}_{ku}^H\bar{\bm{g}}_{ku})\bm{f}_{BSM, ku}}
+\end{equation}
+
+The digital precoder for each user can be solved by \cite{wang2012statistical}
+\begin{equation}
+	\bm{f}_{BSM,ku} = \lambda_{max}\left( \left(\frac{1}{\gamma}\bm{I}+\bar{\bm{g}}_{ku}^H\bar{\bm{g}}_{ku} \right)^{-1}{\bm{g}}_{ku}^H{\bm{g}}_{ku} \right)
+\end{equation}
+
+The equivalent of BZF and BSM  will be shown in simulation results.
 
 
 
-
-
-\subsection{Greedy group scheduling algorithm}
-To solve the Eq. \eqref{eq:group-scheduling}, although global optimal solution of group clustering problem by exhaustive searching, the computational cost is also very huge. Considering the K-means algorithm to minimize the summation of Euclidean distance, we will propose a similar algorithm to cluster the users with least interference.
-
-The algorithm can be summarized as Algorithm \ref{selection}. The users index is represented as $\bm{\mathcal{I}}$.
-\begin{algorithm}[h] 		
-	\caption{Greedy clustering algorithm for block hybrid beamforming system}
-	\label{selection}
-	\begin{algorithmic}
-		\REQUIRE  \quad
-		\STATE	All user index set: $\mathcal{X}$\\
-		\STATE  Selected user index set : $\mathcal{I}_k=\emptyset$, $k=1,2,\cdots, K$\\
-		\STATE  Number of clusters: $K$\\
-		\STATE Analog precoding matrix solved by Eq. \eqref{eq:analogprecoder}: $\bm{V}^*$ 
-		\ENSURE   	
-		\STATE Initialization: Randomly assign a user index with $k$-th cluster $x_k$ corresponding to ${\mathcal I}_1$, {\em i.e.} $\mathcal{I}_1 \leftarrow  x^*_k$,  $\bm{\mathcal{I}} \leftarrow \mathcal{I}_1$ and ${\mathcal X}\setminus x_k^*$, 
-		\WHILE{$2\leq k \leq K$}
-		\FOR{$x_k$ in ${\mathcal{X}}$}
-		\STATE $p(x_k) = ||\bm{v}_{kx}^H \bm{v}_{\bm{\mathcal{I}}}||^2$
-		\ENDFOR
-		\STATE Find the user index $x_k^*$ with minimum $p(x_k)$ in $k$ cluster
-		\STATE Update $\mathcal{I}_k\leftarrow x_k^*$, $\bm{\mathcal{I}}\leftarrow \mathcal{I}_k$ and  ${\cal X}\setminus x_k^*$
-		\ENDWHILE
-		\FOR{$x_k$ in ${\mathcal{X}}$}
-		\WHILE{$1\leq k \leq K$}
-		\STATE  inter-cluster interference: $p(x_k)= \sum_{k=1,j\neq k}^{K}||\bm{v}_{kx}\bm{v}_{\mathcal{I}_j}||^2$					 								
-		\ENDWHILE
-		\STATE Find the user index $x_k^*$ with minimal $p(x_k)$									
-		\STATE	Update ${\cal I}_k \leftarrow  x_k^*$, $\bm{\mathcal{I}}\leftarrow \mathcal{I}_k$ and ${\cal X}\setminus x_k^*$	
-		\ENDFOR	
-	\end{algorithmic}
-\end{algorithm}
 
 \section{simulation results}
 In this section, we use computer simulation to compare the performance of sum-rate capacity for RF chains-reduction algorithm. Unless specified otherwise, we consider a transmitter equipped with an $12\times 12$ UPA ({\em i.e.} $N_T=144$) and $N_{RF}=8$ RF chains serving $N_U=16$ users each equipped with a $8\times 8$ UPA ({\em i.e.} $N_R=64$). The channels are multi-path with the azimuth AoAs/AoDs being uniformly distributed over $[0, 2\pi]$ and the elevation AoAs/AoDs being uniformly distributed in $[-\pi/2, \pi/2]$, respectively. For each computer experiment, we compute the average over 500 realizations.
@@ -296,7 +339,7 @@ In the Fig.~\ref{fig:RFchains}, we can see that the sum-rate capacity will incre
 
 \begin{figure}[ht]
 	\begin{center}
-		\includegraphics[width=3.8in,height=3in]{Figure/powerBalanced.eps}
+		\includegraphics[width=3.8in,height=3in]{Figure/antenna.eps}
 		\caption{Power allocation.}\label{fig:CDF}
 	\end{center}
 \end{figure}

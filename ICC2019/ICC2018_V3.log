@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  24 OCT 2018 10:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  28 OCT 2018 01:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -491,28 +491,21 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 35.
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Package epstopdf Info: Source file: <PPTFigure/groupcluster.eps>
-(epstopdf)                    date: 2018-09-25 22:04:25
-(epstopdf)                    size: 506652 bytes
-(epstopdf)             Output file: <PPTFigure/groupcluster-eps-converted-to.pd
-f>
-(epstopdf)                    date: 2018-09-25 22:04:43
-(epstopdf)                    size: 88649 bytes
-(epstopdf)             Command: <repstopdf --outfile=PPTFigure/groupcluster-eps
--converted-to.pdf PPTFigure/groupcluster.eps>
-(epstopdf)             \includegraphics on input line 49.
-Package epstopdf Info: Output file is already uptodate.
 
-<PPTFigure/groupcluster-eps-converted-to.pdf, id=1, 324.21124pt x 346.29375pt>
-File: PPTFigure/groupcluster-eps-converted-to.pdf Graphic file (type pdf)
-
-<use PPTFigure/groupcluster-eps-converted-to.pdf>
-Package pdftex.def Info: PPTFigure/groupcluster-eps-converted-to.pdf used on in
-put line 49.
-(pdftex.def)             Requested size: 178.31673pt x 190.46214pt.
+LaTeX Warning: Citation `spencer2004zero' on page  undefined on input line 46.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Citation `ni2016hybrid' on page  undefined on input line 46.
+
+
+LaTeX Warning: Citation `bogale2014beamforming' on page  undefined on input lin
+e 46.
+
+
+LaTeX Warning: Citation `liu2014phase' on page  undefined on input line 46.
+
+
+LaTeX Warning: Citation `garcia2017mimo' on page  undefined on input line 48.
 
 Package epstopdf Info: Source file: <PPTFigure/BlockDiagonal.eps>
 (epstopdf)                    date: 2018-10-11 16:52:11
@@ -523,17 +516,17 @@ df>
 (epstopdf)                    size: 224193 bytes
 (epstopdf)             Command: <repstopdf --outfile=PPTFigure/BlockDiagonal-ep
 s-converted-to.pdf PPTFigure/BlockDiagonal.eps>
-(epstopdf)             \includegraphics on input line 61.
+(epstopdf)             \includegraphics on input line 53.
 Package epstopdf Info: Output file is already uptodate.
-<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=2, 495.8525pt x 271.0125pt>
+<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=1, 495.8525pt x 271.0125pt>
 File: PPTFigure/BlockDiagonal-eps-converted-to.pdf Graphic file (type pdf)
 
 <use PPTFigure/BlockDiagonal-eps-converted-to.pdf>
 Package pdftex.def Info: PPTFigure/BlockDiagonal-eps-converted-to.pdf used on i
-nput line 61.
+nput line 53.
 (pdftex.def)             Requested size: 404.71773pt x 216.81856pt.
 
-Overfull \hbox (25.30188pt too wide) in paragraph at lines 61--62
+Overfull \hbox (25.30188pt too wide) in paragraph at lines 53--54
 [][] 
  []
 
@@ -542,98 +535,88 @@ Non-PDF special ignored!{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdft
 ex.map}
 
 
- <./PPTFigure/groupcluster-eps-converted-to.pdf>] [2 <./PPTFigure/BlockDiagonal
--eps-converted-to.pdf>]
-Underfull \hbox (badness 1642) in paragraph at lines 194--195
+]
+Underfull \vbox (badness 1953) has occurred while \output is active []
+
+ [2 <./PPTFigure/BlockDiagonal-eps-converted-to.pdf>]
+Underfull \vbox (badness 1052) has occurred while \output is active []
+
+ [3]
+Underfull \hbox (badness 1642) in paragraph at lines 207--209
 \OT1/ptm/m/n/10 for-ma-tion (CSI), then all AoA and AoD in-for-ma-tion, \OT1/pt
 m/m/it/10 i.e.
  []
 
-[3]
-Underfull \hbox (badness 7759) in paragraph at lines 210--211
-[]\OT1/ptm/m/n/10 To sat-isfy the power con-straint, power nor-mal-iza-tion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
-\OT1/ptm/m/n/10 is per-formed on each $\OML/cmm/b/it/10 f[]$ \OT1/ptm/m/n/10 de
--rived from $\OML/cmm/b/it/10 F[] \OT1/cmr/m/n/10 =
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+[4]
 Package epstopdf Info: Source file: <Figure/comparison.eps>
-(epstopdf)                    date: 2018-10-24 10:22:17
-(epstopdf)                    size: 22802 bytes
+(epstopdf)                    date: 2018-10-24 16:24:24
+(epstopdf)                    size: 19887 bytes
 (epstopdf)             Output file: <Figure/comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-24 10:22:22
-(epstopdf)                    size: 8921 bytes
+(epstopdf)                    date: 2018-10-24 16:30:55
+(epstopdf)                    size: 8182 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figure/comparison-eps-conv
 erted-to.pdf Figure/comparison.eps>
-(epstopdf)             \includegraphics on input line 279.
+(epstopdf)             \includegraphics on input line 322.
 Package epstopdf Info: Output file is already uptodate.
-<Figure/comparison-eps-converted-to.pdf, id=135, 519.9425pt x 423.5825pt>
+ <Figure/comparison-eps-converted-to.pdf, id=75, 421.575pt x 316.18124pt>
 File: Figure/comparison-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figure/comparison-eps-converted-to.pdf>
 Package pdftex.def Info: Figure/comparison-eps-converted-to.pdf used on input l
-ine 279.
-(pdftex.def)             Requested size: 274.6241pt x 224.03876pt.
+ine 322.
+(pdftex.def)             Requested size: 274.6316pt x 224.04156pt.
 
-Overfull \hbox (9.6116pt too wide) in paragraph at lines 279--280
+Overfull \hbox (9.61911pt too wide) in paragraph at lines 322--323
  [] 
  []
 
+[5 <./Figure/comparison-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figure/NRFChains.eps>
-(epstopdf)                    date: 2018-10-24 10:05:25
-(epstopdf)                    size: 17407 bytes
+(epstopdf)                    date: 2018-10-25 01:59:22
+(epstopdf)                    size: 22774 bytes
 (epstopdf)             Output file: <Figure/NRFChains-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-24 10:33:33
-(epstopdf)                    size: 5171 bytes
+(epstopdf)                    date: 2018-10-25 01:59:37
+(epstopdf)                    size: 8971 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figure/NRFChains-eps-conve
 rted-to.pdf Figure/NRFChains.eps>
-(epstopdf)             \includegraphics on input line 290.
+(epstopdf)             \includegraphics on input line 333.
 Package epstopdf Info: Output file is already uptodate.
-<Figure/NRFChains-eps-converted-to.pdf, id=136, 421.575pt x 316.18124pt>
+
+<Figure/NRFChains-eps-converted-to.pdf, id=84, 421.575pt x 316.18124pt>
 File: Figure/NRFChains-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figure/NRFChains-eps-converted-to.pdf>
 Package pdftex.def Info: Figure/NRFChains-eps-converted-to.pdf used on input li
-ne 290.
+ne 333.
 (pdftex.def)             Requested size: 274.6316pt x 231.2687pt.
 
-Overfull \hbox (9.61911pt too wide) in paragraph at lines 290--291
+Overfull \hbox (9.61911pt too wide) in paragraph at lines 333--334
  [] 
  []
 
-Package epstopdf Info: Source file: <Figure/powerBalanced.eps>
-(epstopdf)                    date: 2018-10-15 15:18:03
-(epstopdf)                    size: 16171 bytes
-(epstopdf)             Output file: <Figure/powerBalanced-eps-converted-to.pdf>
-
-(epstopdf)                    date: 2018-10-15 15:19:36
-(epstopdf)                    size: 7207 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figure/powerBalanced-eps-c
-onverted-to.pdf Figure/powerBalanced.eps>
-(epstopdf)             \includegraphics on input line 299.
+Package epstopdf Info: Source file: <Figure/antenna.eps>
+(epstopdf)                    date: 2018-10-24 16:30:49
+(epstopdf)                    size: 23721 bytes
+(epstopdf)             Output file: <Figure/antenna-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-10-24 16:30:57
+(epstopdf)                    size: 9344 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figure/antenna-eps-convert
+ed-to.pdf Figure/antenna.eps>
+(epstopdf)             \includegraphics on input line 342.
 Package epstopdf Info: Output file is already uptodate.
-<Figure/powerBalanced-eps-converted-to.pdf, id=137, 421.575pt x 316.18124pt>
-File: Figure/powerBalanced-eps-converted-to.pdf Graphic file (type pdf)
+<Figure/antenna-eps-converted-to.pdf, id=85, 546.04pt x 403.5075pt>
+File: Figure/antenna-eps-converted-to.pdf Graphic file (type pdf)
 
-<use Figure/powerBalanced-eps-converted-to.pdf>
-Package pdftex.def Info: Figure/powerBalanced-eps-converted-to.pdf used on inpu
-t line 299.
-(pdftex.def)             Requested size: 274.6316pt x 216.81442pt.
+<use Figure/antenna-eps-converted-to.pdf>
+Package pdftex.def Info: Figure/antenna-eps-converted-to.pdf used on input line
+ 342.
+(pdftex.def)             Requested size: 274.62738pt x 216.81332pt.
 
-Overfull \hbox (9.61911pt too wide) in paragraph at lines 299--300
+Overfull \hbox (9.61488pt too wide) in paragraph at lines 342--343
  [] 
  []
 
-(./ICC2018_V3.bbl
-Underfull \vbox (badness 1394) has occurred while \output is active []
-
- [4])
+(./ICC2018_V3.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -645,39 +628,42 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[5 <./Figure/comparison-eps-converted-to.pdf> <./Figure/NRFChains-eps-converted
--to.pdf> <./Figure/powerBalanced-eps-converted-to.pdf>] (./ICC2018_V3.aux) ) 
+[6 <./Figure/NRFChains-eps-converted-to.pdf> <./Figure/antenna-eps-converted-to
+.pdf>] (./ICC2018_V3.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5130 strings out of 492995
- 72366 string characters out of 6136402
- 167701 words of memory out of 5000000
- 8566 multiletter control sequences out of 15000+600000
+ 5128 strings out of 492995
+ 72195 string characters out of 6136402
+ 166681 words of memory out of 5000000
+ 8565 multiletter control sequences out of 15000+600000
  49996 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,18n,29p,1235b,517s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:
-/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2017/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/texlive/2017/texmf-dist/fonts/
-type1/public/amsfonts/cmextra/cmbsy7.pfb><c:/texlive/2017/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.
-pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/te
-xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/20
-17/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><c:/texlive/2017/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
-10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive
-/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2017/texmf-dist/
-fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/ti
-mes/utmri8a.pfb>
-Output written on ICC2018_V3.pdf (5 pages, 476460 bytes).
+ 39i,18n,29p,1744b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2017/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/texlive/2017/texmf-dist/f
+onts/type1/public/amsfonts/cmextra/cmbsy7.pfb><c:/texlive/2017/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi5.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texli
+ve/2017/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><c:/texlive/2
+017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols
+/msbm10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/te
+xlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2017/texmf-
+dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/u
+rw/times/utmri8a.pfb>
+Output written on ICC2018_V3.pdf (6 pages, 439690 bytes).
 PDF statistics:
- 221 PDF objects out of 1000 (max. 8388607)
- 167 compressed objects within 2 object streams
+ 160 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

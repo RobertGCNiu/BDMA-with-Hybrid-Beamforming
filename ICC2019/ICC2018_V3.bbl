@@ -62,4 +62,9 @@ A.~Alkhateeb, O.~El~Ayach, G.~Leus, and R.~W. Heath, ``Channel estimation and
   hybrid precoding for millimeter wave cellular systems,'' \emph{IEEE Journal
   of Selected Topics in Signal Processing}, vol.~8, no.~5, pp. 831--846, 2014.
 
+\bibitem{wang2012statistical}
+J.~Wang, S.~Jin, X.~Gao, K.-K. Wong, and E.~Au, ``Statistical eigenmode-based
+  {SDMA} for two-user downlink,'' \emph{IEEE Transactions on Signal
+  Processing}, vol.~60, no.~10, pp. 5371--5383, 2012.
+
 \end{thebibliography}
