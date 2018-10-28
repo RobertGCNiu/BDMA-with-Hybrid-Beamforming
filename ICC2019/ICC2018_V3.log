@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.10.24)  26 OCT 2018 23:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.10.24)  26 OCT 2018 23:48
 entering extended mode
 **./ICC2018_V3.tex
 (ICC2018_V3.tex
@@ -485,22 +485,6 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 35.
 ("D:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-
-LaTeX Warning: Citation `spencer2004zero' on page  undefined on input line 47.
-
-
-LaTeX Warning: Citation `ni2016hybrid' on page  undefined on input line 47.
-
-
-LaTeX Warning: Citation `bogale2014beamforming' on page  undefined on input lin
-e 47.
-
-
-LaTeX Warning: Citation `liu2014phase' on page  undefined on input line 47.
-
-
-LaTeX Warning: Citation `garcia2017mimo' on page  undefined on input line 49.
-
 Package epstopdf Info: Source file: <PPTFigure/BlockDiagonal.eps>
 (epstopdf)                    date: 2018-10-24 11:15:11
 (epstopdf)                    size: 1303054 bytes
@@ -630,38 +614,34 @@ Before submitting the final camera ready copy, remember to:
 
 [6
 
-] (ICC2018_V3.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (ICC2018_V3.aux) ) 
 Here is how much of TeX's memory you used:
  5078 strings out of 493308
  71918 string characters out of 3138770
- 165078 words of memory out of 3000000
+ 165097 words of memory out of 3000000
  8511 multiletter control sequences out of 15000+200000
  49996 words of font info for 116 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,18n,29p,1744b,517s stack positions out of 5000i,500n,10000p,200000b,50000s
-{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<D:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><D:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><D:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmex10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi5.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
-i7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmib10.pfb>
-<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><D:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy8.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/symbols/msbm10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/
-utmb8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><D:/P
-rogram Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><D:/Program Files/MiKT
-eX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ICC2018_V3.pdf (6 pages, 461665 bytes).
+{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<D
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><D:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><D:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmmi5.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmmi7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmmib10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmex
+tra/cmmib7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/
+Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><D:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/symbols/msbm10.pfb><D:/Program Files/MiKTeX 2.9/font
+s/type1/urw/times/utmb8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/times
+/utmbi8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><D:/
+Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on ICC2018_V3.pdf (6 pages, 463953 bytes).
 PDF statistics:
  157 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
