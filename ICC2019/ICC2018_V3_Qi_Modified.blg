@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: ICC2018_V4.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: ICC2018_V3_Qi_Modified.aux
 The style file: IEEEtran.bst
 Database file #1: BDMAref.bib
 Repeated entry---line 429 of file BDMAref.bib
@@ -9,7 +9,6 @@ Repeated entry---line 484 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "wang2012statistical"
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
