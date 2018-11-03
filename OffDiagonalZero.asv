@@ -1,7 +1,8 @@
-function F_odz = OffDiagonalZero(N_RF, N_users,F_full);
+function F_odz = OffDiagonalZero(N_RF, N_users,G, Num_RF)
 
+F_1 = pinv(G(Num_RF,1:N_RF));
+F_2 = pinv(G(N_users-Num_RF+1:N_users, N_RF+1:N_users));
 
-Fbb_cl=Fbb_cl.*kron(eye(K),ones(m_k));
-
+F_odz = blkdiag(F_1, F_2);
 end
 

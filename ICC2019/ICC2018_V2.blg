@@ -8,11 +8,15 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: BDMAref.bib
-Repeated entry---line 857 of file BDMAref.bib
+Repeated entry---line 43 of file BDMAref.bib
+ : @article{Jiang2018
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 899 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 967 of file BDMAref.bib
+Repeated entry---line 1009 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
@@ -62,4 +66,4 @@ warning$ -- 0
 while$ -- 34
 width$ -- 9
 write$ -- 106
-(There were 2 error messages)
+(There were 3 error messages)

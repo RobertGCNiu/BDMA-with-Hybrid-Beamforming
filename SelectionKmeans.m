@@ -1,4 +1,4 @@
-function [Wrf_cl, Frf_cl, H_cl] = SelectionKmeans(a_TX_select, a_RX_select,K,H,Num_RF)
+function [Wrf_cl, Frf_cl, H_cl, cluster_index] = SelectionKmeans(a_TX_select, a_RX_select,K,H,Num_RF)
 
 Num_users = size(a_TX_select,2);
 %% find the first beam with largest channel gain
@@ -34,7 +34,7 @@ for u = 1:Num_users
     if ~ismember(u,index_all)
         alpha_k = zeros(K,1);
         for k = 1:K
-            if sum(cluster_index==k)<Num_RF
+            if sum(cluster_index==1)<=Num_RF
             alpha_k(k) = sum(abs(a_TX_select(:,u)'*a_TX_select(:, find(cluster_index==k))).^2);
             end
         end

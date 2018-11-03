@@ -7,11 +7,11 @@
 %--------------------------------------------------------------------------
 clear;clc;
 % ----------------------------- System Parameters% -------------------------
-Num_user_cluster = [8];
+Num_user_cluster = [16];
 Num_users_all = 40;
 Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
-paths = [4];
+paths = [1];
 Rate_Path = zeros(length(paths),1);
 TX_sets = (8:16).^2;
 Rate_HP_ant = zeros(1,length(TX_sets));
@@ -53,7 +53,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                     
                     
                     
-                    ITER=50; % Number of iterations
+                    ITER=500; % Number of iterations
                     
                     % --------------- Simulation starts ---------------------------------------
                     for iter=1:1:ITER
@@ -64,8 +64,8 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         [H_all,a_TX_all,a_RX_all]=ULAMulPath(Num_users_all,TX_ant_w,RX_ant_w,Num_paths);
                         % H is a 3-dimensional matrix, with Num_users,RX_ant,TX_ant dimensions
                         
-                        [a_TX_schedule,a_RX_schedule, ~,~,H_schedule] = Selectusers(Num_users,Num_users_all,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
-                        
+                       % [a_TX_schedule,a_RX_schedule, ~,~,H_schedule] = Selectusers(Num_users,Num_users_all,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
+                        [a_TX_schedule,a_RX_schedule, H_schedule]  = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);
                         
                         H = H_all(1:Num_users,:,:);
                         a_TX = a_TX_all(:,1:Num_users,:);

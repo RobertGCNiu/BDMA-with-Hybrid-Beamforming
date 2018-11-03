@@ -8,58 +8,66 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: BDMAref.bib
-Repeated entry---line 857 of file BDMAref.bib
+Repeated entry---line 43 of file BDMAref.bib
+ : @article{Jiang2018
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 899 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 967 of file BDMAref.bib
+Repeated entry---line 1009 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1473 of file BDMAref.bib
+ : @article{bogale2014beamforming
+ :                               ,
 I'm skipping whatever remains of this entry
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 8 entries,
+You've used 13 entries,
             4087 wiz_defined-function locations,
-            871 strings with 8846 characters,
-and the built_in function-call counts, 7662 in all, are:
-= -- 623
-> -- 208
-< -- 81
-+ -- 118
-- -- 35
-* -- 396
-:= -- 1105
-add.period$ -- 16
-call.type$ -- 8
-change.case$ -- 7
-chr.to.int$ -- 180
-cite$ -- 8
-duplicate$ -- 514
-empty$ -- 536
-format.name$ -- 43
-if$ -- 1778
+            899 strings with 9675 characters,
+and the built_in function-call counts, 11388 in all, are:
+= -- 941
+> -- 295
+< -- 116
++ -- 166
+- -- 49
+* -- 574
+:= -- 1675
+add.period$ -- 26
+call.type$ -- 13
+change.case$ -- 12
+chr.to.int$ -- 258
+cite$ -- 13
+duplicate$ -- 784
+empty$ -- 809
+format.name$ -- 62
+if$ -- 2641
 int.to.chr$ -- 0
-int.to.str$ -- 8
-missing$ -- 88
-newline$ -- 47
-num.names$ -- 8
-pop$ -- 180
+int.to.str$ -- 13
+missing$ -- 131
+newline$ -- 62
+num.names$ -- 13
+pop$ -- 271
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 582
+skip$ -- 872
 stack$ -- 0
-substring$ -- 427
-swap$ -- 480
-text.length$ -- 21
+substring$ -- 614
+swap$ -- 706
+text.length$ -- 30
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 8
+type$ -- 13
 warning$ -- 0
-while$ -- 34
-width$ -- 9
-write$ -- 106
-(There were 2 error messages)
+while$ -- 51
+width$ -- 15
+write$ -- 155
+(There were 4 error messages)

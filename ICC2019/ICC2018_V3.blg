@@ -8,63 +8,66 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: BDMAref.bib
-Repeated entry---line 879 of file BDMAref.bib
+Repeated entry---line 43 of file BDMAref.bib
+ : @article{Jiang2018
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 899 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 989 of file BDMAref.bib
+Repeated entry---line 1009 of file BDMAref.bib
  : @article{alkhateeb2014channel
  :                              ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "spencer2004zero"
-Warning--I didn't find a database entry for "ni2016hybrid"
-Warning--I didn't find a database entry for "bogale2014beamforming"
-Warning--I didn't find a database entry for "liu2014phase"
-Warning--I didn't find a database entry for "garcia2017mimo"
+Repeated entry---line 1473 of file BDMAref.bib
+ : @article{bogale2014beamforming
+ :                               ,
+I'm skipping whatever remains of this entry
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 9 entries,
+You've used 14 entries,
             4087 wiz_defined-function locations,
-            883 strings with 9118 characters,
-and the built_in function-call counts, 8756 in all, are:
-= -- 714
-> -- 239
-< -- 94
-+ -- 136
-- -- 40
-* -- 451
-:= -- 1256
-add.period$ -- 18
-call.type$ -- 9
-change.case$ -- 8
-chr.to.int$ -- 210
-cite$ -- 9
-duplicate$ -- 586
-empty$ -- 609
-format.name$ -- 49
-if$ -- 2035
+            905 strings with 9833 characters,
+and the built_in function-call counts, 12414 in all, are:
+= -- 1030
+> -- 318
+< -- 129
++ -- 180
+- -- 52
+* -- 625
+:= -- 1820
+add.period$ -- 28
+call.type$ -- 14
+change.case$ -- 13
+chr.to.int$ -- 288
+cite$ -- 14
+duplicate$ -- 852
+empty$ -- 878
+format.name$ -- 66
+if$ -- 2882
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 100
-newline$ -- 50
-num.names$ -- 9
-pop$ -- 204
+int.to.str$ -- 14
+missing$ -- 141
+newline$ -- 65
+num.names$ -- 14
+pop$ -- 289
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 666
+skip$ -- 952
 stack$ -- 0
-substring$ -- 498
-swap$ -- 550
-text.length$ -- 24
+substring$ -- 685
+swap$ -- 772
+text.length$ -- 33
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 9
+type$ -- 14
 warning$ -- 0
-while$ -- 39
-width$ -- 10
-write$ -- 117
-(There were 2 error messages)
+while$ -- 56
+width$ -- 16
+write$ -- 166
+(There were 4 error messages)

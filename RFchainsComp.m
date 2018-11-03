@@ -11,7 +11,7 @@ Num_user_cluster = 16;
 Num_users_all = 40;
 Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
-paths = [4];
+paths = [1];
 Rate_Path = zeros(length(paths),1);
 TX_sets = (8:16).^2;
 Rate_HP_ant = zeros(1,length(TX_sets));
@@ -64,7 +64,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         [H_all,a_TX_all,a_RX_all]=ULAMulPath(Num_users_all,TX_ant_w,RX_ant_w,Num_paths);
                         % H is a 3-dimensional matrix, with Num_users,RX_ant,TX_ant dimensions
                         
-                        [a_TX_schedule,a_RX_schedule, ~,~,H_schedule] = Selectusers(Num_users,Num_users_all,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
+                      [a_TX_schedule,a_RX_schedule, H_schedule]  = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
                         
                         
                         H = H_all(1:Num_users,:,:);
@@ -88,8 +88,8 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         
                         % Baseband zero-forcing precoding
                         
-                        Fbb_fzf=pinv(G_fzf);
-                        %Fbb_fzf = OffDiagonalZero(Num_RF, Num_users,Fbb_fzf);
+                        %Fbb_fzf=pinv(G_fzf);
+                        Fbb_fzf = OffDiagonalZero(Num_RF, Num_users,G_fzf);
                         Fbb_fzf = normalize_f(Fbb_fzf,Frf_fzf);
                         
                         
@@ -100,23 +100,27 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         %   Fbb_cl = eye(Num_users);
                         Fbb_schedule=pinv(G_schedule);
                         Fbb_schedule = normalize_f(Fbb_schedule,a_TX_schedule);
-                        
+                       
      %                   [Wrf_cl, Frf_cl, H_cl]= greedySelection(a_TX_select, a_RX_select,K,H);
-                     [Wrf_cl, Frf_cl, H_cl] = SelectionKmeans(a_TX_select, a_RX_select,K,H,Num_RF);
+                     [Wrf_cl, Frf_cl, H_cl,cluster_index] = SelectionKmeans(a_TX_select, a_RX_select,K,H,Num_RF);
                         % Constructin the effective channels
+                        k_1 = Num_RF;
                         G_cl = effective_H(H_cl,Wrf_cl,Frf_cl);
                         
                         % Baseband zero-forcing precoding
                         %   Fbb_cl = eye(Num_users);
-                        Fbb_cl=pinv(G_cl);
+                        %Fbb_cl=pinv(G_cl);
                         %Fbb_cl=Fbb_cl.*kron(eye(K),ones(m_k));
-                        Fbb_cl = OffDiagonalZero(Num_RF, Num_users,Fbb_cl);
+                        if Num_RF == 16
+                            k_1 = Num_RF;
+                        end
+                        Fbb_cl = OffDiagonalZero(k_1, Num_users,G_cl);
 %                        Fbb_cl = [];
 %                         for k = 1:K
 %                             Fbb_k = pinv(G_cl(1+m_k*(k-1):m_k*k, 1+m_k*(k-1):m_k*k));
 %                             Fbb_cl = blkdiag(Fbb_cl, Fbb_k);
 %                         end
-                        
+%                         
                         Fbb_cl = normalize_f(Fbb_cl,Frf_cl);
                         
                         
@@ -138,20 +142,21 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         SNR_index=0;
                         for SNR_dB=SNR_dB_range
                             SNR_index=SNR_index+1;
-                            rho=db2pow(SNR_dB)/Num_users*2; % SNR value
+                            rho=db2pow(SNR_dB)/Num_users; % SNR value
                             
                             clear Fbb_slnr_1;clear Fbb_slnr_2;
                             % interval=1:m_k:Num_users+1;
-                            for u=1:Num_RF
+                            Fbb_slnr_1 = [];
+                            for u=1:k_1
                                 Int_set=1:Num_users; % interference index
                                 Int_set(u)=[];
-                                G_replace=G_cl(:,1:Num_RF);
+                                G_replace=G_cl(:,1:k_1);
                                 C = rho*G_replace(u,:)'*G_replace(u,:);
-                                D_temp = zeros(Num_RF,Num_RF);
+                                D_temp = zeros(k_1,k_1);
                                 for int = Int_set
                                 D_temp = D_temp+rho*(G_replace(int,:)'*G_replace(int,:));
                                 end
-                                D = eye(Num_RF) +D_temp;
+                                D = eye(k_1) +D_temp;
                                
                                 [Vector_C, lamda_C]= eigs((D^(-1)*C));
                                 f_temp=zeros(Num_users,1);
@@ -159,24 +164,25 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                                 Fbb_slnr_1(:,u) =f_temp;
                             end
                             Fbb_slnr_2 = [];
-                            for u=Num_RF+1:Num_users
-                                Int_set=1:Num_users; % interference index
-                                Int_set(u)=[];
-                                G_replace=G_cl(:,Num_RF+1:Num_users);
+                            G_replace = zeros(Num_users, Num_users-k_1);
+                            for u=k_1+1:Num_users
+                                Int_set=k_1+1:Num_users; % interference index
+                                Int_set(u-k_1)=[];
+                                G_replace=G_cl(:,k_1+1:Num_users);
                                 C = rho*G_replace(u,:)'*G_replace(u,:);
-                                D_temp = zeros(Num_users-Num_RF, Num_users-Num_RF);
+                                D_temp = zeros(Num_users-k_1, Num_users-k_1);
                                 for int = Int_set
                                 D_temp = D_temp+rho*(G_replace(int,:)'*G_replace(int,:));
                                 end
-                                D = eye(Num_users-Num_RF) +D_temp;
+                                D = eye(Num_users-k_1) +D_temp;
                                 [Vector_C, lamda_C]= eigs((D^(-1)*C));
                                 f_temp=zeros(Num_users,1);
                                 f_temp=Vector_C(:,1);
-                                Fbb_slnr_2(:,u-Num_RF) =f_temp;
+                                Fbb_slnr_2(:,u-k_1) =f_temp;
                             end
                             Fbb_slnr = blkdiag(Fbb_slnr_1,Fbb_slnr_2);
                             Fbb_slnr=normalize_f(Fbb_slnr,Frf_cl);
-                            
+                           
                             clear Channel;clear Channel_cl;
                             for u=1:1:Num_users
                                 Int_set=1:Num_users; % interference index
@@ -215,7 +221,8 @@ figure
 plot(RF_sets,Rate_SU,'-v','linewidth',1.5);
 hold on; 
 plot(RF_sets,Rate_BS_BDMA,'linewidth',1.5);
-plot(RF_sets,Rate_HP_fzf,'--o','linewidth',1.5);
+plot(RF_sets, Rate_HP_fzf);
+%plot(RF_sets, sum(Rate_HP_fzf)/length(RF_sets).*ones(1,length(RF_sets)),'--o','linewidth',1.5);
 plot(RF_sets,Rate_HP_cl,'--','linewidth',1.5);
 %plot(RF_sets,Rate_HP_schedule,'linewidth',1.5);
 plot(RF_sets,Rate_HP_SLNR,'-','linewidth',1.5);

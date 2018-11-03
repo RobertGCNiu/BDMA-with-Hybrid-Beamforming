@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  15 OCT 2018 19:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  2 NOV 2018 20:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -223,6 +223,14 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
+(c:/texlive/2017/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip47
+\enit@outerparindent=\dimen137
+\enit@toks=\toks21
+\enit@inbox=\box30
+\enitdp@description=\count109
+)
 ** ATTENTION: Overriding command lockouts (line 9).
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
@@ -237,26 +245,26 @@ nment
 
 (c:/texlive/2017/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count109
-\float@exts=\toks21
-\float@box=\box30
-\@float@everytoks=\toks22
-\@floatcapt=\box31
+\c@float@type=\count110
+\float@exts=\toks22
+\float@box=\box31
+\@float@everytoks=\toks23
+\@floatcapt=\box32
 )
 (c:/texlive/2017/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\@float@every@algorithm=\toks23
-\c@algorithm=\count110
+\@float@every@algorithm=\toks24
+\c@algorithm=\count111
 )
 (c:/texlive/2017/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count111
-\c@ALC@line=\count112
-\c@ALC@rem=\count113
-\c@ALC@depth=\count114
-\ALC@tlm=\skip47
-\algorithmicindent=\skip48
+\c@ALC@unique=\count112
+\c@ALC@line=\count113
+\c@ALC@rem=\count114
+\c@ALC@depth=\count115
+\ALC@tlm=\skip48
+\algorithmicindent=\skip49
 )
 (c:/texlive/2017/texmf-dist/tex/latex/cjk/texinput/CJK.sty
 Package: CJK 2015/04/18 4.8.4
@@ -268,7 +276,7 @@ Package: MULEenc 2015/04/18 4.8.4
 File: CJK.enc 2015/04/18 4.8.4
 )
 LaTeX Info: Redefining \selectfont on input line 755.
-\CJK@indent=\box32
+\CJK@indent=\box33
 )
 (c:/texlive/2017/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
@@ -295,21 +303,21 @@ Package ifvtex Info: VTeX not detected.
 (c:/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count115
-\Gm@cntv=\count116
-\c@Gm@tempcnt=\count117
-\Gm@bindingoffset=\dimen137
-\Gm@wd@mp=\dimen138
-\Gm@odd@mp=\dimen139
-\Gm@even@mp=\dimen140
-\Gm@layoutwidth=\dimen141
-\Gm@layoutheight=\dimen142
-\Gm@layouthoffset=\dimen143
-\Gm@layoutvoffset=\dimen144
-\Gm@dimlist=\toks24
+\Gm@cnth=\count116
+\Gm@cntv=\count117
+\c@Gm@tempcnt=\count118
+\Gm@bindingoffset=\dimen138
+\Gm@wd@mp=\dimen139
+\Gm@odd@mp=\dimen140
+\Gm@even@mp=\dimen141
+\Gm@layoutwidth=\dimen142
+\Gm@layoutheight=\dimen143
+\Gm@layouthoffset=\dimen144
+\Gm@layoutvoffset=\dimen145
+\Gm@dimlist=\toks25
 ) (./ICC2018_V4.aux
 
-LaTeX Warning: Label `eq:hats' multiply defined.
+LaTeX Warning: Label `eq:group-scheduling' multiply defined.
 
 )
 \openout1 = `ICC2018_V4.aux'.
@@ -394,17 +402,17 @@ LaTeX Font Info:    ... okay on input line 23.
 -- Lines per column: 57 (approximate, difference = 2.56499pt).
 (c:/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count118
-\scratchdimen=\dimen145
-\scratchbox=\box33
-\nofMPsegments=\count119
-\nofMParguments=\count120
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count121
-\MPscratchDim=\dimen146
-\MPnumerator=\count122
-\makeMPintoPDFobject=\count123
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count119
+\scratchdimen=\dimen146
+\scratchbox=\box34
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen147
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks27
 ) (c:/texlive/2017/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -485,59 +493,37 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 35.
-LaTeX Font Info:    Try loading font information for U+msa on input line 35.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 31.
+LaTeX Font Info:    Try loading font information for U+msa on input line 31.
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 35.
+LaTeX Font Info:    Try loading font information for U+msb on input line 31.
 
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Package epstopdf Info: Source file: <PPTFigure/groupcluster.eps>
-(epstopdf)                    date: 2018-09-25 22:04:25
-(epstopdf)                    size: 506652 bytes
-(epstopdf)             Output file: <PPTFigure/groupcluster-eps-converted-to.pd
-f>
-(epstopdf)                    date: 2018-09-25 22:04:43
-(epstopdf)                    size: 88649 bytes
-(epstopdf)             Command: <repstopdf --outfile=PPTFigure/groupcluster-eps
--converted-to.pdf PPTFigure/groupcluster.eps>
-(epstopdf)             \includegraphics on input line 49.
-Package epstopdf Info: Output file is already uptodate.
-
-<PPTFigure/groupcluster-eps-converted-to.pdf, id=1, 324.21124pt x 346.29375pt>
-File: PPTFigure/groupcluster-eps-converted-to.pdf Graphic file (type pdf)
-
-<use PPTFigure/groupcluster-eps-converted-to.pdf>
-Package pdftex.def Info: PPTFigure/groupcluster-eps-converted-to.pdf used on in
-put line 49.
-(pdftex.def)             Requested size: 178.31673pt x 190.46214pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <PPTFigure/BlockDiagonal.eps>
-(epstopdf)                    date: 2018-10-11 16:52:11
-(epstopdf)                    size: 1303038 bytes
+(epstopdf)                    date: 2018-11-01 23:29:25
+(epstopdf)                    size: 1332618 bytes
 (epstopdf)             Output file: <PPTFigure/BlockDiagonal-eps-converted-to.p
 df>
-(epstopdf)                    date: 2018-10-11 16:52:19
-(epstopdf)                    size: 224193 bytes
+(epstopdf)                    date: 2018-11-01 23:29:58
+(epstopdf)                    size: 245598 bytes
 (epstopdf)             Command: <repstopdf --outfile=PPTFigure/BlockDiagonal-ep
 s-converted-to.pdf PPTFigure/BlockDiagonal.eps>
-(epstopdf)             \includegraphics on input line 62.
+(epstopdf)             \includegraphics on input line 41.
 Package epstopdf Info: Output file is already uptodate.
-<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=2, 495.8525pt x 271.0125pt>
+
+<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=1, 577.15625pt x 269.005pt>
 File: PPTFigure/BlockDiagonal-eps-converted-to.pdf Graphic file (type pdf)
 
 <use PPTFigure/BlockDiagonal-eps-converted-to.pdf>
 Package pdftex.def Info: PPTFigure/BlockDiagonal-eps-converted-to.pdf used on i
-nput line 62.
-(pdftex.def)             Requested size: 404.71773pt x 216.81856pt.
+nput line 41.
+(pdftex.def)             Requested size: 404.71243pt x 188.6388pt.
 
-Overfull \hbox (25.30188pt too wide) in paragraph at lines 62--63
+Overfull \hbox (25.29659pt too wide) in paragraph at lines 41--42
 [][] 
  []
 
@@ -546,109 +532,125 @@ Non-PDF special ignored!{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdft
 ex.map}
 
 
- <./PPTFigure/groupcluster-eps-converted-to.pdf>] [2 <./PPTFigure/BlockDiagonal
--eps-converted-to.pdf>]
-Underfull \hbox (badness 1642) in paragraph at lines 196--197
-\OT1/ptm/m/n/10 for-ma-tion (CSI), then all AoA and AoD in-for-ma-tion, \OT1/pt
-m/m/it/10 i.e.
+]
+Underfull \hbox (badness 2538) in paragraph at lines 68--69
+[]\OT1/ptm/m/n/10 In our pro-posed cluster-by-cluster BD dig-i-tal pre-cod-ing
+ []
+
+[2 <./PPTFigure/BlockDiagonal-eps-converted-to.pdf>]
+Overfull \hbox (5.36829pt too wide) detected at line 115
+[]\OML/cmm/b/it/10 H[] \OT1/cmr/m/n/10 = [] [] \OML/cmm/m/it/10 [] \OMS/cmsy/m
+/n/10 ^^A \OML/cmm/b/it/10 a[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^^[]; ^^R[]\OT
+1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^A \OML/cmm/b/it/10 a[]\OT1/cmr/m/n/10 (\OML/c
+mm/m/it/10 ^^^[]; ^^R[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ;
  []
 
 
-Underfull \hbox (badness 7759) in paragraph at lines 212--213
-[]\OT1/ptm/m/n/10 To sat-isfy the power con-straint, power nor-mal-iza-tion
+LaTeX Font Warning: Command \small invalid in math mode on input line 151.
+
+
+Underfull \hbox (badness 1509) in paragraph at lines 160--161
+[]\OT1/ptm/m/n/10 For con-ven-tional hy-brid beam-form-ing with suf-fi-cient RF
+
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 212--213
-\OT1/ptm/m/n/10 is per-formed on each $\OML/cmm/b/it/10 f[]$ \OT1/ptm/m/n/10 de
--rived from $\OML/cmm/b/it/10 F[] \OT1/cmr/m/n/10 =
- []
-
-[3]
+[3] [4]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4]
-Package epstopdf Info: Source file: <Figure/powerBalanced.eps>
-(epstopdf)                    date: 2018-10-15 15:18:03
-(epstopdf)                    size: 16171 bytes
-(epstopdf)             Output file: <Figure/powerBalanced-eps-converted-to.pdf>
-
-(epstopdf)                    date: 2018-10-15 15:19:36
-(epstopdf)                    size: 7207 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figure/powerBalanced-eps-c
-onverted-to.pdf Figure/powerBalanced.eps>
-(epstopdf)             \includegraphics on input line 392.
+[5]
+Package epstopdf Info: Source file: <Figure/comp1path.eps>
+(epstopdf)                    date: 2018-11-02 09:41:33
+(epstopdf)                    size: 26690 bytes
+(epstopdf)             Output file: <Figure/comp1path-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-11-02 09:41:37
+(epstopdf)                    size: 10160 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figure/comp1path-eps-conve
+rted-to.pdf Figure/comp1path.eps>
+(epstopdf)             \includegraphics on input line 346.
 Package epstopdf Info: Output file is already uptodate.
+ <Figure/comp1path-eps-converted-to.pdf, id=94, 408.52625pt x 313.17pt>
+File: Figure/comp1path-eps-converted-to.pdf Graphic file (type pdf)
 
-<Figure/powerBalanced-eps-converted-to.pdf, id=138, 421.575pt x 316.18124pt>
-File: Figure/powerBalanced-eps-converted-to.pdf Graphic file (type pdf)
+<use Figure/comp1path-eps-converted-to.pdf>
+Package pdftex.def Info: Figure/comp1path-eps-converted-to.pdf used on input li
+ne 346.
+(pdftex.def)             Requested size: 274.63997pt x 224.04385pt.
 
-<use Figure/powerBalanced-eps-converted-to.pdf>
-Package pdftex.def Info: Figure/powerBalanced-eps-converted-to.pdf used on inpu
-t line 392.
-(pdftex.def)             Requested size: 274.6316pt x 216.81442pt.
-
-Overfull \hbox (9.61911pt too wide) in paragraph at lines 392--393
+Overfull \hbox (9.62747pt too wide) in paragraph at lines 346--347
  [] 
  []
 
-
-LaTeX Warning: Reference `fig:SpectralEffNoSelection' on page  undefined on inp
-ut line 400.
-
-
-LaTeX Warning: Reference `fig:SpectralEffNoSelection' on page  undefined on inp
-ut line 400.
-
-Package epstopdf Info: Source file: <Figure/differentK.eps>
-(epstopdf)                    date: 2018-10-15 15:18:59
-(epstopdf)                    size: 22191 bytes
-(epstopdf)             Output file: <Figure/differentK-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-15 15:19:37
-(epstopdf)                    size: 7165 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figure/differentK-eps-conv
-erted-to.pdf Figure/differentK.eps>
-(epstopdf)             \includegraphics on input line 404.
+Package epstopdf Info: Source file: <Figure/differentRF1path.eps>
+(epstopdf)                    date: 2018-11-02 15:52:36
+(epstopdf)                    size: 20418 bytes
+(epstopdf)             Output file: <Figure/differentRF1path-eps-converted-to.p
+df>
+(epstopdf)                    date: 2018-11-02 15:53:01
+(epstopdf)                    size: 8487 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figure/differentRF1path-ep
+s-converted-to.pdf Figure/differentRF1path.eps>
+(epstopdf)             \includegraphics on input line 357.
 Package epstopdf Info: Output file is already uptodate.
-<Figure/differentK-eps-converted-to.pdf, id=139, 519.9425pt x 418.56375pt>
-File: Figure/differentK-eps-converted-to.pdf Graphic file (type pdf)
 
-<use Figure/differentK-eps-converted-to.pdf>
-Package pdftex.def Info: Figure/differentK-eps-converted-to.pdf used on input l
-ine 404.
-(pdftex.def)             Requested size: 274.6241pt x 231.2582pt.
+<Figure/differentRF1path-eps-converted-to.pdf, id=95, 438.63875pt x 327.2225pt>
+File: Figure/differentRF1path-eps-converted-to.pdf Graphic file (type pdf)
+<use Figure/differentRF1path-eps-converted-to.pdf>
+Package pdftex.def Info: Figure/differentRF1path-eps-converted-to.pdf used on i
+nput line 357.
+(pdftex.def)             Requested size: 274.63043pt x 231.2611pt.
 
-Overfull \hbox (9.6116pt too wide) in paragraph at lines 404--405
+Overfull \hbox (9.61794pt too wide) in paragraph at lines 357--358
  [] 
  []
 
-Package epstopdf Info: Source file: <Figure/8usercomparisonWithGroup.eps>
-(epstopdf)                    date: 2018-09-24 21:33:50
-(epstopdf)                    size: 29809 bytes
-(epstopdf)             Output file: <Figure/8usercomparisonWithGroup-eps-conver
-ted-to.pdf>
-(epstopdf)                    date: 2018-09-24 21:36:38
-(epstopdf)                    size: 10715 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figure/8usercomparisonWith
-Group-eps-converted-to.pdf Figure/8usercomparisonWithGroup.eps>
-(epstopdf)             \includegraphics on input line 413.
+Package epstopdf Info: Source file: <Figure/antenna1path.eps>
+(epstopdf)                    date: 2018-11-02 10:35:02
+(epstopdf)                    size: 24640 bytes
+(epstopdf)             Output file: <Figure/antenna1path-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-11-02 10:35:08
+(epstopdf)                    size: 9436 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figure/antenna1path-eps-co
+nverted-to.pdf Figure/antenna1path.eps>
+(epstopdf)             \includegraphics on input line 366.
 Package epstopdf Info: Output file is already uptodate.
+<Figure/antenna1path-eps-converted-to.pdf, id=96, 433.62pt x 318.18875pt>
+File: Figure/antenna1path-eps-converted-to.pdf Graphic file (type pdf)
 
-<Figure/8usercomparisonWithGroup-eps-converted-to.pdf, id=140, 621.32124pt x 44
-8.67625pt>
-File: Figure/8usercomparisonWithGroup-eps-converted-to.pdf Graphic file (type p
-df)
- <use Figure/8usercomparisonWithGroup-eps-converted-to.pdf>
-Package pdftex.def Info: Figure/8usercomparisonWithGroup-eps-converted-to.pdf u
-sed on input line 413.
-(pdftex.def)             Requested size: 274.62415pt x 224.03633pt.
+<use Figure/antenna1path-eps-converted-to.pdf>
+Package pdftex.def Info: Figure/antenna1path-eps-converted-to.pdf used on input
+ line 366.
+(pdftex.def)             Requested size: 274.63768pt x 216.8073pt.
 
-Overfull \hbox (9.61165pt too wide) in paragraph at lines 413--414
+Overfull \hbox (9.62518pt too wide) in paragraph at lines 366--367
  [] 
  []
 
-[5 <./Figure/powerBalanced-eps-converted-to.pdf>] (./ICC2018_V4.bbl)
+Package epstopdf Info: Source file: <Figure/differentK1path.eps>
+(epstopdf)                    date: 2018-11-02 11:22:50
+(epstopdf)                    size: 19906 bytes
+(epstopdf)             Output file: <Figure/differentK1path-eps-converted-to.pd
+f>
+(epstopdf)                    date: 2018-11-02 11:22:56
+(epstopdf)                    size: 8260 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figure/differentK1path-eps
+-converted-to.pdf Figure/differentK1path.eps>
+(epstopdf)             \includegraphics on input line 373.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figure/differentK1path-eps-converted-to.pdf, id=97, 406.51875pt x 298.11375pt>
+File: Figure/differentK1path-eps-converted-to.pdf Graphic file (type pdf)
+<use Figure/differentK1path-eps-converted-to.pdf>
+Package pdftex.def Info: Figure/differentK1path-eps-converted-to.pdf used on in
+put line 373.
+(pdftex.def)             Requested size: 274.63643pt x 216.81152pt.
+
+Overfull \hbox (9.62393pt too wide) in paragraph at lines 373--374
+ [] 
+ []
+
+[6 <./Figure/comp1path-eps-converted-to.pdf> <./Figure/differentRF1path-eps-con
+verted-to.pdf>] (./ICC2018_V4.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -660,45 +662,54 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6 <./Figure/differentK-eps-converted-to.pdf> <./Figure/8usercomparisonWithGrou
-p-eps-converted-to.pdf>] (./ICC2018_V4.aux)
-
-LaTeX Warning: There were undefined references.
-
+[7 <./Figure/antenna1path-eps-converted-to.pdf> <./Figure/differentK1path-eps-c
+onverted-to.pdf>] (./ICC2018_V4.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
- ) 
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 65 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 5133 strings out of 492995
- 72518 string characters out of 6136402
- 169755 words of memory out of 5000000
- 8569 multiletter control sequences out of 15000+600000
- 49996 words of font info for 116 fonts, out of 8000000 for 9000
+ 5431 strings out of 492995
+ 77358 string characters out of 6136402
+ 175973 words of memory out of 5000000
+ 8855 multiletter control sequences out of 15000+600000
+ 54047 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,18n,29p,1244b,517s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2017/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/texlive/2017/texmf-dist/f
-onts/type1/public/amsfonts/cmextra/cmbsy7.pfb><c:/texlive/2017/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi5.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
-c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texli
-ve/2017/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><c:/texlive/2
-017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols
-/msbm10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/te
-xlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2017/texmf-
-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/u
-rw/times/utmri8a.pfb>
-Output written on ICC2018_V4.pdf (6 pages, 491121 bytes).
+ 39i,18n,29p,1880b,568s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/tex
+live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/texlive/201
+7/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><c:/texlive/2017/te
+xmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy9.pfb><c:/texlive/2017/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/font
+s/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/p
+ublic/amsfonts/cmextra/cmex9.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi5.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/te
+xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2017
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/2017/texmf-d
+ist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><c:/texlive/2017/texmf-dist/
+fonts/type1/public/amsfonts/cmextra/cmmib9.pfb><c:/texlive/2017/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr6.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.
+pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/t
+exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/201
+7/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2017/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2017/texmf-dist/fonts/type1/publi
+c/amsfonts/symbols/msbm10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times
+/utmb8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/t
+exlive/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-
+dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on ICC2018_V4.pdf (7 pages, 536273 bytes).
 PDF statistics:
- 224 PDF objects out of 1000 (max. 8388607)
- 169 compressed objects within 2 object streams
+ 214 PDF objects out of 1000 (max. 8388607)
+ 156 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

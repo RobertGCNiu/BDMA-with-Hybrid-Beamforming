@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  10 OCT 2018 12:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  1 NOV 2018 10:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -519,25 +519,25 @@ put line 49.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 Package epstopdf Info: Source file: <PPTFigure/BlockDiagonal.eps>
-(epstopdf)                    date: 2018-09-25 19:47:26
-(epstopdf)                    size: 1307271 bytes
+(epstopdf)                    date: 2018-10-29 16:41:10
+(epstopdf)                    size: 1311347 bytes
 (epstopdf)             Output file: <PPTFigure/BlockDiagonal-eps-converted-to.p
 df>
-(epstopdf)                    date: 2018-09-25 19:49:48
-(epstopdf)                    size: 226490 bytes
+(epstopdf)                    date: 2018-10-29 16:41:24
+(epstopdf)                    size: 248354 bytes
 (epstopdf)             Command: <repstopdf --outfile=PPTFigure/BlockDiagonal-ep
 s-converted-to.pdf PPTFigure/BlockDiagonal.eps>
 (epstopdf)             \includegraphics on input line 61.
 Package epstopdf Info: Output file is already uptodate.
-<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=2, 495.8525pt x 271.0125pt>
+<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=2, 604.2575pt x 271.0125pt>
 File: PPTFigure/BlockDiagonal-eps-converted-to.pdf Graphic file (type pdf)
 
 <use PPTFigure/BlockDiagonal-eps-converted-to.pdf>
 Package pdftex.def Info: PPTFigure/BlockDiagonal-eps-converted-to.pdf used on i
 nput line 61.
-(pdftex.def)             Requested size: 404.71773pt x 216.81856pt.
+(pdftex.def)             Requested size: 404.71213pt x 216.81856pt.
 
-Overfull \hbox (25.30188pt too wide) in paragraph at lines 61--62
+Overfull \hbox (25.29628pt too wide) in paragraph at lines 61--62
 [][] 
  []
 
@@ -607,10 +607,10 @@ fb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/201
 7/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2017/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on ICC2018_V2.pdf (5 pages, 466833 bytes).
+Output written on ICC2018_V2.pdf (5 pages, 478484 bytes).
 PDF statistics:
- 203 PDF objects out of 1000 (max. 8388607)
- 155 compressed objects within 2 object streams
+ 209 PDF objects out of 1000 (max. 8388607)
+ 161 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
