@@ -149,7 +149,24 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         for SNR_dB=SNR_dB_range
                             SNR_index=SNR_index+1;
                             rho=db2pow(SNR_dB)/Num_users; % SNR value
-                            
+          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                       [Wrf_cl_new, Frf_cl_new, H_cl_new]= select_interCluster(a_TX_select, a_RX_select,K,H,rho);
+                        % Constructin the effective channels
+                        G_cl_new = effective_H(H_cl_new,Wrf_cl_new,Frf_cl_new);
+                        
+                        % Baseband zero-forcing precoding
+                        %   Fbb_cl = eye(Num_users);
+                        %Fbb_cl_org=pinv(G_cl_new);
+                        %Fbb_cl=Fbb_cl.*kron(eye(K),ones(m_k));
+                        %Fbb_cl = OffDiagonalZero(Num_RF, Num_users,Fbb_cl);
+                        Fbb_cl_new = [];
+                        for k = 1:K
+                               Fbb_k_new = pinv(G_cl_new(1+m_k*(k-1):m_k*k, 1+m_k*(k-1):m_k*k));       
+                               Fbb_cl_new = blkdiag(Fbb_cl_new, Fbb_k_new);
+                        end
+                        
+                        Fbb_cl_new = normalize_f(Fbb_cl_new,Frf_cl_new);
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                             
                             interval=1:m_k:Num_users+1;
                             for u=1:Num_users
@@ -184,7 +201,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                             Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
                             Rate_HP_fzf(SNR_index)=Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                             Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
-                            Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_schedule,Fbb_schedule,rho)/(ITER);
+                            Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_cl_new,Fbb_cl_new,rho)/(ITER);
                             Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
                             
                          end % End of SNR loop

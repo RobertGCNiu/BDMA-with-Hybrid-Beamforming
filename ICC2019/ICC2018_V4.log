@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  2 NOV 2018 20:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  11 NOV 2018 23:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -315,11 +315,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen144
 \Gm@layoutvoffset=\dimen145
 \Gm@dimlist=\toks25
-) (./ICC2018_V4.aux
-
-LaTeX Warning: Label `eq:group-scheduling' multiply defined.
-
-)
+) (./ICC2018_V4.aux)
 \openout1 = `ICC2018_V4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
@@ -504,12 +500,12 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 31.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Package epstopdf Info: Source file: <PPTFigure/BlockDiagonal.eps>
-(epstopdf)                    date: 2018-11-01 23:29:25
-(epstopdf)                    size: 1332618 bytes
+(epstopdf)                    date: 2018-11-11 13:22:29
+(epstopdf)                    size: 1349917 bytes
 (epstopdf)             Output file: <PPTFigure/BlockDiagonal-eps-converted-to.p
 df>
-(epstopdf)                    date: 2018-11-01 23:29:58
-(epstopdf)                    size: 245598 bytes
+(epstopdf)                    date: 2018-11-11 13:22:37
+(epstopdf)                    size: 243306 bytes
 (epstopdf)             Command: <repstopdf --outfile=PPTFigure/BlockDiagonal-ep
 s-converted-to.pdf PPTFigure/BlockDiagonal.eps>
 (epstopdf)             \includegraphics on input line 41.
@@ -558,99 +554,102 @@ Underfull \hbox (badness 1509) in paragraph at lines 160--161
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5]
 Package epstopdf Info: Source file: <Figure/comp1path.eps>
-(epstopdf)                    date: 2018-11-02 09:41:33
-(epstopdf)                    size: 26690 bytes
+(epstopdf)                    date: 2018-11-06 21:49:14
+(epstopdf)                    size: 28703 bytes
 (epstopdf)             Output file: <Figure/comp1path-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-11-02 09:41:37
-(epstopdf)                    size: 10160 bytes
+(epstopdf)                    date: 2018-11-06 21:52:34
+(epstopdf)                    size: 10435 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figure/comp1path-eps-conve
 rted-to.pdf Figure/comp1path.eps>
-(epstopdf)             \includegraphics on input line 346.
+(epstopdf)             \includegraphics on input line 326.
 Package epstopdf Info: Output file is already uptodate.
- <Figure/comp1path-eps-converted-to.pdf, id=94, 408.52625pt x 313.17pt>
+<Figure/comp1path-eps-converted-to.pdf, id=89, 438.63875pt x 327.2225pt>
 File: Figure/comp1path-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figure/comp1path-eps-converted-to.pdf>
 Package pdftex.def Info: Figure/comp1path-eps-converted-to.pdf used on input li
-ne 346.
-(pdftex.def)             Requested size: 274.63997pt x 224.04385pt.
+ne 326.
+(pdftex.def)             Requested size: 274.63043pt x 224.03621pt.
 
-Overfull \hbox (9.62747pt too wide) in paragraph at lines 346--347
+Overfull \hbox (9.61794pt too wide) in paragraph at lines 326--327
  [] 
  []
 
 Package epstopdf Info: Source file: <Figure/differentRF1path.eps>
-(epstopdf)                    date: 2018-11-02 15:52:36
-(epstopdf)                    size: 20418 bytes
+(epstopdf)                    date: 2018-11-06 21:50:16
+(epstopdf)                    size: 21613 bytes
 (epstopdf)             Output file: <Figure/differentRF1path-eps-converted-to.p
 df>
-(epstopdf)                    date: 2018-11-02 15:53:01
-(epstopdf)                    size: 8487 bytes
+(epstopdf)                    date: 2018-11-06 21:52:35
+(epstopdf)                    size: 8539 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figure/differentRF1path-ep
 s-converted-to.pdf Figure/differentRF1path.eps>
-(epstopdf)             \includegraphics on input line 357.
+(epstopdf)             \includegraphics on input line 337.
 Package epstopdf Info: Output file is already uptodate.
 
-<Figure/differentRF1path-eps-converted-to.pdf, id=95, 438.63875pt x 327.2225pt>
+<Figure/differentRF1path-eps-converted-to.pdf, id=90, 438.63875pt x 327.2225pt>
 File: Figure/differentRF1path-eps-converted-to.pdf Graphic file (type pdf)
 <use Figure/differentRF1path-eps-converted-to.pdf>
 Package pdftex.def Info: Figure/differentRF1path-eps-converted-to.pdf used on i
-nput line 357.
+nput line 337.
 (pdftex.def)             Requested size: 274.63043pt x 231.2611pt.
 
-Overfull \hbox (9.61794pt too wide) in paragraph at lines 357--358
+Overfull \hbox (9.61794pt too wide) in paragraph at lines 337--338
  [] 
  []
 
+[5]
 Package epstopdf Info: Source file: <Figure/antenna1path.eps>
-(epstopdf)                    date: 2018-11-02 10:35:02
-(epstopdf)                    size: 24640 bytes
+(epstopdf)                    date: 2018-11-06 21:50:46
+(epstopdf)                    size: 26260 bytes
 (epstopdf)             Output file: <Figure/antenna1path-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-11-02 10:35:08
-(epstopdf)                    size: 9436 bytes
+(epstopdf)                    date: 2018-11-06 21:52:37
+(epstopdf)                    size: 9526 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figure/antenna1path-eps-co
 nverted-to.pdf Figure/antenna1path.eps>
-(epstopdf)             \includegraphics on input line 366.
+(epstopdf)             \includegraphics on input line 346.
 Package epstopdf Info: Output file is already uptodate.
-<Figure/antenna1path-eps-converted-to.pdf, id=96, 433.62pt x 318.18875pt>
+
+<Figure/antenna1path-eps-converted-to.pdf, id=95, 438.63875pt x 327.2225pt>
 File: Figure/antenna1path-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figure/antenna1path-eps-converted-to.pdf>
 Package pdftex.def Info: Figure/antenna1path-eps-converted-to.pdf used on input
- line 366.
-(pdftex.def)             Requested size: 274.63768pt x 216.8073pt.
+ line 346.
+(pdftex.def)             Requested size: 274.63043pt x 216.81133pt.
 
-Overfull \hbox (9.62518pt too wide) in paragraph at lines 366--367
+Overfull \hbox (9.61794pt too wide) in paragraph at lines 346--347
  [] 
  []
 
 Package epstopdf Info: Source file: <Figure/differentK1path.eps>
-(epstopdf)                    date: 2018-11-02 11:22:50
-(epstopdf)                    size: 19906 bytes
+(epstopdf)                    date: 2018-11-06 21:49:41
+(epstopdf)                    size: 20813 bytes
 (epstopdf)             Output file: <Figure/differentK1path-eps-converted-to.pd
 f>
-(epstopdf)                    date: 2018-11-02 11:22:56
-(epstopdf)                    size: 8260 bytes
+(epstopdf)                    date: 2018-11-06 21:52:39
+(epstopdf)                    size: 8071 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figure/differentK1path-eps
 -converted-to.pdf Figure/differentK1path.eps>
-(epstopdf)             \includegraphics on input line 373.
+(epstopdf)             \includegraphics on input line 353.
 Package epstopdf Info: Output file is already uptodate.
 
-<Figure/differentK1path-eps-converted-to.pdf, id=97, 406.51875pt x 298.11375pt>
+<Figure/differentK1path-eps-converted-to.pdf, id=96, 438.63875pt x 327.2225pt>
 File: Figure/differentK1path-eps-converted-to.pdf Graphic file (type pdf)
+
 <use Figure/differentK1path-eps-converted-to.pdf>
 Package pdftex.def Info: Figure/differentK1path-eps-converted-to.pdf used on in
-put line 373.
-(pdftex.def)             Requested size: 274.63643pt x 216.81152pt.
+put line 353.
+(pdftex.def)             Requested size: 274.63043pt x 216.81133pt.
 
-Overfull \hbox (9.62393pt too wide) in paragraph at lines 373--374
+Overfull \hbox (9.61794pt too wide) in paragraph at lines 353--354
  [] 
  []
 
 [6 <./Figure/comp1path-eps-converted-to.pdf> <./Figure/differentRF1path-eps-con
-verted-to.pdf>] (./ICC2018_V4.bbl)
+verted-to.pdf> <./Figure/antenna1path-eps-converted-to.pdf> <./Figure/different
+K1path-eps-converted-to.pdf>] (./ICC2018_V4.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -662,24 +661,21 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[7 <./Figure/antenna1path-eps-converted-to.pdf> <./Figure/differentK1path-eps-c
-onverted-to.pdf>] (./ICC2018_V4.aux)
+[7
 
-LaTeX Warning: There were multiply-defined labels.
-
- )
+] (./ICC2018_V4.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 65 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5431 strings out of 492995
- 77358 string characters out of 6136402
- 175973 words of memory out of 5000000
- 8855 multiletter control sequences out of 15000+600000
+ 5434 strings out of 492995
+ 77381 string characters out of 6136402
+ 172977 words of memory out of 5000000
+ 8858 multiletter control sequences out of 15000+600000
  54047 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,18n,29p,1880b,568s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,18n,29p,1880b,636s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/tex
 live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/texlive/201
 7/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><c:/texlive/2017/te
@@ -706,10 +702,10 @@ c/amsfonts/symbols/msbm10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times
 /utmb8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/t
 exlive/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-
 dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ICC2018_V4.pdf (7 pages, 536273 bytes).
+Output written on ICC2018_V4.pdf (7 pages, 529690 bytes).
 PDF statistics:
- 214 PDF objects out of 1000 (max. 8388607)
- 156 compressed objects within 2 object streams
+ 213 PDF objects out of 1000 (max. 8388607)
+ 155 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

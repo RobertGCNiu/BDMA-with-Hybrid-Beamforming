@@ -1,8 +1,0 @@
-function F_odz = OffDiagonalZero(N_RF, N_users,G, Num_RF)
-
-F_1 = pinv(G(Num_RF,1:N_RF));
-F_2 = pinv(G(N_users-Num_RF+1:N_users, N_RF+1:N_users));
-
-F_odz = blkdiag(F_1, F_2);
-end
-

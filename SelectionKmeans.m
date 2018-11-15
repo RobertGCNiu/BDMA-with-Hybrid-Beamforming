@@ -15,12 +15,13 @@ Frf_cl(:,1) = a_TX_select(:,index_1);
 H_cl(1,:,:) = H(index_1,:,:);
 cluster_index(index_1) = 1;
 index_all = index_1;
+
 for k = 2:K
     alpha_u = zeros(Num_users,1);
     for u = 1:Num_users
         if ~ismember(u, index_all)
-        channel(:,:) = H(u,:,:);
-        alpha_u(u) =sum(abs(a_TX_select(:,u)'*a_TX_select(:,index_all)).^2);
+        H_u(:,:) = H(u,:,:);
+         sinr(u_try,path) =sinr(u_try,path) * (abs(a_RX_select(:,user)'*H_u*a_TX_select(:,user))^2)/sum(abs(a_RX_select(:,user)'*H_u*a_TX_select(:,user_int)).^2);
         else
             alpha_u(u) = inf;
         end
