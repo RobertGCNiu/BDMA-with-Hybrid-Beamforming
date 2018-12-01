@@ -7,7 +7,7 @@
 %--------------------------------------------------------------------------
 clear;clc;
 % ----------------------------- System Parameters% -------------------------
-Num_user_cluster = [16];
+Num_user_cluster = [32];
 Num_users_all = 40;
 Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
@@ -16,7 +16,7 @@ Rate_Path = zeros(length(paths),1);
 TX_sets = (8:16).^2;
 Rate_HP_ant = zeros(1,length(TX_sets));
 SNR_dB_range=-15:3:20;
-
+sinr_all =zeros(Num_user_cluster, Num_user_cluster, 50);
 
 
 for Num_users_index=1:length(Num_user_cluster) % Number of users
@@ -38,13 +38,13 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
             RX_ant_h=sqrt(RX_ant); % hieght
             ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
             ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
-            for K = [2]
+            for K = [1]
                 m_k = Num_users/K;
                 % ----------------------------- Channel Parameters ------------------------
                 for Num_paths_index=1:length(paths) %Number of channel paths
                     Num_paths = paths(Num_paths_index);
                     % ----------------------------- Simulation Parameters ---------------------
-                    SNR_dB_range=-15:3:20;  % SNR in dB
+                    %SNR_dB_range=-15:3:30;  % SNR in dB
                     
 
                     Rate_SU=zeros(1,length(SNR_dB_range)); % Will carry the single-user MIMO rate (without interference)
@@ -57,7 +57,8 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
    
                     
                     ITER=50; % Number of iterations
-                    
+                    Fbb_all = zeros(Num_users, Num_users, ITER);
+                    Fbb_all_fzf = zeros(Num_users, Num_users, ITER);
                     % --------------- Simulation starts ---------------------------------------
                     for iter=1:1:ITER
 
@@ -149,6 +150,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         for SNR_dB=SNR_dB_range
                             SNR_index=SNR_index+1;
                             rho=db2pow(SNR_dB)/Num_users; % SNR value
+                            %rho = db2pow(16)
           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                        [Wrf_cl_new, Frf_cl_new, H_cl_new]= select_interCluster(a_TX_select, a_RX_select,K,H,rho);
                         % Constructin the effective channels
@@ -166,7 +168,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         end
                         
                         Fbb_cl_new = normalize_f(Fbb_cl_new,Frf_cl_new);
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
                             
                             interval=1:m_k:Num_users+1;
                             for u=1:Num_users
@@ -200,6 +202,8 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                             G_BDMA=effective_H(H,Wrf_BDMA,Frf_BDMA);
                             Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
                             Rate_HP_fzf(SNR_index)=Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
+                            [~,~,sinr] = RGH(G_fzf,Fbb_fzf,rho);
+                            sinr_all(:,u,iter) = sinr ;
                             Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
                             Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_cl_new,Fbb_cl_new,rho)/(ITER);
                             Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
@@ -207,14 +211,18 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                          end % End of SNR loop
                         %Rate_HP_fzf(Num_RF_index)=Rate_HP_fzf(Num_RF_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                         %Rate_HP_ant(TX_index) = Rate_HP_ant(TX_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
-                        
+                        Fbb_all(:,:,iter) = abs(Fbb_cl);
+                        Fbb_all_fzf(:,:,iter) = abs(Fbb_fzf);
                     end % End of ITER loop
+                    
                 end
             end
         end
         
     end
 end
+cdf_test(Fbb_all)
+
  %plot(RF_sets,Rate_HP_fzf,'-v');
  figure
  %plot(TX_sets,Rate_HP_ant,'-v');

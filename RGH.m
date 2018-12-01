@@ -1,4 +1,4 @@
-function [R, users_rate] = RGH(G,F,rho)
+function [R, users_rate, snr] = RGH(G,F,rho)
 
 s=size(F,2);
 T=abs(G*F).^2+eye(s)/rho;
