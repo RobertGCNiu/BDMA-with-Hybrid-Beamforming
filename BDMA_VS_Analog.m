@@ -7,18 +7,18 @@
 %--------------------------------------------------------------------------
 clear;clc;
 % ----------------------------- System Parameters% -------------------------
-Num_user_cluster = [32];
-Num_users_all = 40;
+Num_user_cluster = [16];
+Num_users_all = 16;
 Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
 paths = [1];
 Rate_Path = zeros(length(paths),1);
 TX_sets = (8:16).^2;
 Rate_HP_ant = zeros(1,length(TX_sets));
-SNR_dB_range=-15:3:20;
-sinr_all =zeros(Num_user_cluster, Num_user_cluster, 50);
-
-
+%SNR_dB_range=-15:3:20;
+SNR_dB_range = -15:3:20;
+sinr_all =zeros(Num_user_cluster, 50);
+sigma = 0.001;
 for Num_users_index=1:length(Num_user_cluster) % Number of users
     Num_users = Num_user_cluster(Num_users_index);
     RF_sets = 8;
@@ -38,7 +38,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
             RX_ant_h=sqrt(RX_ant); % hieght
             ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
             ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
-            for K = [1]
+            for K = [2]
                 m_k = Num_users/K;
                 % ----------------------------- Channel Parameters ------------------------
                 for Num_paths_index=1:length(paths) %Number of channel paths
@@ -56,12 +56,12 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                     Rate_HP_SLNR = zeros(1,length(SNR_dB_range));
    
                     
-                    ITER=50; % Number of iterations
+                    ITER=10; % Number of iterations
                     Fbb_all = zeros(Num_users, Num_users, ITER);
                     Fbb_all_fzf = zeros(Num_users, Num_users, ITER);
                     % --------------- Simulation starts ---------------------------------------
                     for iter=1:1:ITER
-
+                        iter
                         T = zeros(Num_users, Num_users);
                         
                         % Generate user channels
@@ -133,13 +133,13 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         Fbb_fzf = normalize_f(Fbb_fzf,Frf_fzf); 
                         
                         %% Power Allocation
-                        for u = 1: Num_users
-                            for col = 1: Num_users
-                                T(u, col) = abs(G_cl(u,:) * Fbb_cl(:,col)).^2;
-                            end
-                        end
-                        [sir, power] = GMtraixGeneration(T); %The power is orthonomal vector.
-                        Rate_SIR(Num_users_index) = Rate_SIR(Num_users_index)+ log2(1+ sir)/(ITER);
+%                         for u = 1: Num_users
+%                             for col = 1: Num_users
+%                                 T(u, col) = abs(G_cl(u,:) * Fbb_cl(:,col)).^2;
+%                             end
+%                         end
+%                         [sir, power] = GMtraixGeneration(T); %The power is orthonomal vector.
+%                         Rate_SIR(Num_users_index) = Rate_SIR(Num_users_index)+ log2(1+ sir)/(ITER);
                         
                         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                         % Leakage-Based Hybrid Beamforming Design for Downlink Multiuser mmWave MIMO Systems
@@ -150,25 +150,8 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         for SNR_dB=SNR_dB_range
                             SNR_index=SNR_index+1;
                             rho=db2pow(SNR_dB)/Num_users; % SNR value
-                            %rho = db2pow(16)
-          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                       [Wrf_cl_new, Frf_cl_new, H_cl_new]= select_interCluster(a_TX_select, a_RX_select,K,H,rho);
-                        % Constructin the effective channels
-                        G_cl_new = effective_H(H_cl_new,Wrf_cl_new,Frf_cl_new);
-                        
-                        % Baseband zero-forcing precoding
-                        %   Fbb_cl = eye(Num_users);
-                        %Fbb_cl_org=pinv(G_cl_new);
-                        %Fbb_cl=Fbb_cl.*kron(eye(K),ones(m_k));
-                        %Fbb_cl = OffDiagonalZero(Num_RF, Num_users,Fbb_cl);
-                        Fbb_cl_new = [];
-                        for k = 1:K
-                               Fbb_k_new = pinv(G_cl_new(1+m_k*(k-1):m_k*k, 1+m_k*(k-1):m_k*k));       
-                               Fbb_cl_new = blkdiag(Fbb_cl_new, Fbb_k_new);
-                        end
-                        
-                        Fbb_cl_new = normalize_f(Fbb_cl_new,Frf_cl_new);
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                            p_all = rho*Num_users*sigma;
+                            
                             
                             interval=1:m_k:Num_users+1;
                             for u=1:Num_users
@@ -198,21 +181,27 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                                 Rate_SU(SNR_index)=Rate_SU(SNR_index)+log2(1+rho*S_channel(1,1)^2)/(ITER);
                                 
                             end
+                            Heff_p = abs(G_cl*Fbb_cl).^2;
+                            p =  dcpower(Heff_p, Num_users, p_all,sigma);
                             
-                            G_BDMA=effective_H(H,Wrf_BDMA,Frf_BDMA);
-                            Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
+                            Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index)+PGH(Heff_p,p,sigma)/(ITER);
+%                             G_BDMA=effective_H(H,Wrf_BDMA,Frf_BDMA);
+%                             [~,~,sinr] = RGH(G_BDMA,eye(size(G_BDMA)),rho);
+%                              sinr_all(:,iter) = sinr ;
+                           % Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
+                            
                             Rate_HP_fzf(SNR_index)=Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
-                            [~,~,sinr] = RGH(G_fzf,Fbb_fzf,rho);
-                            sinr_all(:,u,iter) = sinr ;
+                            %[~,~,sinr] = RGH(G_fzf,Fbb_fzf,rho);
+                           
                             Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
-                            Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_cl_new,Fbb_cl_new,rho)/(ITER);
+%                            Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_cl_new,Fbb_cl_new,rho)/(ITER);
                             Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
                             
                          end % End of SNR loop
                         %Rate_HP_fzf(Num_RF_index)=Rate_HP_fzf(Num_RF_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                         %Rate_HP_ant(TX_index) = Rate_HP_ant(TX_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
-                        Fbb_all(:,:,iter) = abs(Fbb_cl);
-                        Fbb_all_fzf(:,:,iter) = abs(Fbb_fzf);
+%                         Fbb_all(:,:,iter) = abs(Fbb_cl);
+%                         Fbb_all_fzf(:,:,iter) = abs(Fbb_fzf);
                     end % End of ITER loop
                     
                 end
@@ -221,7 +210,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
         
     end
 end
-cdf_test(Fbb_all)
+%cdf_test(sinr_all)
 
  %plot(RF_sets,Rate_HP_fzf,'-v');
  figure
@@ -231,10 +220,10 @@ plot(SNR_dB_range,Rate_SU,'-v','linewidth',1.5);
 hold on; plot(SNR_dB_range,Rate_BS_BDMA,'linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_fzf,'--o','linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_cl,'--','linewidth',1.5);
-plot(SNR_dB_range,Rate_HP_schedule,'linewidth',1.5);
+%plot(SNR_dB_range,Rate_HP_schedule,'linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_SLNR,'-','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_clip,'-','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_bzf,'-','linewidth',1.5);
-legend('signle user','BDMA','full-zf','group','selection', 'SLNR')
+legend('signle user','BDMA','full-zf','group', 'SLNR')
 xlabel('SNR')
 ylabel('Sum-rate Spectral Efficiency(bps/Hz)')

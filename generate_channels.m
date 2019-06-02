@@ -13,8 +13,8 @@ for u=1:1:Num_users
     AoD_az(u,:)=2*pi*rand(1,Num_paths);
     AoA_el(u,:)=pi*rand(1,Num_paths)-pi/2;
     AoA_az(u,:)=2*pi*rand(1,Num_paths);
-    alpha(u,:)=sqrt(1/Num_paths)*sqrt(1/2)*(randn(1,Num_paths)+1j*randn(1,Num_paths));
-
+    %alpha(u,:)=sqrt(1/Num_paths)*sqrt(1/2)*(normrnd(0,1,[Num_paths,1])+1j*normrnd(0,1,[Num_paths,1]));
+    alpha(u,:)=  (normrnd(0,1,[Num_paths,1])+1j*normrnd(0,1,[Num_paths,1]));
     Temp_Channel=zeros(RX_ant_w*RX_ant_h,TX_ant_w*TX_ant_h);
     for l=1:1:Num_paths
         a_TX(:,u)=transpose(sqrt(1/(TX_ant_w*TX_ant_h))*exp(1j*pi*(ind_TX_w*sin(AoD_az(u,l))*sin(AoD_el(u,l))+ind_TX_h*cos(AoD_el(u,l))) ));

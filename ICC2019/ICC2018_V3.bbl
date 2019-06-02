@@ -38,7 +38,7 @@ Z.~Jiang, S.~Chen, S.~Zhou, and Z.~Niu, ``Joint user scheduling and beam
   April 2018.
 
 \bibitem{bogale2014beamforming}
-T.~E. Bogale and L.~B. Le, ``Beamforming for multiuser massive mimo systems:
+T.~E. Bogale and L.~B. Le, ``Beamforming for multiuser massive {MIMO} systems:
   Digital versus hybrid analog-digital,'' \emph{arXiv preprint
   arXiv:1407.0446}, 2014.
 
@@ -58,17 +58,17 @@ Q.~H. Spencer, A.~L. Swindlehurst, and M.~Haardt, ``Zero-forcing methods for
   transactions on signal processing}, vol.~52, no.~2, pp. 461--471, 2004.
 
 \bibitem{ni2016hybrid}
-W.~Ni and X.~Dong, ``Hybrid block diagonalization for massive multiuser mimo
+W.~Ni and X.~Dong, ``Hybrid block diagonalization for massive multiuser {MIMO}
   systems,'' \emph{IEEE transactions on communications}, vol.~64, no.~1, pp.
   201--211, 2016.
 
 \bibitem{liu2014phase}
-A.~Liu and V.~Lau, ``Phase only rf precoding for massive mimo systems with
-  limited rf chains,'' \emph{IEEE Transactions on Signal Processing}, vol.~62,
-  no.~17, pp. 4505--4515, 2014.
+A.~Liu and V.~Lau, ``Phase only {RF} precoding for massive {MIMO} systems with
+  limited {RF} chains,'' \emph{IEEE Transactions on Signal Processing},
+  vol.~62, no.~17, pp. 4505--4515, 2014.
 
 \bibitem{garcia2017mimo}
-N.~Garcia, H.~Wymeersch, and E.~G. Larsson, ``Mimo with more users than rf
+N.~Garcia, H.~Wymeersch, and E.~G. Larsson, ``{MIMO} with more users than {RF}
   chains,'' \emph{arXiv preprint arXiv:1709.05200}, 2017.
 
 \bibitem{alkhateeb2015limited}

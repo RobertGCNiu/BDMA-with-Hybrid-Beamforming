@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  1 NOV 2018 10:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.7.19)  28 FEB 2019 15:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -497,26 +497,26 @@ ex.map}
 
 ]
 Package epstopdf Info: Source file: <PPTFigure/BlockDiagonal.eps>
-(epstopdf)                    date: 2018-10-29 16:41:10
-(epstopdf)                    size: 1311347 bytes
+(epstopdf)                    date: 2018-11-11 13:22:29
+(epstopdf)                    size: 1349917 bytes
 (epstopdf)             Output file: <PPTFigure/BlockDiagonal-eps-converted-to.p
 df>
-(epstopdf)                    date: 2018-10-29 16:41:24
-(epstopdf)                    size: 248354 bytes
+(epstopdf)                    date: 2018-11-11 13:22:37
+(epstopdf)                    size: 243306 bytes
 (epstopdf)             Command: <repstopdf --outfile=PPTFigure/BlockDiagonal-ep
 s-converted-to.pdf PPTFigure/BlockDiagonal.eps>
 (epstopdf)             \includegraphics on input line 53.
 Package epstopdf Info: Output file is already uptodate.
 
-<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=13, 604.2575pt x 271.0125pt>
+<PPTFigure/BlockDiagonal-eps-converted-to.pdf, id=13, 577.15625pt x 269.005pt>
 File: PPTFigure/BlockDiagonal-eps-converted-to.pdf Graphic file (type pdf)
 
 <use PPTFigure/BlockDiagonal-eps-converted-to.pdf>
 Package pdftex.def Info: PPTFigure/BlockDiagonal-eps-converted-to.pdf used on i
 nput line 53.
-(pdftex.def)             Requested size: 404.71213pt x 216.81856pt.
+(pdftex.def)             Requested size: 404.72876pt x 216.81331pt.
 
-Overfull \hbox (25.29628pt too wide) in paragraph at lines 53--54
+Overfull \hbox (25.31291pt too wide) in paragraph at lines 53--54
 [][] 
  []
 
@@ -558,24 +558,24 @@ Overfull \hbox (9.61594pt too wide) in paragraph at lines 332--333
  []
 
 Package epstopdf Info: Source file: <Figure/NRFChains.eps>
-(epstopdf)                    date: 2018-10-28 22:36:47
-(epstopdf)                    size: 26672 bytes
+(epstopdf)                    date: 2018-11-02 14:59:08
+(epstopdf)                    size: 20487 bytes
 (epstopdf)             Output file: <Figure/NRFChains-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-28 22:36:51
-(epstopdf)                    size: 10292 bytes
+(epstopdf)                    date: 2019-02-28 15:55:02
+(epstopdf)                    size: 8145 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figure/NRFChains-eps-conve
 rted-to.pdf Figure/NRFChains.eps>
 (epstopdf)             \includegraphics on input line 343.
 Package epstopdf Info: Output file is already uptodate.
-<Figure/NRFChains-eps-converted-to.pdf, id=84, 566.115pt x 460.72125pt>
+<Figure/NRFChains-eps-converted-to.pdf, id=84, 438.63875pt x 327.2225pt>
 File: Figure/NRFChains-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figure/NRFChains-eps-converted-to.pdf>
 Package pdftex.def Info: Figure/NRFChains-eps-converted-to.pdf used on input li
 ne 343.
-(pdftex.def)             Requested size: 274.63455pt x 231.2599pt.
+(pdftex.def)             Requested size: 274.63043pt x 231.2611pt.
 
-Overfull \hbox (9.62206pt too wide) in paragraph at lines 343--344
+Overfull \hbox (9.61794pt too wide) in paragraph at lines 343--344
  [] 
  []
 
@@ -664,7 +664,7 @@ m10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texliv
 e/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2017/texmf-dist
 /fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on ICC2018_V3.pdf (7 pages, 465793 bytes).
+Output written on ICC2018_V3.pdf (7 pages, 463974 bytes).
 PDF statistics:
  173 PDF objects out of 1000 (max. 8388607)
  125 compressed objects within 2 object streams

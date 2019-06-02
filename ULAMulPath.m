@@ -25,7 +25,7 @@ for u=1:1:Num_users
     AoD_az(u,:)=2*pi*rand(1,Num_paths);
     AoA_el(u,:)=pi*rand(1,Num_paths)-pi/2;
     AoA_az(u,:)=2*pi*rand(1,Num_paths);
-    alpha(u,:)=  sqrt(1/Num_paths)*sqrt(1/2)*(randn(1,Num_paths)+1j*randn(1,Num_paths));
+    alpha(u,:)=   sqrt(1/Num_paths)* (normrnd(0,1,[Num_paths,1])+1j*normrnd(0,1,[Num_paths,1])); %sqrt(1/Num_paths)*sqrt(1/2)*(randn(1,Num_paths)+1j*randn(1,Num_paths));
     
 %     alpha(u,:)= Lam*exp(-Lam*(0:20:(Num_paths-1)*20)); % ideal exponential pdf
 %     alpha(u,:) = alpha(u,:) ./sum(alpha);

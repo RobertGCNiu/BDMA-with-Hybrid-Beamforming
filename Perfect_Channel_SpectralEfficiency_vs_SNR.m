@@ -25,18 +25,18 @@ ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
 ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
 
 % ----------------------------- Channel Parameters ------------------------
-Num_paths=4; %Number of channel paths
+Num_paths=1; %Number of channel paths
 
 % ----------------------------- Simulation Parameters ---------------------
-SNR_dB_range=[-20:3:10 40 100];  % SNR in dB
+SNR_dB_range=0:3:36;  % SNR in dB
 Rate_SU=zeros(1,length(SNR_dB_range)); % Will carry the single-user MIMO rate (without interference)
 Rate_LB=zeros(1,length(SNR_dB_range));% Will carry the lower bound values
 Rate_BS=zeros(1,length(SNR_dB_range));% Will carry the rate with analog-only beamsteering
-Rate_HP=zeros(1,length(SNR_dB_range)); % Will carry the rate of the proposed algorithm (with analog 
+Rate_HP=zeros(1,length(SNR_dB_range)); % Will carry the rate of the p roposed algorithm (with analog 
 % and zero-forcing digital precoding)
 
-ITER=500; % Number of iterations
-    
+ITER=100; % Number of iterations
+sinr_all =zeros(Num_users, ITER);
 % --------------- Simulation starts ---------------------------------------
 for iter=1:1:ITER
     % Generate user channels 
@@ -67,8 +67,8 @@ for iter=1:1:ITER
 
      % For the lower bound 
         [Us Ss Vs]=svd(Frf);
-        s_min=(min(diag(Ss)))^2;
-        s_max=(max(diag(Ss)))^2;
+        s_min=(min(diag(Ss))).^2;
+        s_max=(max(diag(Ss))).^2;
         G_factor=4/(s_max/s_min+s_min/s_max+2);  
       
     % Spectral efficiency calculations
@@ -94,9 +94,11 @@ for iter=1:1:ITER
             % Analog-only beamforming
             SINR_BS=(SNR*(abs(Wrf(:,u)'*Channel*Frf(:,u)).^2))/(SNR*sum((abs(Wrf(:,u)'*Channel*Frf(:,Int_set)).^2))+1);
             Rate_BS(count)=Rate_BS(count)+log2(1+SINR_BS)/(Num_users*ITER);
-            
+            sinr = (SNR*(abs(Wrf(:,u)'*Channel*Frf(:,u)).^2));
+            sinr_all(u,iter) = sinr/SNR/144/64 ;
             % Derived lower bound
-            Rate_LB(count)=Rate_LB(count)+log2(1+SNR*S_channel(1,1)^2*G_factor)/(Num_users*ITER);
+            SINR_LB=(SNR*(abs(Wrf(:,u)'*Channel*Frf(:,u)).^2))/(SNR*sum((abs(Wrf(:,u)'*Channel*Frf(:,u)).^2))*0.03+1);
+            Rate_LB(count)=Rate_LB(count)+log2(1+SINR_LB)/(Num_users*ITER);
         end
     
         % Hybrid Precoding
@@ -104,18 +106,19 @@ for iter=1:1:ITER
        
     end % End of SNR loop
 end % End of ITER loop
-
-%Plotting the spectral efficiencies
-    plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
-    hold on; plot(SNR_dB_range,Rate_HP,'-s','LineWidth',1.5);
-if Num_paths==1
-    hold on; plot(SNR_dB_range,Rate_LB,'--k','LineWidth',1.5);
-    hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
-    legend('Single-user (No Interference)','Proposed Hybrid Precoding','Lower Bound (Theorem 1)','Analog-only Beamsteering');
-else
-    hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
-    legend('Single-user (No Interference)','Proposed Hybrid Precoding','Analog-only Beamsteering');
-end
-xlabel('SNR (dB)','FontSize',12);
-ylabel('Spectral Efficiency (bps/ Hz)','FontSize',12);
-grid;
+%cdf_test(sinr_all)
+% %Plotting the spectral efficiencies
+%     plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
+   hold on; plot(SNR_dB_range,Rate_HP*Num_users,'-s','LineWidth',1.5);
+% if Num_paths==1
+%     hold on; plot(SNR_dB_range,Rate_LB,'--k','LineWidth',1.5);
+    hold on; plot(SNR_dB_range,Rate_BS*Num_users,'-ro','LineWidth',1.5);
+     hold on; plot(SNR_dB_range,Rate_LB*Num_users,'--bo','LineWidth',1.5);
+%     legend('Single-user (No Interference)','Proposed Hybrid Precoding','Lower Bound (Theorem 1)','Analog-only Beamsteering');
+% else
+%     hold on; plot(SNR_dB_range,Rate_BS,'-ro','LineWidth',1.5);
+%     legend('Single-user (No Interference)','Proposed Hybrid Precoding','Analog-only Beamsteering');
+% end
+% xlabel('SNR (dB)','FontSize',12);
+% ylabel('Spectral Efficiency (bps/ Hz)','FontSize',12);
+% grid;
