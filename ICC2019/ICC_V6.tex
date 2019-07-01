@@ -65,7 +65,7 @@ In this paper, we consider a multiuser massive MIMO downlink system in which the
 We consider a MU-MIMO downlink system as shown in \figurename{\ref{fig:BlockDiagram} in which $N_U$ out of $N_{tot}$ users are scheduled for service. The base station (BS) equipped with $N_{RF}$ RF chains and $N_T$ antennas transmits $N_U$ data streams to $N_U$ receivers with $N_R$ receive antennas. We assume only one data stream is designated to each scheduled receiver. Denoted by ${\bm s}(n)$ the $n$-th block of $N_U$ data to be transmitted, ${\bm s}(n)$ has unit power with $\mathbb{E}\left[\bm{ss}^H\right]=\frac{1}{N_U}\bm{I}_{N_U}$. In the sequel, we concentrate on a single block and omit the temporal index $n$ for notational simplicity.
 
 \subsection{Transmitter}
-In our proposed cluster-by-cluster BD digital precoding system shown in Fig.~\ref{fig:BlockDiagram}, the $N_U$ users are first divided into $K$ clusters with the cluster size being $0< M_k\leq N_U$ for $k=1,2,\cdots,K$. It is clear that $\displaystyle\sum_{k=1}^{K} M_k = N_U$. Accordingly, the data streams $\bm{s}$ can be rewritten in clusters as:
+In our proposed cluster-by-cluster BD digital precoding system shown in Fig.~\ref{fig:BlockDiagram}, the $N_U$ users are first divided into $K$ clusters with the cluster size being $0< M_k\leq N_{RF}$ for $k=1,2,\cdots,K$. It is clear that $\displaystyle\sum_{k=1}^{K} M_k = N_U$. Accordingly, the data streams $\bm{s}$ can be rewritten in clusters as:
 \begin{equation}
 \bm{s} = \left[{\mathbf{s}}_1^T, {\mathbf{s}}_2^T,\cdots, \mathbf{s}_{K}^T\right]^T,
 \end{equation}
@@ -187,7 +187,7 @@ The problem $P_1$ is challenging due to its non-convex and combinatorial nature.
 In this section, we will first optimize the analog precoder before deriving two digital precoders, namely the block zero-forcing (BZF) and block signal-to-leakage-and-noise ratio (SLNR) maximization (BSM) precoders. When designing the digital and analog precoders, we assume that the user clustering is given. This approach enables us to first solve the precoder optimization problem for a particular user clustering before handling the user clustering algorithm. Even though the optimization problems in these two stages are all highly non-convex, we attempt at closed-form solutions for precoder design and low complexity solution for user clustering algorithm.
 
 \subsection{Analog Beamforming Design}\label{analog}
-In this subsection, we first focus on the analog beamforming design on both transmitter and receiver sides. According to the theory for infinite antenna theory, as the number of transmit antennas goes to infinity, distinct array response vectors are asymptotically orthogonal, {\em i.e.}
+In this subsection, we first focus on the analog beamforming design on both transmitter and receiver sides. According to the theory for infinite antenna, as the number of transmit antennas goes to infinity, distinct array response vectors are asymptotically orthogonal, {\em i.e.}
 \begin{equation}\label{Eq:assumption}
 \lim_{N\rightarrow +\infty} \bm{a}_{T}^{H}(\phi^t_{k,u},\theta^t_{k,u}) \cdot\bm{a}_{T}(\phi^t_{\ell,v},\theta^t_{\ell,v})=\delta(k-\ell)\delta(u-v).
 \end{equation}
@@ -328,7 +328,7 @@ We first compare the two proposed digital precoding approaches against the conve
 \end{figure}
 \begin{figure}[ht]
 	\begin{center}
-		\includegraphics[width=3.6in]{Figure/differentK1path.eps}
+		\includegraphics[width=3.2in]{Figure/differentK1path.eps}
 		\caption{Sum-rate capacity comparison for different number of clusters.}\label{fig:differentK}
 	\end{center}
 \end{figure}
