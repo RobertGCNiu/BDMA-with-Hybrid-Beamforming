@@ -7,8 +7,8 @@
 %--------------------------------------------------------------------------
 clear;clc;
 % ----------------------------- System Parameters% -------------------------
-Num_user_cluster = [50];
-Num_users_all = 50;
+Num_user_cluster = [16];
+Num_users_all = 16;
 Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
 paths = [1];
@@ -52,9 +52,8 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                     Rate_BS_BDMA = zeros(1,length(SNR_dB_range));
                      Rate_HP_cl = zeros(1,length(SNR_dB_range));
                     Rate_HP_fzf = zeros(1,length(SNR_dB_range));
-                    Rate_HP_schedule = zeros(1,length(SNR_dB_range));
+                    Rate_HP_mc = zeros(1,length(SNR_dB_range));
                     Rate_HP_SLNR = zeros(1,length(SNR_dB_range));
-   
                     
                     ITER=1; % Number of iterations
                     Fbb_all = zeros(Num_users, Num_users, ITER);
@@ -69,7 +68,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         % H is a 3-dimensional matrix, with Num_users,RX_ant,TX_ant dimensions
                         
                        % [a_TX_schedule,a_RX_schedule, ~,~,H_schedule] = Selectusers(Num_users,Num_users_all,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
-                        [a_TX_schedule,a_RX_schedule, H_schedule]  = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);
+%                        [a_TX_schedule,a_RX_schedule, H_schedule]  = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);
                         
                         H = H_all(1:Num_users,:,:);
                         a_TX = a_TX_all(:,1:Num_users,:);
@@ -87,15 +86,34 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         
                         
                         %Schedule Selection
-                        G_schedule = effective_H(H_schedule,a_RX_schedule,a_TX_schedule);
+        %                G_schedule = effective_H(H_schedule,a_RX_schedule,a_TX_schedule);
                         
                         % Baseband zero-forcing precoding
                         %   Fbb_cl = eye(Num_users);
-                        Fbb_schedule=pinv(G_schedule);
-                        Fbb_schedule = normalize_f(Fbb_schedule,a_TX_schedule);
+        %                Fbb_schedule=pinv(G_schedule);
+          %              Fbb_schedule = normalize_f(Fbb_schedule,a_TX_schedule);
                         
-                        
-                        weight_all = max_cut_selection(a_TX_select, a_RX_select,H);
+
+                      max_cut_selection(a_TX_select, a_RX_select,H);
+                      system('python maxcut.py test.txt text.txt');
+                      data = load('text.txt');
+                      x  = data(2:end,:);
+                      [~,used_total] = sort(x(:,2));
+
+                      Frf_mc = a_TX_select(:,used_total);
+                      Wrf_mc =a_RX_select(:,used_total);
+                      H_mc = H(used_total,:,:);
+                      G_mc = effective_H(H_mc,Wrf_mc,Frf_mc);
+                          
+                      Fbb_mc = [];
+                        for k = 1:K
+                            Fbb_k = pinv(G_mc(1+m_k*(k-1):m_k*k, 1+m_k*(k-1):m_k*k));
+                            Fbb_mc = blkdiag(Fbb_mc, Fbb_k);
+                        end
+
+                        Fbb_mc = normalize_f(Fbb_mc,Frf_mc);
+                      
+                      
                         [Wrf_cl, Frf_cl, H_cl]= greedySelection(a_TX_select, a_RX_select,K,H);
                         % Constructin the effective channels
                         G_cl = effective_H(H_cl,Wrf_cl,Frf_cl);
@@ -198,7 +216,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                             Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
 %                            Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_cl_new,Fbb_cl_new,rho)/(ITER);
                             Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
-                            
+                             Rate_HP_mc(SNR_index)=Rate_HP_mc(SNR_index) + RGH(G_mc,Fbb_mc,rho)/(ITER);
                          end % End of SNR loop
                         %Rate_HP_fzf(Num_RF_index)=Rate_HP_fzf(Num_RF_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                         %Rate_HP_ant(TX_index) = Rate_HP_ant(TX_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
@@ -219,14 +237,15 @@ end
  %plot(TX_sets,Rate_HP_ant,'-v');
 % 
 hold on
-plot(SNR_dB_range,Rate_SU,'-v','linewidth',1.5);
+%plot(SNR_dB_range,Rate_SU,'-v','linewidth',1.5);
 %hold on; plot(SNR_dB_range,Rate_BS_BDMA,'linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_fzf,'--o','linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_cl,'--','linewidth',1.5);
 %plot(SNR_dB_range,Rate_HP_schedule,'linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_SLNR,'-','linewidth',1.5);
+plot(SNR_dB_range,Rate_HP_mc,'--o','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_clip,'-','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_bzf,'-','linewidth',1.5);
-legend('signle user','full-zf','group', 'SLNR')
+legend('full-zf no group','group zf', 'SLNR','max cut zf')
 xlabel('SNR')
 ylabel('Sum-rate Spectral Efficiency(bps/Hz)')

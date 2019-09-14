@@ -1,6 +1,5 @@
-function [g_gradient] = g_gradient(p,H, M)
+function [g_gradient] = g_gradient(p, H, M,sigma)
 
-sigma = 0.0001;
 w = ones(M,1);
 g_gradient = 0;
 e_i = zeros(M,1);

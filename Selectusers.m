@@ -5,7 +5,9 @@ function [a_TX_select,a_RX_select, H_selected] = Selectusers(Num_users_all, Num_
 % a_TX_select = a_TX(:,1:Num_users,:);
 % a_RX_select = a_RX(:,1:Num_users,:);
 % H_selected  = H(1:Num_users,:,:);
-
+ N_T = size(a_TX,1);
+  N_R = size(a_RX,1);
+  H_selected = zeros(Num_users, N_R, N_T);
 %% find the first beam with largest channel gain
 alpha_u = zeros(Num_users_all,Num_paths);
 for u = 1:Num_users_all
@@ -17,6 +19,8 @@ end
 [max_u_all, max_u] = max(alpha_u,[],1);
 [~, max_p] = max(max_u_all);
 max_user = max_u(max_p);
+a_TX_select = zeros(N_T, Num_users);
+a_RX_select = zeros(N_R, Num_users);
 %% The first user with largest channel gain is selected
 a_TX_select(:,1) = a_TX(:,max_user,max_p);
 a_RX_select(:,1) = a_RX(:,max_user,max_p);

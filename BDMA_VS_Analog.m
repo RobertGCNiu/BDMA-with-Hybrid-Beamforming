@@ -7,7 +7,9 @@
 %--------------------------------------------------------------------------
 clear;clc;
 % ----------------------------- System Parameters% -------------------------
-Num_user_cluster = [16];
+R_all_users = [];
+R_zf_user_all = [];
+Num_user_cluster = [8];
 Num_users_all = 16;
 Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
@@ -15,8 +17,8 @@ paths = [1];
 Rate_Path = zeros(length(paths),1);
 TX_sets = (8:16).^2;
 Rate_HP_ant = zeros(1,length(TX_sets));
-%SNR_dB_range=-15:3:20;
-SNR_dB_range = -15:3:20;
+SNR_dB_range=-15:5:30;
+%SNR_dB_range = 10;
 sinr_all =zeros(Num_user_cluster, 50);
 sigma = 0.001;
 for Num_users_index=1:length(Num_user_cluster) % Number of users
@@ -26,7 +28,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
     for Num_RF_index = 1:length(RF_sets)
         Num_RF = RF_sets(Num_RF_index);
         TX_index = 0;
-        for TX_ant=144  %Number of UPA TX antennas
+        for TX_ant=144 %Number of UPA TX antennas
             TX_index = TX_index+1;
             TX_ant_w=sqrt(TX_ant); % width
             TX_ant_h=sqrt(TX_ant); % hieght
@@ -38,7 +40,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
             RX_ant_h=sqrt(RX_ant); % hieght
             ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
             ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
-            for K = [2]
+            for K = [1]
                 m_k = Num_users/K;
                 % ----------------------------- Channel Parameters ------------------------
                 for Num_paths_index=1:length(paths) %Number of channel paths
@@ -54,9 +56,9 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                     Rate_HP_fzf = zeros(1,length(SNR_dB_range));
                     Rate_HP_schedule = zeros(1,length(SNR_dB_range));
                     Rate_HP_SLNR = zeros(1,length(SNR_dB_range));
-   
+                    count_flag = zeros(1,length(SNR_dB_range));
                     
-                    ITER=10; % Number of iterations
+                    ITER=100; % Number of iterations
                     Fbb_all = zeros(Num_users, Num_users, ITER);
                     Fbb_all_fzf = zeros(Num_users, Num_users, ITER);
                     % --------------- Simulation starts ---------------------------------------
@@ -69,7 +71,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         % H is a 3-dimensional matrix, with Num_users,RX_ant,TX_ant dimensions
                         
                        % [a_TX_schedule,a_RX_schedule, ~,~,H_schedule] = Selectusers(Num_users,Num_users_all,a_TX_all,a_RX_all,Num_paths,H_all);%select Num_users from Num_users_all
-                        [a_TX_schedule,a_RX_schedule, H_schedule]  = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);
+                    %    [a_TX_schedule,a_RX_schedule, H_schedule]  = Selectusers(Num_users_all, Num_users,a_TX_all,a_RX_all,Num_paths,H_all);
                         
                         H = H_all(1:Num_users,:,:);
                         a_TX = a_TX_all(:,1:Num_users,:);
@@ -87,12 +89,12 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         
                         
                         %Schedule Selection
-                        G_schedule = effective_H(H_schedule,a_RX_schedule,a_TX_schedule);
-                        
-                        % Baseband zero-forcing precoding
-                        %   Fbb_cl = eye(Num_users);
-                        Fbb_schedule=pinv(G_schedule);
-                        Fbb_schedule = normalize_f(Fbb_schedule,a_TX_schedule);
+%                         G_schedule = effective_H(H_schedule,a_RX_schedule,a_TX_schedule);
+%                         
+%                         % Baseband zero-forcing precoding
+%                         %   Fbb_cl = eye(Num_users);
+%                         Fbb_schedule=pinv(G_schedule);
+%                         Fbb_schedule = normalize_f(Fbb_schedule,a_TX_schedule);
                         
                         [Wrf_cl, Frf_cl, H_cl]= greedySelection(a_TX_select, a_RX_select,K,H);
                         % Constructin the effective channels
@@ -181,22 +183,28 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                                 Rate_SU(SNR_index)=Rate_SU(SNR_index)+log2(1+rho*S_channel(1,1)^2)/(ITER);
                                 
                             end
-                            Heff_p = abs(G_cl*Fbb_cl).^2;
-                            p =  dcpower(Heff_p, Num_users, p_all,sigma);
-                            
-                            Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index)+PGH(Heff_p,p,sigma)/(ITER);
+                           % Heff_p = abs(G_cl*Fbb_cl).^2;
+                            %[p,flag] =  dcpower(Heff_p, Num_users, p_all,sigma);
+                            %if flag == 1
+                            count_flag(SNR_index) = count_flag(SNR_index) +1;
+                           % [R_each_user R_users] = PGH(Heff_p,p,sigma);
+                            %R_all_users = [R_all_users, R_users];
+                            %Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index)+R_each_user;
 %                             G_BDMA=effective_H(H,Wrf_BDMA,Frf_BDMA);
 %                             [~,~,sinr] = RGH(G_BDMA,eye(size(G_BDMA)),rho);
 %                              sinr_all(:,iter) = sinr ;
                            % Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
                             
-                            Rate_HP_fzf(SNR_index)=Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
-                            %[~,~,sinr] = RGH(G_fzf,Fbb_fzf,rho);
-                           
-                            Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
+                            Rate_HP_fzf(SNR_index)=Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho);
+                            [R_zf,R_zf_user] = RGH(G_cl,Fbb_cl,rho);
+%                             if flag ==1
+                            % R_all_users = [R_all_users, R_users];
+                             R_zf_user_all = [R_zf_user_all, R_zf_user'];
+%                             end
+                            Rate_HP_cl(SNR_index)=Rate_HP_cl(SNR_index) + R_zf;
 %                            Rate_HP_schedule(SNR_index) = Rate_HP_schedule(SNR_index) + RGH(G_cl_new,Fbb_cl_new,rho)/(ITER);
-                            Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho)/(ITER);
-                            
+                            Rate_HP_SLNR(SNR_index) = Rate_HP_SLNR(SNR_index) + RGH(G_cl,Fbb_slnr,rho);
+                            %end
                          end % End of SNR loop
                         %Rate_HP_fzf(Num_RF_index)=Rate_HP_fzf(Num_RF_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                         %Rate_HP_ant(TX_index) = Rate_HP_ant(TX_index) + RGH(G_cl,Fbb_cl,rho)/(ITER);
@@ -216,14 +224,19 @@ end
  figure
  %plot(TX_sets,Rate_HP_ant,'-v');
 % 
-plot(SNR_dB_range,Rate_SU,'-v','linewidth',1.5);
-hold on; plot(SNR_dB_range,Rate_BS_BDMA,'linewidth',1.5);
-plot(SNR_dB_range,Rate_HP_fzf,'--o','linewidth',1.5);
-plot(SNR_dB_range,Rate_HP_cl,'--','linewidth',1.5);
+%plot(SNR_dB_range,Rate_SU,'-v','linewidth',1.5);
+hold on; plot(SNR_dB_range,Rate_BS_BDMA./count_flag,'linewidth',1.5);
+plot(SNR_dB_range,Rate_HP_fzf./count_flag,'--o','linewidth',1.5);
+plot(SNR_dB_range,Rate_HP_cl./count_flag,'--','linewidth',1.5);
 %plot(SNR_dB_range,Rate_HP_schedule,'linewidth',1.5);
-plot(SNR_dB_range,Rate_HP_SLNR,'-','linewidth',1.5);
+plot(SNR_dB_range,Rate_HP_SLNR./count_flag,'-','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_clip,'-','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_bzf,'-','linewidth',1.5);
-legend('signle user','BDMA','full-zf','group', 'SLNR')
+legend('DC','full-zf','group', 'SLNR')
 xlabel('SNR')
 ylabel('Sum-rate Spectral Efficiency(bps/Hz)')
+
+%figure
+% hold on
+% cdfplot(R_all_users);
+% cdfplot(R_zf_user_all);
