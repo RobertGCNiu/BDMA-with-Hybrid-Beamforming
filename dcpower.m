@@ -3,9 +3,9 @@ function [p,flag_solve] =  dcpower(H, M, p_all,sigma )
 flag_solve = 0;
 w = ones(M,1);
 p_max = ones(M,1)*p_all/M;
-ri = -10;
-flag = 0;
-p_initial = p_max;
+ri = 1;
+flag = 1;
+p_initial = p_max/10;
 t_old = 0;
 max_value_dif = 100;
 iter = 0;
@@ -31,33 +31,33 @@ variables p(M)
      g_p  = g_p + w(i) * log(sigma + H_g)/log(2);  % g(p)
  end
     gra_g = g_gradient(p_initial,H, M, sigma);   % gradient of g
-    t= f_p - g_p - gra_g'*(p-p_initial);
+    t= f_p - real(g_p) - gra_g'*(p-p_initial);
     maximize(t)
     subject to
           sum(p)<=p_all;
           for i = 1:M
-            p(i)>=0.00001;
+            p(i)>=0;
           end
-  %        if flag ==1
-%             for i = 1:M
-%                 He = 0;
-%                 for j = 1:M
-%                    if j ~= i
-%                         He = He + H(j,i) * p(j);
-%                    end
-%                 end
-%                  H(i,i) * p(i) + (1-2^ri)*(He + sigma) >= 0; 
-%             end
-  %        end
+          if flag ==1
+            for i = 1:M
+                He = 0;
+                for j = 1:M
+                   if j ~= i
+                        He = He + H(j,i) * p(j);
+                   end
+                end
+                 H(i,i) * p(i) + (1-2^ri)*(He + sigma) >= 0; 
+            end
+          end
 cvx_end
     p_initial = p;
     max_value_dif = t-t_old;
-    t_old = t;
-%    if t_old >=30
+    t_old = t
+    if t_old >=15
         flag = 1;
-  %  end
+    end
 end
 
-%if t_old <1000
+if t_old <1000 & flag ==1
     flag_solve = 1;
-%end
+end

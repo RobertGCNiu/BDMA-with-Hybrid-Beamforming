@@ -7,8 +7,8 @@
 %--------------------------------------------------------------------------
 clear;clc;
 % ----------------------------- System Parameters% -------------------------
-Num_user_cluster = [16];
-Num_users_all = 16;
+Num_user_cluster = [20];
+Num_users_all = 20;
 Rate_SIR=zeros(1,length(Num_user_cluster));
 Rate_hb = zeros(1,length(Num_user_cluster));
 paths = [1];
@@ -26,19 +26,19 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
     for Num_RF_index = 1:length(RF_sets)
         Num_RF = RF_sets(Num_RF_index);
         TX_index = 0;
-        for TX_ant=144  %Number of UPA TX antennas
+        for TX_ant=64  %Number of UPA TX antennas
             TX_index = TX_index+1;
             TX_ant_w=sqrt(TX_ant); % width
             TX_ant_h=sqrt(TX_ant); % hieght
             ind_TX_w=reshape(repmat([0:1:TX_ant_w-1],TX_ant_h,1),1,TX_ant_w*TX_ant_h);
             ind_TX_h=repmat([0:1:TX_ant_h-1],1,TX_ant_w);
             
-            RX_ant=64; %Number of UPA RX antennas
+            RX_ant=16; %Number of UPA RX antennas
             RX_ant_w=sqrt(RX_ant); % width
             RX_ant_h=sqrt(RX_ant); % hieght
             ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
             ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
-            for K = [2]
+            for K = [1]
                 m_k = Num_users/K;
                 % ----------------------------- Channel Parameters ------------------------
                 for Num_paths_index=1:length(paths) %Number of channel paths
@@ -83,8 +83,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
                         G_bdma=effective_H(H,Wrf_BDMA,Frf_BDMA);
                         
 
-                        
-                        
+                       
                         %Schedule Selection
         %                G_schedule = effective_H(H_schedule,a_RX_schedule,a_TX_schedule);
                         
@@ -208,7 +207,7 @@ for Num_users_index=1:length(Num_user_cluster) % Number of users
 %                             G_BDMA=effective_H(H,Wrf_BDMA,Frf_BDMA);
 %                             [~,~,sinr] = RGH(G_BDMA,eye(size(G_BDMA)),rho);
 %                              sinr_all(:,iter) = sinr ;
-                           % Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_BDMA,eye(size(G_BDMA)),rho)/(ITER);
+                            Rate_BS_BDMA(SNR_index)=Rate_BS_BDMA(SNR_index) + RGH(G_cl,eye(size(G_cl)),rho)/(ITER);
                             
                             Rate_HP_fzf(SNR_index)=Rate_HP_fzf(SNR_index) + RGH(G_fzf,Fbb_fzf,rho)/(ITER);
                             %[~,~,sinr] = RGH(G_fzf,Fbb_fzf,rho);
@@ -239,6 +238,7 @@ end
 hold on
 %plot(SNR_dB_range,Rate_SU,'-v','linewidth',1.5);
 %hold on; plot(SNR_dB_range,Rate_BS_BDMA,'linewidth',1.5);
+plot(SNR_dB_range,Rate_BS_BDMA,'--o','linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_fzf,'--o','linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_cl,'--','linewidth',1.5);
 %plot(SNR_dB_range,Rate_HP_schedule,'linewidth',1.5);
@@ -246,6 +246,6 @@ plot(SNR_dB_range,Rate_HP_SLNR,'-','linewidth',1.5);
 plot(SNR_dB_range,Rate_HP_mc,'--o','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_clip,'-','linewidth',1.5);
 % plot(SNR_dB_range,var_fzf_bzf,'-','linewidth',1.5);
-legend('full-zf no group','group zf', 'SLNR','max cut zf')
+legend('analog-only','full-zf no group','group zf', 'SLNR','max cut zf')
 xlabel('SNR')
 ylabel('Sum-rate Spectral Efficiency(bps/Hz)')

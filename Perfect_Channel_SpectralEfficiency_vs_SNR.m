@@ -11,24 +11,24 @@
 %--------------------------------------------------------------------------
 clear;clc;
 % ----------------------------- System Parameters -------------------------
-Num_users=4; % Number of users
-TX_ant=64; %Number of UPA TX antennas
+Num_users=12; % Number of users
+TX_ant=16; %Number of UPA TX antennas
 TX_ant_w=sqrt(TX_ant); % width
 TX_ant_h=sqrt(TX_ant); % hieght 
 ind_TX_w=reshape(repmat([0:1:TX_ant_w-1],TX_ant_h,1),1,TX_ant_w*TX_ant_h);
 ind_TX_h=repmat([0:1:TX_ant_h-1],1,TX_ant_w);
 
-RX_ant=16; %Number of UPA RX antennas
+RX_ant=4; %Number of UPA RX antennas
 RX_ant_w=sqrt(RX_ant); % width 
 RX_ant_h=sqrt(RX_ant); % hieght
 ind_RX_w=reshape(repmat([0:1:RX_ant_w-1],RX_ant_h,1),1,RX_ant_w*RX_ant_h);
 ind_RX_h=repmat([0:1:RX_ant_h-1],1,RX_ant_w);
 
 % ----------------------------- Channel Parameters ------------------------
-Num_paths=1; %Number of channel paths
+Num_paths=4; %Number of channel paths
 
 % ----------------------------- Simulation Parameters ---------------------
-SNR_dB_range=0:3:36;  % SNR in dB
+SNR_dB_range=-10:5:15;  % SNR in dB
 Rate_SU=zeros(1,length(SNR_dB_range)); % Will carry the single-user MIMO rate (without interference)
 Rate_LB=zeros(1,length(SNR_dB_range));% Will carry the lower bound values
 Rate_BS=zeros(1,length(SNR_dB_range));% Will carry the rate with analog-only beamsteering
@@ -109,6 +109,7 @@ end % End of ITER loop
 %cdf_test(sinr_all)
 % %Plotting the spectral efficiencies
 %     plot(SNR_dB_range,Rate_SU,'-v','LineWidth',1.5);
+figure
    hold on; plot(SNR_dB_range,Rate_HP*Num_users,'-s','LineWidth',1.5);
 % if Num_paths==1
 %     hold on; plot(SNR_dB_range,Rate_LB,'--k','LineWidth',1.5);
